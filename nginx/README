@@ -1,1 +1,1 @@
-This folder contains some example Nginx server config.  These are production settings: for dev use you'll probably want to point at the website (rather than website-compressed) folder, disable static gzip, and remove expiry definitions.
+This folder contains some example Nginx server config.  nginx.conf contains production settings: for dev use you'll probably want to use nginx-dev.conf instead.
