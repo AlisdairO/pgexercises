@@ -6,13 +6,13 @@ This is the code for the SQL tutorial site [PostgreSQL Exercises](http://pgexerc
 Directories/Files under this project root:
 -----
 
-- database - contains sample database configuration files, SQL file to create+populate pgexercises database  
-- dbdata.xlsx - just an excel file containing all the db data  
-- nginx - contains sample nginx configurations files  
-- questions - contains the files that define the exercises.  These are used to generate static html files based on the templates under site/website  
-- scripts - various scripts to do stuff like generate the html files, upload them to the site, and so on  
-- site - web site files and html templates  
-- SQLForwarder - simple web application to send queries to and from the DB.  
+- **database** - contains sample database configuration files, SQL file to create+populate pgexercises database  
+- **nginx** - contains sample nginx configurations files  
+- **questions** - contains the files that define the exercises.  These are used to generate static html files based on the templates under site/website  
+- **scripts** - various scripts to do stuff like generate the html files, upload them to the site, and so on  
+- **site** - web site files and html templates  
+- **SQLForwarder** - simple web application to send queries to and from the DB.  
+- **dbdata.xlsx** - just an excel file containing all the db data  
 
 
 Instructions to get a dev environment working:
