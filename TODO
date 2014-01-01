@@ -10,5 +10,7 @@ make import/export of progress
 make the site work correctly on mobile/tablets
 Make the site more googleable - use of words like 'tutorial', 'SQL', and 'learning' in the title, for example
 improve documentation
-make the site generation a smidge more generic to allow easy rebranding, for example.
+substantial refactor of the scripts directory (particularly processdocs.pl).  These have grown fairly organically, and some major clarification of the code is in order
 clean up site generation code - use a single code library to generate query results for static site generation and dynamic retrieval
+test scripts that load each page of the web site in turn and check that the provided answer produces a tick on the web site.
+make the site generation a smidge more generic to allow easy rebranding, for example.
