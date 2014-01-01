@@ -1,0 +1,32 @@
+/* #D44413*/
+.splitbarV {
+float:left;width:6px;height:100%;
+line-height:0px;font-size:0px;
+border-left:solid 1px #FF9062;border-right:solid 1px #FF9062;
+background:#D44413 url(img/panev.gif) 0% 50%;
+}
+.splitbarH {
+height:6px;text-align:left;line-height:0px;font-size:0px;
+border-top:solid 1px #FF9062;border-bottom:solid 1px #FF9062;
+background:#cbe1fb url(img/paneh.gif) 50% 0%;
+}
+
+.splitbuttonV{
+margin-top:-41px;margin-left:-4px;top:50%;position:relative;
+height:83px;width:10px;
+background:transparent url(img/panevc.gif) 10px 50%;
+}
+.splitbuttonV.invert{
+margin-left:0px;background:transparent url(img/panevc.gif) 0px 50%;
+}
+.splitbuttonH{
+margin-left:-41px;left:50%;position:relative;
+height:10px !important;width:83px;
+background:transparent url(img/panehc.gif) 50% 0px;
+}
+.splitbuttonH.invert{
+margin-top:-4px;background:transparent url(img/panehc.gif) 50% -10px;
+}
+.splitbarV.working,.splitbarH.working,.splitbuttonV.working,.splitbuttonH.working{
+ -moz-opacity:.50; filter:alpha(opacity=50); opacity:.50;
+}

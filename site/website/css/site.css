@@ -1,0 +1,134 @@
+
+@font-face {
+	font-family: 'Ubuntu';
+	src: url('../lib/ubuntu-fontfacekit/Ubuntu-R-webfont.woff') format('woff'),
+	url('../lib/ubuntu-fontfacekit/Ubuntu-R-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+
+}
+
+.secondaryanswerdiv {
+	display: inline-block;
+	min-width: 700px;
+}
+
+html, body{
+	height:100%;width:100%;
+	margin:0;padding:0;
+}
+
+.headertick {
+	width: 50px;
+	height: 50px;
+	visibility: hidden;
+}
+
+.listingtick {
+	width: 15px;
+	margin-left: 10px;
+}
+
+.youranswertick {
+	width: 30px;
+	height: 30px;
+	vertical-align: text-top;
+}
+
+#youranswertickspan {
+	width: 30px;
+	height: 30px;
+	margin-left: 6px;
+	visibility: hidden;
+}
+
+.bfnav {
+	padding: 8px;
+}
+
+.code {
+	font-family: "Courier New";
+}
+
+a.listlink:visited {color:#CD3804;}
+
+#helpcontent {
+	width:705px;
+}
+
+#splittercontainer {/* Main vertical splitter element */
+	height:400px;
+	width:100%;
+	margin:0;
+	padding-left:3px;
+	padding-right:3px;
+	border: 1px dashed #ce4213;
+	position:relative;
+}
+
+
+#expres{
+	position: relative;
+	float:left;width:40%;height:100%;
+	overflow:hidden;
+}
+
+#codediv{     /*Contains toolbar and horizontal splitter*/
+	position:relative;
+	float:right;
+	width:60%;
+	height:100%;
+	overflow:hidden;
+}
+#youranswerdiv{
+	margin-left:5px;
+	margin-right:5px;
+	height: 60%;
+	overflow:hidden;
+}
+#youranswerbuttons{
+	float:right;
+}
+#yourresultsdiv{
+	height:40%;
+	overflow-y:hidden;
+	overflow-x:hidden;
+	position:relative;
+}
+
+#yourresultserror{
+	display:none;
+	margin:3px;
+}
+
+#querydiv{
+	display: inline-block;
+	min-width: 700px;
+}
+#answerbtn{
+	width:30px;
+}
+.youranswerbutton{
+	margin-right:1px;
+	
+}
+.answerdiv{
+	opacity:0;
+}
+.queryerror{
+	margin:0px;
+}
+
+.CodeMirror {
+	border: 1px solid #eee;
+	height: auto;
+}
+.CodeMirror-scroll {
+	width: 100%;
+	overflow-y: hidden;
+	overflow-x: auto;
+}
+
+.aboutheader {
+	margin-top: 20px;
+}

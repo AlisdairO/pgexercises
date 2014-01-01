@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>PostgreSQL exercises</title>
+    <link rel="shortcut icon" href="img/favicon.ico" />
+    <link rel="icon" href="img/favicon.ico" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="css/site.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <script src="js/options.js"></script>
+
+  </head>
+
+  <body class="preview" data-spy="scroll" data-target=".subnav" data-offset="80">
+
+
+  <!-- Navbar
+    ================================================== -->
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container" style="width: auto;">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="./">PostgreSQL Exercises</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="divider"></li>
+              <li><a href="./">Home</a></li>
+              <li><a href="gettingstarted.html">Getting Started</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Exercises<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="questions/basic/">Basic</a></li>
+                  <li><a href="questions/joins/">Joins and Subqueries</a></li>
+                  <li><a href="questions/aggregates/">Aggregates</a></li>
+                  <li><a href="questions/date/">Date</a></li>
+                  <li><a href="questions/string/">String</a></li>
+                  <li><a href="questions/recursive/">Recursive</a></li>
+                </ul>
+              </li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="options.html">Options</a></li>
+              <!--<li><a href="#">Random</a></li>-->
+            </ul>
+          </div><!-- /.nav-collapse -->
+        </div>
+      </div><!-- /navbar-inner -->
+    </div><!-- /navbar -->
+  
+    <div class="container">
+    
+      <div class="page-header">
+        <h1>
+	Options
+        </h1>
+      </div>
+    
+      <div class="row" style="margin-bottom:30px">
+        <div class="span8">
+          <p>
+            </b><a href="#" onclick="clearLocalStoredInfo()">Clear saved data</a></b>: clears all saved information on which questions you've passed, along with all saved queries.
+          </p>
+        </div>
+      </div>
+    </div>  
+  
+      <!-- Placed at the end of the document so the pages load faster -->
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-45602502-1', 'pgexercises.com');
+      ga('send', 'pageview');
+
+    </script>
+  
+  </body>
+</html>

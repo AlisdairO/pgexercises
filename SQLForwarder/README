@@ -1,0 +1,1 @@
+This is an eclipse project defining a simple java web application to take a REST GET with a 'query' parameter, and run that query against a database.  Be aware that this webapp does no vetting of the query and is 100% insecure: it relies totally on the underlying infrastructure preventing writes to the DB or over-complicated queries.

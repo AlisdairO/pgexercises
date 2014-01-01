@@ -1,0 +1,2 @@
+#!/bin/sh
+psql93 -d exercises -H --host=localhost --port=5432 --username=postgres --no-password -c "$1"

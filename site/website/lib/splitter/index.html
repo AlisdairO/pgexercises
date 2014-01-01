@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery splitter demo</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<link href="splitter.css" rel="stylesheet">
+<link href="../../css/site.css" rel="stylesheet">
+<script type="text/javascript" src="splitter.js"></script>
+<style type="text/css" media="all">
+
+
+
+</style>
+<script type="text/javascript">
+
+$(document).ready(function() {
+$("#splitterContainer").splitter({splitVertical:true,A:$('#expRes'),B:$('#hint'),closeableto:0});
+});
+</script>
+</head>
+
+<body>
+<div id="blah" style="height:300px;width:1000px;overflow:hidden;">
+<div id="header">
+jQuery splitter v1.1 demo. Download&nbsp; <a href="splitter.zip">here</a></div>
+<div id="splitterContainer">
+	<div id="expRes">
+		<p>This pane limited to a range of 100 to 300 pixels wide with the minAsize / maxAsize 
+		properties of the plugin..</p>
+		<p>&nbsp;</p>
+
+	</div>
+	<!-- #leftPane -->
+	<div id="hint">
+			<div id="rightTopPane">
+				<p>testing</p>
+				<p>testing</p>
+				<p>testing</p>
+				<p>testing</p>
+				<p>testing</p>
+				<p>testing</p>
+				<p>testing</p>
+				<p>testing</p>
+				<p>testing</p>
+				<p>testing</p>
+				<p>testing</p>
+				<p>testing</p>
+				<p>testing</p>
+				<p>testing</p>
+				<p>testing</p>
+			</div>
+			<!-- #rightBottomPane--></div>
+	<!-- #rightPane --></div>
+<!-- #splitterContainer -->
+</div>
+</body>
+
+</html>

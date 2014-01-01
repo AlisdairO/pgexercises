@@ -1,0 +1,5 @@
+|CATNAME|
+Aggregation
+|CATDESC|
+<p>Aggregation is one of those capabilities that really make you appreciate the power of relational database systems.  It allows you to move beyond merely persisting your data, into the realm of asking truly interesting questions that can be used to inform decision making.  This category covers aggregation at length, making use of standard grouping as well as more recent window functions.</p>
+<p>If you struggle with these questions, I strongly recommend <a href="http://shop.oreilly.com/product/9780596007270.do">Learning SQL</a>, by Alan Beaulieu and <a href="http://shop.oreilly.com/product/9780596009762.do">SQL Cookbook</a> by Anthony Molinaro.  In fact, get the latter anyway - it'll take you beyond anything you find on this site, and on multiple different database systems to boot.</p>

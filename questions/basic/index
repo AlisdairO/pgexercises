@@ -1,0 +1,6 @@
+|CATNAME|
+Simple SQL Queries
+|CATDESC|
+<p>This category deals with the basics of SQL.  It covers select and where clauses, case expressions, unions, and a few other odds and ends.  If you're already educated in SQL you will probably find these exercises fairly easy.  If not, you should find them a good point to start learning for the more difficult categories ahead!</p>
+
+<p>If you struggle with these questions, I strongly recommend <a href="http://shop.oreilly.com/product/9780596007270.do">Learning SQL</a>, by Alan Beaulieu, as a concise and well-written book on the subject.  If you're interested in the fundamentals of database systems (as opposed to just how to use them), you should also investigate An Introduction to Database Systems by C.J. Date.</p>

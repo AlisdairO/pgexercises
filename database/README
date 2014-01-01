@@ -1,0 +1,1 @@
+This folder contains sample setup files for pgbouncer, an sql file to auto-create the database, and a context.xml file to define a data source in tomcat.  You'll need to define a password for each of them.

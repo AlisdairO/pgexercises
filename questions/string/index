@@ -1,0 +1,6 @@
+|CATNAME|
+String Operations
+|CATDESC|
+<p>String operations in most RDBMSs are, arguably, needlessly painful.  Fortunately, Postgres is better than most in this regard, providing strong regular expression support.  This section covers basic string manipulation, use of the LIKE operator, and use of regular expressions.  I also make an effort to show you some alternative approaches that work reliably in most RDBMSs.  Be sure to check out Postgres' string function <a href="http://www.postgresql.org/docs/9.2/static/functions-matching.html">docs page</a> if you're not confident about these exercises.</p>
+<p>Anthony Molinaro's <a href="http://shop.oreilly.com/product/9780596009762.do">SQL Cookbook</a> provides some excellent documentation of (difficult) cross-DBMS compliant SQL string manipulation.  I'd strongly recommend his book, particularly as it's published by O'Reilly, whose ethical policy of DRM-free ebook distribution deserves rich rewards.</p>
+<p>NB: This section is currently in progress, so expect more content here in future :-)</p>

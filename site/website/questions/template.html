@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>PostgreSQL exercises</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <link rel="icon" href="../../img/favicon.ico" />
+
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="../../css/site.css" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="../../lib/codemirror/lib/codemirror.css" rel="stylesheet">
+    <link href="../../lib/splitter/splitter.css" rel="stylesheet">
+    <link href="../../lib/perfect-scrollbar/min/perfect-scrollbar.min.css" rel="stylesheet">
+    <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- temporary downgrade to 1.10.2 due to popup drag bugs with 1.10.3-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    <script src="../../lib/codemirror/lib/codemirror.js"></script>
+    <script src="../../lib/perfect-scrollbar/min/perfect-scrollbar.with-mousewheel.min.js"></script>
+    <script src="../../lib/codemirror/mode/sql/sql.js"></script>
+    <script src="../../js/browser.js"></script>
+    <script src="../../lib/splitter/splitter.js"></script>
+    <script src="../../js/site.js"></script>
+
+  </head>
+
+  <body class="preview" data-spy="scroll" data-target=".subnav" data-offset="80">
+  
+    <!-- Navbar
+      ================================================== -->
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container" style="width: auto;">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="../../">PostgreSQL Exercises</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="divider"></li>
+              <li><a href="../../">Home</a></li>
+              <li><a href="../../gettingstarted.html">Getting Started</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Exercises<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="../basic/">Basic</a></li>
+                  <li><a href="../joins/">Joins and Subqueries</a></li>
+                  <li><a href="../aggregates/">Aggregates</a></li>
+                  <li><a href="../date/">Date</a></li>
+                  <li><a href="../string/">String</a></li>
+                  <li><a href="../recursive/">Recursive</a></li>
+                </ul>
+              </li>
+              <li><a href="../../about.html">About</a></li>
+	      <li><a href="../../options.html">Options</a></li>
+              <!--<li><a href="#">Random</a></li>-->
+            </ul>
+          </div><!-- /.nav-collapse -->
+        </div>
+      </div><!-- /navbar-inner -->
+    </div><!-- /navbar -->
+  
+    <div class="container">
+    
+      <!--Navigation-->
+      <div class="row">
+        <div class="span4"><p class="bfnav">|PREVPAGE|</p></div>
+        <div class="span4" align="center">
+          <ul class="breadcrumb">
+            <li><a href="../../">Home</a> <span class="divider">/</span></li>
+            <li><a href="./">|CATEGORY|</a> <span class="divider">/</span></li>
+            <li class="active">|SHORTNAME|</li>
+          </ul>
+        </div>
+        <div class="span4"><p class="bfnav" align="right">|NEXTPAGE|</p></div>
+      </div>
+    
+    
+    <!-- Typography
+    ================================================== -->
+    <section id="typography">
+      <div class="page-header">
+        <h1>
+	<span style="float:left">
+    |QUESTIONNAME|
+        </span>
+	<span style="float:right">
+	<img src="../../assets/tick2.svg" class="headertick"></img>
+	
+	</span>
+        <div style="clear:both"></div>
+        </h1>
+      </div>
+    
+      <div class="row" style="margin-bottom:30px">
+        <div class="span8">
+          <h3>Question</h3>
+            |QUESTION|
+            <!-- FILLER -->
+            <p class="demo">Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            <p class="demo">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</p>
+            <!-- FILLER -->
+        </div>
+      </div>
+      <div class="row">
+      <div class="span12">
+      <div id=splittercontainer>
+        <div id="expres" ondblclick="setOptimalExpectedResultsSize()">
+          <div style="overflow-x:hidden;">
+            <div style="display: inline-block; min-width:1000px;">
+              <h3>Expected Results</h3>
+              <div style="width:auto; display:inline-block">
+              <!-- FILLER -->
+                <table id="exprestable" class="demo table table-bordered table-striped" style="width:auto;">
+                  <thead>
+                    <tr>
+                      <th>Col1</th>
+                      <th>Col2</th>
+                      <th>Col3</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>                  <td>val</td><td>val</td><td>val</td>
+                    </tr>
+                    <tr>
+                      <td>val</td><td>val</td><td>val</td>
+                    </tr>
+                    <tr>                  <td>val</td><td>val</td><td>val</td>
+                    </tr>
+                    <tr>                  <td>val</td><td>val</td><td>val</td>
+                    </tr>
+                    <tr>                  <td>val</td><td>val</td><td>val</td>
+                    </tr>
+                    <tr>                  <td>val</td><td>val</td><td>val</td>
+                    </tr>
+                    <tr>                  <td>val</td><td>val</td><td>val</td>
+                    </tr>
+                    <tr>                  <td>val</td><td>val</td><td>val</td>
+                    </tr>
+                    <tr>                  <td>val</td><td>val</td><td>val</td>
+                    </tr>
+                    <tr>                  <td>val</td><td>val</td><td>val</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- FILLER -->
+                |RESULTS|
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="codediv">
+          <div id="youranswerdiv" ondblclick="setOptimalYourAnswerSize()">
+                  <h3 style="min-width:200px;">Your Answer<span id="youranswertickspan"><img src="../../assets/cross.svg" class="youranswertick"></img></span> 
+              <span id="youranswerbuttons">
+                <a id="hintbtn" class="youranswerbutton btn btn-primary btn-small" onClick="hint();">Hint</a>
+                <a id="helpbtn" class="youranswerbutton btn btn-primary btn-small" onClick="help();">Schema & Help</a>
+                <a id="querybtn" class="youranswerbutton btn btn-primary btn-small" onClick="save();">Save</a>
+                <a id="savebtn" class="youranswerbutton btn btn-primary btn-small" onClick="query();">Run Query</a>
+              </span>
+            </h3>
+            <div style="clear:both;">
+	      <div id="codewrapper">
+                <form>
+                  <textarea id="code" name="code"></textarea>
+                </form>
+              </div>
+	    </div>
+          </div>
+          <div id="yourresultsdiv" ondblclick="setOptimalYourResultsSize()">
+            <div>
+              <table id="yourresultstable" class="demo table table-bordered table-striped"></table>
+              <pre id="yourresultserror"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+      <div class="row" style="margin-bottom:30px">
+        <div class="span12">
+          <h3>Answers and Discussion <a id="answerbtn" class="inactive btn btn-primary btn-small" style="margin: 5px" onClick="toggleAnswers();">Show</a></h3>
+          <pre id="querydiv" class="answerdiv prettyprint lang-sql">
+    |QUERY|
+          </pre>
+          <div class="row">
+            <div class="span8 answerdiv">
+    |ANSWER|
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Navigation-->
+      <div class="row">
+        <div class="span4"><p class="bfnav">|PREVPAGE|</p></div>
+        <div class="span4" align="center">
+          <ul class="breadcrumb">
+            <li><a href="../../">Home</a> <span class="divider">/</span></li>
+            <li><a href="./">|CATEGORY|</a> <span class="divider">/</span></li>
+            <li class="active">|SHORTNAME|</li>
+          </ul>
+        </div>
+        <div class="span4"><p class="bfnav" align="right">|NEXTPAGE|</p></div>
+      </div>
+    </div><!-- /container -->
+      <div id="hint" title="Hint">
+          |HINT|
+
+          <!-- FILLER -->
+          <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi e rat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</p>
+          <!-- FILLER -->
+      </div>
+      <div id="help" title="Help">
+        <div id="helpcontent">
+	  <h4>Keyboard shortcuts:</h4>
+	  <ul>
+	    <li><b>Alt-r</b>: Run query
+	    <li><b>Alt-x</b>: Run selected text as query
+	    <li><b>Alt-s</b>: Run query by cursor (delimited by whitespace/semi-colon)
+	  </ul>
+	  <hr />
+	  <h4>Other hints:</h4>
+	    <ul>
+	      <li>You can double click on each of the panes of Expected Result/Your answer to quickly resize them.
+	      <li>If you have trouble remembering the database schema, you can leave this popup open while you work on your answer.
+	      <li>Don't forget to use the hint button if you're stuck!
+	    </ul>
+	  <hr />
+	  <h4>Database schema:</h4>
+          <img src="../../img/schema2.svg" alt="DB schema" width="700"></img>
+	</div>
+      </div>
+
+
+    <script>
+        var App = {};
+	App.sorted = |SORTED|;
+	App.pageID = "|PAGEID|";
+	App.jsonResults = sortJSONResults(|JSONRESULTS|);
+    </script>
+
+    <script src="../../js/prettify/run_prettify.js?lang=sql"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-45602502-1', 'pgexercises.com');
+      ga('send', 'pageview');
+
+    </script>
+
+  </body>
+</html>

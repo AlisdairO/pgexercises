@@ -1,0 +1,16 @@
+Files in this directory:
+
+generatebookings.pl - used to generate bookings for the database.
+
+processdocs.pl - generates html files from templates.  Just run "processdocs.pl ../ 1", which will pick up all the template files, and strip off the prepended ordering number.  Use "processdocs.pl ../" to leave ordering numbers intact.
+
+compress.pl - goes through the website folder to create the website-compressed folder.  Compresses html files using htmlcompresser.jar, js/css using yuicompressor.jar, and then gzips everything.
+
+runpsql - runs a query against postgres, gets it back in HTML table form.
+
+sync.sh - copies the website-compressed folder to the production web site.
+
+deploy.sh - runs processdocs.pl, compress.pl, and sync.sh in sequence to recreate and upload the web site.
+
+stress.pl - used to stress test the postgres DB and make sure it could stand up to a reasonable load.
+

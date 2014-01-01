@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>PostgreSQL Exercises</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.ico" />
+
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="css/site.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+
+  </head>
+
+  <body class="preview" data-spy="scroll" data-target=".subnav" data-offset="80">
+
+
+  <!-- Navbar
+    ================================================== -->
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container" style="width: auto;">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="./">PostgreSQL Exercises</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="divider"></li>
+              <li><a href="./">Home</a></li>
+              <li><a href="gettingstarted.html">Getting Started</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Exercises<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="questions/basic/">Basic</a></li>
+                  <li><a href="questions/joins/">Joins and Subqueries</a></li>
+                  <li><a href="questions/aggregates/">Aggregates</a></li>
+                  <li><a href="questions/date/">Date</a></li>
+                  <li><a href="questions/string/">String</a></li>
+                  <li><a href="questions/recursive/">Recursive</a></li>
+                </ul>
+              </li>
+              <li><a href="about.html">About</a></li>
+	      <li><a href="options.html">Options</a></li>
+              <!--<li><a href="#">Random</a></li>-->
+            </ul>
+          </div><!-- /.nav-collapse -->
+        </div>
+      </div><!-- /navbar-inner -->
+    </div><!-- /navbar -->
+  
+
+    <div class="container">
+    
+      <div class="page-header">
+        <h1>About</h1>
+      </div>
+      <div class="row">
+        <div class="span9">
+          <p>PostgreSQL Exercises was made by <a href="http://www.zaltys.net">Alisdair Owens</a>.  I noticed that while there was a lot of information out there on database systems, there didn't seem to be a lot of places to learn by <i>doing</i> in a structured manner.  I hope this site helps people out.</p>
+          <ul>
+            <li><a href="#contact">How can I contact you?</a>
+            <li><a href="#security">You're running raw SQL!  How did you secure the server?</a>
+            <li><a href="#coding">I want to contribute/Your CSS sucks/I have a suggestion for the site code.</a>
+<!--            <li><a href="#schema">What would a good schema for this dataset be?</a>-->
+            <li><a href="#writes">What about creates, updates, and deletes?</a>
+            <li><a href="#tech">What technologies were used in this site?</a>
+          </ul>
+        </div>
+      </div>
+      <div class="row aboutheader">
+        <div class="span9">
+          <a name="contact"></a><h3>How can I contact you?</h3>
+        </div>
+      </div>
+      <div class="row aboutqstn">
+        <div class="span8 offset1">
+          <p>For anything related to the site, mail me at <a href="mailto:pgexercises@pgexercises.com">pgexercises@pgexercises.com</a>.  For anything else, find details on my personal web site <a href="http://www.zaltys.net">www.zaltys.net</a>.</p>
+        </div>
+      </div>
+      <div class="row aboutheader">
+        <div class="span9">
+          <a name="security"></a><h3>You're running raw SQL!  How did you secure the server?</h3>
+        </div>
+      </div>
+      <div class="row aboutqstn">
+        <div class="span8 offset1">
+          <p>Good question!  Generally speaking, allowing raw SQL to run against your database is, of course, a big no-no.  We're aided rather in this by the fact that all our work here is read-only, allowing us to easily prevent malicious writes to the DB :-).  Other concerns are people running very expensive queries, changing settings, etc.  I've taken the following security measures:</p>
+          <ul>
+            <li>User has read-only access to the exercises tables and nothing else.
+            <li>Each statement is time limited using statement_timeout.
+            <li>App server connects through pgbouncer, which is configured for statement-level pooling.  When the connection gets returned between statements pgbouncer runs ABORT; DISCARD ALL;.  This clears any settings, preventing the user from changing settings on the pooled connections.  In particular, this prevents users changing the statement timeout to something longer :-).
+          </ul>
+          <p>This should at least secure the DB from casual attempts at taking it down.  If you know of vulnerabilities in these measures, please <a href="mailto:pgexercises@pgexercises.com">email me</a>.</p>
+        </div>
+      </div>
+      <div class="row aboutheader">
+        <div class="span9">
+          <a name="coding"></a><h3>I want to contribute/Your CSS sucks/I have a suggestion for the site code.</h3>
+        </div>
+      </div>
+      <div class="row aboutqstn">
+        <div class="span8 offset1">
+          <p>Github is [coming soon]: (more documentation on how to edit stuff is forthcoming).  For minor corrections or more sweeping suggestions, you can mail me at <a href="mailto:pgexercises@pgexercises.com">pgexercises@pgexercises.com</a>.  Sorry about the CSS :-).</p>
+        </div>
+      </div>
+      <!--TODO when I can be bothered to create more diagrams :-)
+      <div class="row aboutheader">
+        <div class="span9">
+          <a name="schema"></a><h3>What would a good schema for this dataset be?</h3>
+        </div>
+      </div>-->
+      <div class="row aboutqstn">
+        <div class="span8 offset1">
+        </div>
+      </div>
+      <div class="row aboutheader">
+        <div class="span9">
+          <a name="writes"></a><h3>What about creates, updates, and deletes?</h3>
+        </div>
+      </div>
+      <div class="row aboutqstn">
+        <div class="span8 offset1">
+	  <p>These are harder to do safely on a site like this, as having a bunch of users concurrently modifying the same data just wouldn't work - quite apart from the security risks.  At some point in the distant future I hope to make a similar site that takes you through DDL and CRUD operations against a database you set up yourself.</p>
+        </div>
+      </div>
+      <div class="row aboutheader">
+        <div class="span9">
+          <a name="tech"></a><h3>What technologies were used in this site?</h3>
+        </div>
+      </div>
+      <div class="row aboutqstn">
+        <div class="span8 offset1">
+	  <p>I've used the following technologies as part of this site.  Many thanks to all of their contributors!</p>
+	  <ul>	
+	    <li><a href="http://www.postgresql.org/">PostgreSQL</a>
+	    <li><a href="http://nginx.org/">Nginx</a>
+	    <li><a href="http://tomcat.apache.org/">Apache Tomcat</a>
+	    <li><a href="http://twitter.github.io/bootstrap/">Bootstrap</a>
+	    <li><a href="http://bootswatch.com/">Bootswatch</a>
+	    <li><a href="http://wiki.postgresql.org/wiki/PgBouncer">PgBouncer</a>
+	    <li><a href="http://pgfoundry.org/projects/pgtune/">pgtune</a>
+	    <li><a href="http://jquery.com/">JQuery</a>
+	    <li><a href="http://codemirror.net/">Code Mirror</a>
+	    <li><a href="https://code.google.com/p/google-code-prettify/">Google Code Prettify</a>
+	    <li><a href="http://noraesae.github.io/perfect-scrollbar/">Perfect Scrollbar</a>
+	    <li><a href="http://krikus.com/js/splitter/">Krikus' JQuery splitter</a>
+	  </ul>
+	  <p>I also used the following tooling/sites:</p>
+	  <ul>
+	    <li><a href="http://www.vim.org/">Vim</a>
+	    <li><a href="http://subversion.tigris.org/">Subversion</a>
+	    <li><a href="http://www.eclipse.org/">Eclipse</a>
+	    <li><a href="http://git-scm.com/">Git</a>
+	    <li><a href="http://uptimerobot.com/">UptimeRobot</a>
+	  </ul>
+	  <p>And finally, thanks to user <a href="http://pixabay.com/en/users/Nemo/">Nemo</a> on Pixabay for producing public domain artwork used on this site.</p>
+        </div>
+      </div>
+    
+    
+    </div><!-- /container -->
+
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-45602502-1', 'pgexercises.com');
+      ga('send', 'pageview');
+
+    </script>
+
+
+  </body>
+</html>

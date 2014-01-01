@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>PostgreSQL Exercises</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.ico" />
+
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="css/site.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+
+  </head>
+
+  <body class="preview" data-spy="scroll" data-target=".subnav" data-offset="80">
+
+
+  <!-- Navbar
+    ================================================== -->
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container" style="width: auto;">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="./">PostgreSQL Exercises</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="divider"></li>
+              <li><a href="./">Home</a></li>
+              <li><a href="gettingstarted.html">Getting Started</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Exercises<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="questions/basic/">Basic</a></li>
+                  <li><a href="questions/joins/">Joins and Subqueries</a></li>
+                  <li><a href="questions/aggregates/">Aggregates</a></li>
+                  <li><a href="questions/date/">Date</a></li>
+                  <li><a href="questions/string/">String</a></li>
+                  <li><a href="questions/recursive/">Recursive</a></li>
+                </ul>
+              </li>
+              <li><a href="about.html">About</a></li>
+	      <li><a href="options.html">Options</a></li>
+              <!--<li><a href="#">Random</a></li>-->
+            </ul>
+          </div><!-- /.nav-collapse -->
+        </div>
+      </div><!-- /navbar-inner -->
+    </div><!-- /navbar -->
+  
+
+    <div class="container">
+    
+      <div class="page-header">
+        <h1>Getting Started</h1>
+      </div>
+    
+      <div class="row">
+        <div class="span8">
+	  <p>It's pretty simple to get going with the exercises: all you have to do is <a href="questions/basic/">open the exercises</a>, take a look at the questions, and try to answer them!</p>
+          <p>The dataset for these exercises is for a newly created country club, with a set of members, facilities such as tennis courts, and booking history for those facilities.  Amongst other things, the club wants to understand how they can use their information to analyse facility usage/demand. <b>Please note:</b> this dataset is designed purely for supporting an interesting array of exercises, and the database schema is flawed in several aspects - please don't take it as an example of good design.  We'll start off with a look at the Members table:</p>
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="span7">
+          <pre>
+    CREATE TABLE cd.members
+    (
+       memid integer NOT NULL, 
+       surname character varying(200) NOT NULL, 
+       firstname character varying(200) NOT NULL, 
+       address character varying(300) NOT NULL, 
+       zipcode integer NOT NULL, 
+       telephone character varying(20) NOT NULL, 
+       recommendedby integer,
+       joindate timestamp not null,
+       CONSTRAINT members_pk PRIMARY KEY (memid),
+       CONSTRAINT fk_members_recommendedby FOREIGN KEY (recommendedby)
+            REFERENCES cd.members(memid) ON DELETE SET NULL
+    );
+          </pre>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span8">
+          <p>Each member has an ID (not guaranteed to be sequential), basic address information, a reference to the member that recommended them (if any), and a timestamp for when they joined.  The addresses in the dataset are entirely (and unrealistically) fabricated.</p>
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="span7">
+          <pre>
+    CREATE TABLE cd.facilities
+    (
+       facid integer NOT NULL, 
+       name character varying(100) NOT NULL, 
+       membercost numeric NOT NULL, 
+       guestcost numeric NOT NULL, 
+       initialoutlay numeric NOT NULL, 
+       monthlymaintenance numeric NOT NULL, 
+       CONSTRAINT facilities_pk PRIMARY KEY (facid)
+    );
+          </pre>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span8">
+          <p>The facilities table lists all the bookable facilities that the country club possesses.  The club stores id/name information, the cost to book to both members and guests, the initial cost to build the facility, and estimated monthly upkeep costs.  They hope to use this information to track how financially worthwhile each facility is.</p> 
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="span8">
+          <pre>
+    CREATE TABLE cd.bookings
+    (
+       bookid integer NOT NULL, 
+       facid integer NOT NULL, 
+       memid integer NOT NULL, 
+       starttime timestamp NOT NULL,
+       slots integer NOT NULL,
+       CONSTRAINT bookings_pk PRIMARY KEY (bookid),
+       CONSTRAINT fk_bookings_facid FOREIGN KEY (facid) REFERENCES cd.facilities(facid),
+       CONSTRAINT fk_bookings_memid FOREIGN KEY (memid) REFERENCES cd.members(memid)
+    );
+          </pre>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span8">
+          <p>Finally, there's a table tracking bookings of facilities.  This stores the facility id, the member who made the booking, the start of the booking, and how many half hour 'slots' the booking was made for.  This idiosyncratic design will make certain queries more difficult, but should provide you with some interesting challenges - as well as prepare you for the horror of working with some real-world databases :-).</p>
+          <p>Okay, that should be all the information you need.  You can select a category of query to try from the menu above, or alternatively <a href="questions/basic/">start from the beginning</a>.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="span8">
+          <h3 style="margin-top:20px">I want to use my own Postgres system</h3>
+          <p>No problem!  Getting up and running isn't too hard.  First, you'll need an install of PostgreSQL, which you can get from <a href="http://www.postgresql.org/download/">here</a>.  Once you have it started, <a href="dbfiles/clubdata.sql">download the SQL</a>.</p>
+          <p>Finally, run <span class="code">psql -U &lt;username&gt; -f clubdata.sql -d postgres -x -q</span> to create the 'exercises' database, the Postgres 'pgexercises' user, the tables, and to load the data in.  Note that you may find that the sort order of your results differs from those shown on the web site: that's probably because your Postgres is set up using a different locale to that used by PGExercises (which uses the C locale)</p>
+          <p>When you're running queries, you may find psql a little clunky.  If so, I recommend trying out pgAdmin or the Eclipse database development tools.</p>
+        </div>
+      </div>
+
+    
+      <div class="row" style="margin-top:30px">
+        <div class="span4 well">
+          <p style="margin-bottom:0px;">Site content licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a></p>
+        </div>
+      </div>
+    </div><!-- /container -->
+
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-45602502-1', 'pgexercises.com');
+      ga('send', 'pageview');
+
+    </script>
+
+
+  </body>
+</html>
