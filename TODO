@@ -7,8 +7,8 @@ SITE CODE:
 try to make syntax highlighting more consistent between editor and viewer
 mini-tutorial for first-time visitors- particularly to expose the help button
 make import/export of progress
-meta tags tutorials learnings
 make the site work correctly on mobile/tablets
 Make the site more googleable - use of words like 'tutorial', 'SQL', and 'learning' in the title, for example
 improve documentation
 make the site generation a smidge more generic to allow easy rebranding, for example.
+clean up site generation code - use a single code library to generate query results for static site generation and dynamic retrieval
