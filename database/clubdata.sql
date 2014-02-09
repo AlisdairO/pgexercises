@@ -8,6 +8,7 @@ GRANT CONNECT ON DATABASE exercises TO pgexercises;
 \c exercises
 CREATE SCHEMA cd;
 GRANT USAGE ON SCHEMA cd TO pgexercises;
+REVOKE ALL PRIVILEGES ON SCHEMA PUBLIC FROM pgexercises;
 
 
 
