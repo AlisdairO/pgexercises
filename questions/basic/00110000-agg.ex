@@ -14,7 +14,7 @@ select max(joindate) as latest
 <li>How much time has each member spent at our facilities?
 </ul>
 
-<p>The aggregate function here is very simple: it simply receives all the possible values for joindate, and outputs the one that's biggest.  There's a world more power to aggregate functions, which you will come across in future exercises.</p>
+<p>The <c>MAX</c> aggregate function here is very simple: it receives all the possible values for joindate, and outputs the one that's biggest.  There's a lot more power to aggregate functions, which you will come across in future exercises.</p>
 |HINT|
 Look up the SQL aggregate function <c>MAX</c>
 |SORTED|
