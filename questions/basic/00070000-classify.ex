@@ -1,8 +1,7 @@
 |QUESTIONNAME|
 Classify results into buckets
 |QUESTION|
-How can you produce a list of facilities, with each labelled as 'cheap' or 'expensive' depending on if their monthly maintenance cost is more than $100?
-Return the name and monthly maintenance of the facilities in question. Be sure to label monthly maintenance as 'cost' in order to match the expected results. 
+How can you produce a list of facilities, with each labelled as 'cheap' or 'expensive' depending on if their monthly maintenance cost is more than $100?  Return the name and monthly maintenance of the facilities in question.
 |QUERY|
 select name, 
 	case when (monthlymaintenance > 100) then

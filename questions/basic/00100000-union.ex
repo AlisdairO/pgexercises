@@ -5,7 +5,7 @@ You, for some reason, want a combined list of all surnames and all facility name
 |QUERY|
 select surname 
 	from cd.members
-union all
+union
 select name
 	from cd.facilities;
 |ANSWER|
