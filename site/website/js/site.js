@@ -245,11 +245,16 @@ function toggleAnswers(forceSetValue) {
 	answershown = setValue;
 }
 
-function query(str) {
-	//whenever the user runs a query, save the contents of the editor
+function save() {
 	if(typeof window.localStorage != 'undefined') {
 		localStorage.setItem(App.pageID+".queryfield", editor.getValue());
 	}
+	
+}
+
+function query(str) {
+	//whenever the user runs a query, save the contents of the editor
+	save();
 
 	//run the user query against our server
 	if(!str) {
