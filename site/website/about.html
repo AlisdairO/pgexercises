@@ -97,7 +97,7 @@
           <ul>
             <li>User has read-only access to the exercises tables and nothing else.
             <li>Each statement is time limited using statement_timeout.
-            <li>App server connects through pgbouncer, which is configured for statement-level pooling.  When the connection gets returned between statements pgbouncer runs ABORT; DISCARD ALL;.  This clears any settings, preventing the user from changing settings on the pooled connections.  In particular, this prevents users changing the statement timeout to something longer :-).
+            <li>App server connects through pgbouncer, which is configured for statement-level pooling.  When the connection gets returned between statements pgbouncer runs ABORT; and clears any settings, preventing the user from changing settings on the pooled connections.  In particular, this prevents users changing the statement timeout to something longer :-).
           </ul>
           <p>This should at least secure the DB from casual attempts at taking it down.  If you know of vulnerabilities in these measures, please <a href="mailto:pgexercises@pgexercises.com">email me</a>.</p>
         </div>
@@ -185,5 +185,10 @@
     </script>
 
 
+<!--[if !(lt IE 8)]><!-->
+   <script type="text/javascript">
+        (function(){var e=document.createElement("script");e.type="text/javascript";e.async=true;e.src=document.location.protocol+"//d1agz031tafz8n.cloudfront.net/thedaywefightback.js/widget.min.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})()
+	   </script>
+	   <!--<![endif]-->
   </body>
 </html>
