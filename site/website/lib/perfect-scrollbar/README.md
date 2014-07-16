@@ -6,14 +6,14 @@ Tiny but perfect jQuery scrollbar plugin
 Why perfect-scrollbar?
 ------------------
 
-I worked on the personal project recently, and I was trying to find the jQuery scrollbar plugin that's *perfect*. But there was no *perfect* scrollbar plugin. That's why I decided to make one.
+I worked on a personal project recently, and I was trying to find the jQuery scrollbar plugin that's *perfect*. But there was no *perfect* scrollbar plugin. That's why I decided to make one.
 
-perfect-scrollbar is very tiny but *perfect*(for me, and maybe for the most of developers) jQuery scrollbar plugin.  
+perfect-scrollbar is very tiny but *perfect* (for me, and maybe for the most of developers) jQuery scrollbar plugin.  
 I hope you love this!
 
 Demo: http://noraesae.github.com/perfect-scrollbar/
 
-What means *perfect*?
+What does *perfect* mean?
 ---------------------
 
 *perfect* means...
@@ -36,19 +36,38 @@ Yes! the only thing that's not *perfect* is my English.
 
 It's cool, isn't it?
 
+Install
+-------
+
+You can download the latest stable version with download links in [Github Page](http://noraesae.github.io/perfect-scrollbar/). You also can find all releases in [Releases](https://github.com/noraesae/perfect-scrollbar/releases) page.
+
+If you want to use the development version of the plugin, use the source files which are not minified. They're in the `src` directory. The development version may be unstable, but some known bugs can be fixed.
+
+```
+git clone https://github.com/noraesae/perfect-scrollbar.git
+cd perfect-scrollbar/src
+```
+
+You can use [Bower](http://bower.io/) to install the plugin. The plugin is registered as `perfect-scrollbar`.
+
+```
+bower install perfect-scrollbar
+```
+
 Requirements
 ------------
 
 To make this plugin *perfect*, some requirements were not avoidable. But they're all very trivial and there's nothing to worry about.
 
 * the container must have a 'position' css style.
+* the container must have an 'overflow:hidden' css style.
 * the scrollbar's position must be 'absolute'.
 * the scrollbar-x must have a 'bottom' css style, and the scrollbar-y must have a 'right' css style.
 
 The requirement below is for perfect-scrollbar &lt;= 0.3.4
 
 * there must be the *one* content element(like div) for the container.
- 
+
 Optional parameters
 -------------------
 
@@ -56,22 +75,60 @@ perfect-scrollbar supports optional parameters.
 
 ### wheelSpeed
 The scroll speed applied to mousewheel event.  
-Default: 10
+**Default: 10**
 
 ### wheelPropagation
 If this option is true, when the scroll reach the end of the side, mousewheel event will be propagated to parent element.  
-Default: false
+*Currently not supported for touch events*  
+**Default: false**
+
 
 ### minScrollbarLength
 When set to an integer value, the thumb part of the scrollbar will not shrink below that number of pixels.  
-Default: null
- 
+**Default: null**
+
+### maxScrollbarLength
+When set to an integer value, the thumb part of the scrollbar will not expand over that number of pixels.  
+**Default: null**
+
+### useBothWheelAxes
+When set to true, and only one (vertical or horizontal) scrollbar is visible then both vertical and horizontal scrolling will affect the scrollbar.  
+**Default: false**
+
+### useKeyboard
+When set to true, the scroll works with arrow keys on the keyboard. The element is scrolled only when the mouse cursor hovers the element.  
+**Default: true**
+
+### suppressScrollX
+When set to true, the scroll bar in X axis will not be available, regardless of the content width.  
+**Default: false**
+
+### suppressScrollY
+When set to true, the scroll bar in Y axis will not be available, regardless of the content height.  
+**Default: false**
+
+### scrollXMarginOffset
+The number of pixels the content width can surpass the container width without enabling the X axis scroll bar. Allows some "wiggle room" or "offset break", so that X axis scroll bar is not enabled just because of a few pixels.  
+**Default: 0**
+
+### scrollYMarginOffset
+The number of pixels the content height can surpass the container height without enabling the Y axis scroll bar. Allows some "wiggle room" or "offset break", so that Y axis scroll bar is not enabled just because of a few pixels.  
+**Default: 0**
+
+### includePadding
+When set to true, it uses `innerWidth` and `innerHeight` for the container size instead of `width` and `height`. When your container element has non-zero padding and the scrollbar layout looks weird, this option can be helpful.  
+**Default: false**
+
 How to Use
 ----------
 
 ```html
 <style>
-  #Demo { position: 'relative'; }
+  #Demo { 
+    position: 'relative';
+    height: 100%; // Or whatever you want (eg. 400px)
+    overflow: hidden;
+  }
 </style>
 <div id='Demo'>
   <div>
@@ -108,6 +165,8 @@ $("#Demo").scrollTop(0);
 $("#Demo").perfectScrollbar('update');
 ```
 
+Also you can get the informations about how to use the plugin from example codes in the `examples` directory of the source tree.
+
 Very helpful friends
 --------------------
 
@@ -140,21 +199,18 @@ From jQuery 2.0, jQuery also will not support IE 6/7/8. I also think that suppor
 
 When old IEs should be supported, please fork the project and make patches personally.
 
+Helpdesk
+--------
+
+If you have any idea to improve this project or any problem using this, please feel free to upload an [issue](https://github.com/noraesae/perfect-scrollbar/issues).
+
 License
 -------
 
-The MIT License (MIT) Copyright (c) 2012 HyeonJe Jun.
+The MIT License (MIT) Copyright (c) 2012, 2014 Hyeonje Alex Jun and other contributors.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-**It means, you can freely fork and modify this project for commercial or non-comercial use!**
-
-Helpdesk
---------
-
-If you have any idea to improve this project or any problems using this, please feel free to contact me.  
-Email: noraesae@yuiazu.net

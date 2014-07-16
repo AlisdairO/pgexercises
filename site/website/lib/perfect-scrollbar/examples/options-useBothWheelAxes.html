@@ -9,26 +9,33 @@
         <script src="../src/perfect-scrollbar.js"></script>
         <style>
           .contentHolder { position:relative; margin:0px auto; padding:0px; width: 640px; height: 360px; overflow: hidden; }
-          .contentHolder .content { background-image: url('./azusa.jpg'); width: 12800px; height: 7200px; }
-          .spacer { text-align:center }
+          .contentHolder .content-x { background-image: url('./azusa.jpg'); width: 1920px; height: 360px; }
+          .contentHolder .content-y { background-image: url('./azusa.jpg'); width: 640px; height: 1080px; }
+          .spacer { text-align:center; }
         </style>
     <script>
       jQuery(document).ready(function ($) {
         "use strict";
         $('#Default').perfectScrollbar();
-        $('#LongThumb').perfectScrollbar({minScrollbarLength:100});
+        $('#CanScrollWithYAxis').perfectScrollbar({useBothWheelAxes: true});
+        $('#CanScrollWithXAxis').perfectScrollbar({useBothWheelAxes: true});
       });
     </script>
   </head>
   <body>
-    <h1 style="text-align:center">No minimum</h1>
+    <h1 style="text-align:center">Default.</h1>
     <div id="Default" class="contentHolder">
-      <div class="content">
+      <div class="content-x">
       </div>
     </div>
-    <h1 style="text-align:center">100px minimum</h1>
-    <div id="LongThumb" class="contentHolder">
-      <div class="content">
+    <h1 style="text-align:center">Can scroll X axis with Y axis wheel.</h1>
+    <div id="CanScrollWithYAxis" class="contentHolder">
+      <div class="content-x">
+      </div>
+    </div>
+    <h1 style="text-align:center">Can scroll Y axis with X axis wheel.</h1>
+    <div id="CanScrollWithXAxis" class="contentHolder">
+      <div class="content-y">
       </div>
     </div>
   </body>

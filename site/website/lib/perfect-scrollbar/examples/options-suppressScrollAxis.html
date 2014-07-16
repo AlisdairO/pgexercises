@@ -11,29 +11,30 @@
         .contentHolder { position:relative; margin:0px auto; padding:0px; width: 600px; height: 400px; overflow: hidden; }
         .contentHolder .content { background-image: url('./azusa.jpg'); width: 1280px; height: 720px; }
         .spacer { text-align:center }
+        h2 { text-align: center; }
       </style>
     <script>
       jQuery(document).ready(function ($) {
         "use strict";
         $('#Default').perfectScrollbar();
-        $('#FastWheelSpeed').perfectScrollbar({wheelSpeed:100});
-        $('#SlowWheelSpeed').perfectScrollbar({wheelSpeed:1});
+        $('#SuppressScrollX').perfectScrollbar({suppressScrollX: true});
+        $('#SuppressScrollY').perfectScrollbar({suppressScrollY: true});
       });
     </script>
   </head>
   <body>
-    <h1 style="text-align:center">Default; wheelSpeed:10</h1>
+    <h2>Default</h2>
     <div id="Default" class="contentHolder">
       <div class="content">
       </div>
     </div>
-    <h1 style="text-align:center">Fast: wheelSpeed:100</h1>
-    <div id="FastWheelSpeed" class="contentHolder">
+    <h2>suppressScrollX: true</h2>
+    <div id="SuppressScrollX" class="contentHolder">
       <div class="content">
       </div>
     </div>
-    <h1 style="text-align:center">Slow: wheelSpeed:1</h1>
-    <div id="SlowWheelSpeed" class="contentHolder">
+    <h2>suppressScrollY: true</h2>
+    <div id="SuppressScrollY" class="contentHolder">
       <div class="content">
       </div>
     </div>
