@@ -27,7 +27,7 @@ Modify database/clubdata.sql and database/context.xml to set a password of your 
 **Set up your database**  
 
 > su - postgres  
-> cd $PGEXERCISES\_HOME/database 
+> cd $PGEXERCISES\_HOME/database  
 > psql -f clubdata.sql  
 
 **Set up nginx**  
@@ -46,8 +46,8 @@ Modify database/clubdata.sql and database/context.xml to set a password of your 
 **Run the pgexercises build**  
 
 The following should build your html files in site/website/questions:
-> cd $PGEXERCISES\_HOME/scripts 
-> ./processdocs.pl ../ 1
+> cd $PGEXERCISES\_HOME/scripts  
+> ./processdocs.pl ../ 1  
 
 **Start everything up**
 
