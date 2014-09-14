@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Create WAR file" basedir="." default="war">
+	
+	<!-- default tomcat dir defined in this file,
+	can be overridden in build.properties.
+	-->
+
+	<property file="${user.home}/sqlforwarder-build.properties"/>
+	<property file="build.properties"/>
+	
+	<property name="tomcatlib.dir"     value="/usr/local/tomcat7/lib"/>
+	<property name="warfilename" value="SQLForwarder"/>
+	<property name="build.dir" value="build"/>
+	<property name="classes.dir" value="${build.dir}/classes"/>
+	<property name="war.dir" value="${build.dir}/war"/>
+	<property name="web.dir"     value="WebContent"/>
+	<property name="lib.dir"     value="${web.dir}/WEB-INF/lib"/>
+	
+	
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+    	<fileset dir="${tomcatlib.dir}" includes="**/*.jar"/>
+    </path>
+	
+	<target name="unpack">
+       <unwar src="${warfilename}.war" dest="${warfilename}" />
+    </target>
+	<target name="clean">
+	    <delete dir="${build.dir}"/>
+	</target>
+    <target name="compile">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="src" destdir="${classes.dir}" classpathref="classpath" includeantruntime="false"/>
+    </target>
+    <target name="war" depends="compile">
+        <mkdir dir="${war.dir}"/>
+    	<war destfile="${war.dir}/${warfilename}.war" webxml="${web.dir}/WEB-INF/web.xml" update="true">
+    	    <classes dir="${classes.dir}"/>
+    		<fileset dir="${web.dir}">
+				<!-- Need to exclude it since webxml is an attribute of the war tag above -->
+				<exclude name="WEB-INF/web.xml" />
+			</fileset>
+    	</war>
+    </target>
+</project>
