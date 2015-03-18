@@ -28,6 +28,29 @@ select member, facility, cost from (
 order by cost desc;
 |ANSWER|
 <p>This answer provides a mild simplification to the previous iteration: in the no-subquery version, we had to calculate the member or guest's cost in both the <c>WHERE</c> clause and the <c>CASE</c> statement.  In our new version, we produce an inline query that calculates the total booking cost for us, allowing the outer query to simply select the bookings it's looking for.  For reference, you may also see subqueries in the <c>FROM</c> clause referred to as <i>inline views</i>.</p>
+|QUERY|
+select member, facility, cost from (
+    select m.firstname || ' ' || m.surname as member, f.name as facility, f.membercost * b.slots as cost
+    from cd.members m
+        inner join cd.bookings b on m.memid = b.memid
+        inner join cd.facilities f on f.facid = b.facid
+    where f.membercost*b.slots > 30
+    and b.starttime::date = '2012-09-14'
+    and m.memid != 0
+
+    union all
+
+    select m.firstname || ' ' || m.surname as member, f.name as facility, f.guestcost * b.slots as cost
+    from cd.members m
+        inner join cd.bookings b on m.memid = b.memid
+        inner join cd.facilities f on f.facid = b.facid
+    where f.guestcost*b.slots > 30
+    and b.starttime::date = '2012-09-14'
+    and m.memid = 0
+)
+order by cost desc;
+|ANSWER|
+<p>Here is an alternate answer that uses a <c>UNION ALL</c> instead of <c>CASE</c> statements.</p>
 |HINT|
 Your answer will be similar to the referenced exercise.  Use a subquery in the <c>FROM</c> clause to generate a result set that calculates the total cost of each booking.  The outer query can then select the bookings it's interested in.
 |SORTED|
