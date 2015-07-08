@@ -108,6 +108,8 @@ function initCodeMirror() {
 					queryStr = editor.getSelection();
 				} else if (e.which == 82) { //alt-r, run everything
 					queryStr = editor.getValue();
+				} else if(e.which == 72) { // alt-h, show/hide help
+					help();
 				} else if (e.which == 83) { //alt-s run 'near cursor' - a best effort to find a queryStr near the cursor
 					//queries can be bounded by semicolons or empty lines.
 					//doesn't handle semicolons in quotes - but none of our questions
@@ -220,7 +222,14 @@ function hint() {
 }
 
 function help() {
-	$("#help").dialog('open');
+	var isOpen = $( "#help" ).dialog( "isOpen" );
+	
+	// Show Dialog if Closed, Hide Dialog if Open
+	if(isOpen) {
+		$("#help").dialog('close'); 
+	} else {
+		$("#help").dialog('open');
+	}
 }
 
 function toggleAnswers(forceSetValue) {
