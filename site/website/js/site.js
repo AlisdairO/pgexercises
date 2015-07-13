@@ -204,7 +204,6 @@ function initExpRes() {
 	$("#expres").on('resize', function(e) { 
 		$("#expres").perfectScrollbar('update');
 	});
-
 }
 
 function initYourResults() {
@@ -213,7 +212,6 @@ function initYourResults() {
 	$("#yourresultsdiv").on('resize', function(e) { 
 		$("#yourresultsdiv").perfectScrollbar('update');
 	});
-
 }
 
 
@@ -223,7 +221,7 @@ function hint() {
 
 function help() {
 	var isOpen = $( "#help" ).dialog( "isOpen" );
-	
+
 	// Show Dialog if Closed, Hide Dialog if Open
 	if(isOpen) {
 		$("#help").dialog('close'); 
@@ -241,7 +239,7 @@ function toggleAnswers(forceSetValue) {
 	} else {
 		setValue = forceSetValue;
 	}
-   // Function linked to the button to trigger the fade.
+	// Function linked to the button to trigger the fade.
 	if(!setValue) {
 		$(".answerdiv").fadeTo(300, 0);
 		$("#answerbtn").text("Show");
@@ -258,7 +256,6 @@ function save() {
 	if(typeof window.localStorage != 'undefined') {
 		localStorage.setItem(App.pageID+".queryfield", editor.getValue());
 	}
-	
 }
 
 function query(str) {
@@ -269,68 +266,73 @@ function query(str) {
 	if(!str) {
 		str = editor.getValue();
 	}
-	$.get("/SQLForwarder/SQLForwarder", {query:str}, function(data) {
-		//empty the error field, and fill the table with the JSON-formatted results!
-		$("#yourresultserror").hide();
-		var table = $("#yourresultstable");
-		table.empty();
 
-		var tbl_head = document.createElement('thead');
-		var tbl_row = document.createElement('tr');
-		tbl_head.appendChild(tbl_row);
-		$.each(data["headers"], function(k, v) {
-			var tbl_cell = document.createElement('th');
-			var cell_text = document.createTextNode(v);
-			tbl_cell.appendChild(cell_text);
-			tbl_row.appendChild(tbl_cell);
-		});
-		table.get(0).appendChild(tbl_head);
+        //table emptied in advance + timeout used to force screen flicker to make a user
+        //aware that a query has definitely been performed.
+	var table = $("#yourresultstable");
+	table.empty();
+	window.setTimeout(function() {
+		$.get("/SQLForwarder/SQLForwarder", {query:str}, function(data) {
+			//empty the error field, and fill the table with the JSON-formatted results!
+			$("#yourresultserror").hide();
 
-		var tbl_body = document.createElement('tbody');
-		$.each(data["values"], function() {
+			var tbl_head = document.createElement('thead');
 			var tbl_row = document.createElement('tr');
-			tbl_body.appendChild(tbl_row);
-			$.each(this, function(k , v) {
-				var tbl_cell = document.createElement('td');
+			tbl_head.appendChild(tbl_row);
+			$.each(data["headers"], function(k, v) {
+				var tbl_cell = document.createElement('th');
 				var cell_text = document.createTextNode(v);
 				tbl_cell.appendChild(cell_text);
 				tbl_row.appendChild(tbl_cell);
+			});
+			table.get(0).appendChild(tbl_head);
+
+			var tbl_body = document.createElement('tbody');
+			$.each(data["values"], function() {
+				var tbl_row = document.createElement('tr');
+				tbl_body.appendChild(tbl_row);
+				$.each(this, function(k , v) {
+					var tbl_cell = document.createElement('td');
+					var cell_text = document.createTextNode(v);
+					tbl_cell.appendChild(cell_text);
+					tbl_row.appendChild(tbl_cell);
+				})
 			})
-		})
 
-		var correct = checkQueryResult(data);
+			var correct = checkQueryResult(data);
 
-		if(correct) {
-			if(typeof window.localStorage != 'undefined') {
-				localStorage.setItem(App.pageID+".success", "true");
+			if(correct) {
+				if(typeof window.localStorage != 'undefined') {
+					localStorage.setItem(App.pageID+".success", "true");
+				}
+				setPageSuccess();
+
+				$("#youranswertickspan").empty();
+				$("#youranswertickspan").append($('<img class="youranswertick" src="../../assets/tick2.svg">'));
+			} else {
+				$("#youranswertickspan").empty();
+				$("#youranswertickspan").append($('<img class="youranswertick" src="../../assets/cross.svg">'));
 			}
-			setPageSuccess();
-		
-			$("#youranswertickspan").empty();
-			$("#youranswertickspan").append($('<img class="youranswertick" src="../../assets/tick2.svg">'));
-		} else {
-			$("#youranswertickspan").empty();
-			$("#youranswertickspan").append($('<img class="youranswertick" src="../../assets/cross.svg">'));
-		}
-		//make the 'Your Answer' tick/cross visible
-		$("#youranswertickspan").css('visibility', 'visible');
-		table.get(0).appendChild(tbl_body);
-		table.show();
-		$("#yourresultsdiv").perfectScrollbar('update');
-	},"json").fail(function(xhr, status, error) {
-		//handle errors coming back from the tomcat server
-		var parsed = $('<div>').append($(xhr.responseText));
-		var errText = parsed.find('h1').get(0).lastChild.nodeValue;
-		errText = errText.substring(errText.indexOf("- ") + 2, errText.length);
-		errText += "\n\n Query was: " + str;
+			//make the 'Your Answer' tick/cross visible
+			$("#youranswertickspan").css('visibility', 'visible');
+			table.get(0).appendChild(tbl_body);
+			table.show();
+			$("#yourresultsdiv").perfectScrollbar('update');
+		},"json").fail(function(xhr, status, error) {
+			//handle errors coming back from the tomcat server
+			var parsed = $('<div>').append($(xhr.responseText));
+			var errText = parsed.find('h1').get(0).lastChild.nodeValue;
+			errText = errText.substring(errText.indexOf("- ") + 2, errText.length);
+			errText += "\n\n Query was: " + str;
 
-		$("#yourresultstable").empty();
-		$("#yourresultstable").hide();
-		$("#yourresultserror").empty();
-		$("#yourresultserror").get(0).appendChild(document.createTextNode(errText));
-		$("#yourresultserror").show();
-		$("#yourresultsdiv").perfectScrollbar('update');
-	});
+			$("#yourresultstable").empty();
+			$("#yourresultstable").hide();
+			$("#yourresultserror").empty();
+			$("#yourresultserror").get(0).appendChild(document.createTextNode(errText));
+			$("#yourresultserror").show();
+			$("#yourresultsdiv").perfectScrollbar('update');
+		})
+	}, 10);
 }
 
 //When the user runs a query, does it match what we'd expect?
@@ -356,7 +358,7 @@ function checkQueryResult(queryResult) {
 				return false;
 			}
 		}
-		
+
 	}
 	return true;
 }
