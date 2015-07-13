@@ -1,8 +1,0 @@
-|CATNAME|
-Arrays
-|CATDESC|
-<p>Postgres supports an unusually rich variety of data types, far beyond the basics of strings, integers, and dates/times.  One useful example is the ARRAY type.  Put simply, this allows you to pack multiple values into a single column.  Array types are available in standard SQL, although compatibility across different systems remains fairly poor.</p>
-
-<p>Arrays can be very useful, but be careful not to reach for them too quickly: generally, most data should be normalised and placed into tables using standard data types.  If you're reaching for arrays, seriously consider creating a new table and joining to it instead.  This is usually a better approach, as it keeps your data normalised: that is,o ne piece of information resides in only one place.  Keeping your data normalised makes it easier to avoid mistakes or concurrency-related errors when you're updating information.</p>
-
-<p>With that said, in situations where you can be confident of avoiding anomalies, arrays can be a convenient way to represent your information.  This section will show you the basics of how to interact with them - if you want to go further, the Postgres <a href="http://www.postgresql.org/docs/9.3/static/arrays.html">documentation</a> is, as ever, very strong.</p>

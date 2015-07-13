@@ -5,7 +5,7 @@ use File::Find;
 my $outputloc = "../site/website/questions/";
 my $templateloc = "../site/website/questions/template.html";
 my $questionsloc = "../questions/";
-my @dirs = ("basic", "joins", "aggregates", "date", "string", "recursive", "arrays");
+my @dirs = ("basic", "joins", "aggregates", "date", "string", "recursive");
 #categories data structure ends up like: category -> files -> file metadata
 my $categories = {};
 my $emptyfile = {'title' => '', 'filenamehtml' => '#'};
