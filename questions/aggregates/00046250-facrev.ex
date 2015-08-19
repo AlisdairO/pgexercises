@@ -3,9 +3,9 @@ Find the total revenue of each facility
 |QUESTION|
 Produce a list of facilities along with their total revenue.  The output table should consist of facility name and revenue, sorted by revenue.  Remember that there's a different cost for guests and members!
 |QUERY|
-select facs.name, sum(case
-			when memid = 0 then slots * facs.guestcost
-			else slots * membercost
+select facs.name, sum(slots * case
+			when memid = 0 then * facs.guestcost
+			else membercost
 		end) as revenue
 	from cd.bookings bks
 	inner join cd.facilities facs
