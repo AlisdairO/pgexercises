@@ -43,7 +43,7 @@ with monthdata as (
 		maxcompletemonth,
 		(extract(year from maxcompletemonth)*12) +
 			extract(month from maxcompletemonth) -
-			(extract(year from maxcompletemonth)*12) -
+			(extract(year from mincompletemonth)*12) -
 			extract(month from mincompletemonth) as nummonths 
 	from (
 		select 	date_trunc('month', 
