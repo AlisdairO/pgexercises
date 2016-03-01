@@ -1,9 +1,9 @@
 |QUESTIONNAME|
 Produce a list of all members, along with their recommender
 |QUESTION|
-How can you output a list of all members, including the individual who recommended them (if any)? Ensure that there are no duplicates in the list, and that results are ordered by (surname, firstname).  
+How can you output a list of all members, including the individual who recommended them (if any)? Ensure that results are ordered by (surname, firstname).  
 |QUERY|
-select distinct mems.firstname as memfname, mems.surname as memsname, recs.firstname as recfname, recs.surname as recsname
+select mems.firstname as memfname, mems.surname as memsname, recs.firstname as recfname, recs.surname as recsname
 	from 
 		cd.members mems
 		left outer join cd.members recs
