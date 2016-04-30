@@ -31,6 +31,8 @@ $(document).ready(function() {
 //		sizeCodeMirror();				
 //	});
 	sizeCodeMirror();				
+
+        initKeyHandler();
 });
 
 //size the left-right splitter to initially show all of the Expected Results
@@ -388,4 +390,13 @@ function setPageSuccess() {
 	//if we've got it right, make the header tick visible and show the answers
 	$(".headertick").css('visibility', 'visible');
 	toggleAnswers(true)
+}
+
+function initKeyHandler() {
+    // toggle the help window shortcut
+    $(document).on("keydown", function (e) {
+        if (e.altKey && e.type == "keydown" && e.which == 72) {
+            help();
+        }
+    });
 }
