@@ -333,6 +333,9 @@ function query(str) {
 			$("#yourresultserror").get(0).appendChild(document.createTextNode(errText));
 			$("#yourresultserror").show();
 			$("#yourresultsdiv").perfectScrollbar('update');
+			$("#youranswertickspan").empty();
+			$("#youranswertickspan").append($('<img class="youranswertick" src="../../assets/cross.svg">'));
+			$("#youranswertickspan").css('visibility', 'visible');
 		})
 	}, 10);
 }
