@@ -4123,6 +4123,7 @@ COPY bookings (bookid, facid, memid, starttime, slots) FROM stdin;
 4040	8	21	2012-09-30 18:30:00	1
 4041	8	16	2012-09-30 19:00:00	1
 4042	8	29	2012-09-30 19:30:00	1
+4043    8       5       2013-01-01 15:30:00     1
 \.
 
 
@@ -4280,7 +4281,5 @@ CREATE INDEX "members.recommendedby"
   ON cd.members
   USING btree
   (recommendedby);
-
-alter database exercises set default_transaction_read_only = on;
 
 ANALYZE;
