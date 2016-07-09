@@ -16,7 +16,7 @@ order by facs.facid;
 
 <p>Unfortunately, depending on which database system we use, validation might not be so smart, and may not realise that the mapping is strictly 1:1.  That being the case, if there were multiple <c>name</c>s for each <c>facid</c> and we hadn't grouped by <c>name</c>, the DBMS would have to choose between multiple (equally valid) choices for the <c>name</c>.  Since this is invalid, the database system will insist that we group by both fields.  In general, I recommend grouping by all columns you don't have an aggregate function on: this will ensure better cross-platform compatibility.</p>
 
-<p>Next up is the division.  Those of you familiar with MySQL may be aware that integer divisions are automatically cast to floats.  Postgres is a little more traditional in this respect, and expects you to tell it if you want a foating point division.  You can do that easily in this case by dividing by 2.0 rather than 2.</p>
+<p>Next up is the division.  Those of you familiar with MySQL may be aware that integer divisions are automatically cast to floats.  Postgres is a little more traditional in this respect, and expects you to tell it if you want a floating point division.  You can do that easily in this case by dividing by 2.0 rather than 2.</p>
 
 <p>Finally, let's take a look at formatting.  The <c>TO_CHAR</c> function converts values to character strings.  It takes a formatting string, which we specify as (up to) lots of numbers before the decimal place, decimal place, and two numbers after the decimal place.  The output of this function can be prepended with a space, which is why we include the outer <c>TRIM</c> function.</p>
 |HINT|
