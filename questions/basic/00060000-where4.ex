@@ -8,7 +8,7 @@ select *
 	where 
 		facid in (1,5);
 |ANSWER|
-<p>The obvious answer to this question is to use a <c>WHERE</c> clause that looks like <c>where facid = 1 or facid = 2</c>.  An alternative that is easier with large numbers of possible matches is the <c>IN</c> operator.  The <c>IN</c> operator takes a list of possible values, and matches them against (in this case) the facid. If one of the values matches, the where clause is true for that row, and the row is returned.
+<p>The obvious answer to this question is to use a <c>WHERE</c> clause that looks like <c>where facid = 1 or facid = 5</c>.  An alternative that is easier with large numbers of possible matches is the <c>IN</c> operator.  The <c>IN</c> operator takes a list of possible values, and matches them against (in this case) the facid. If one of the values matches, the where clause is true for that row, and the row is returned.
 <p>The <c>IN</c> operator is a good early demonstrator of the elegance of the relational model.  The argument it takes is not just a list of values - it's actually a table with a single column.  Since queries also return tables, if you create a query that returns a single column, you can feed those results into an <c>IN</c> operator.  To give a toy example:
 <sql>
 select * 
