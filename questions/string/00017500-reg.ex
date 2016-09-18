@@ -19,7 +19,7 @@ We've chosen to answer this using regular expressions, although Postgres does pr
 
 <sql>select memid, telephone from cd.members where telephone similar to '%[()]%';</sql>
 
-<p>Finally, it's worth noting that regular expressions usually don't use indexes.  Generally you don't want your regex to be responsible for doing heavy lifting in your query, because it will be slow.  If you need fuzzy matching that works fast, consider working out if your needs can be met by <a href="http://www.postgresql.org/docs/9.2/static/textsearch.html">full text search</a>.</p>
+<p>Finally, it's worth noting that regular expressions usually don't use indexes.  Generally you don't want your regex to be responsible for doing heavy lifting in your query, because it will be slow.  If you need fuzzy matching that works fast, consider working out if your needs can be met by <a href="http://www.postgresql.org/docs/current/static/textsearch.html">full text search</a>.</p>
 
 |HINT|
 Look up the ~ or <c>SIMILAR TO</c> operators in the Postgres docs.
