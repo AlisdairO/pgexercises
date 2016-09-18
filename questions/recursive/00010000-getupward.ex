@@ -41,7 +41,7 @@ select * from increment;
 
 <p>Now that we've constructed the recommenders CTE, all our main <c>SELECT</c> statement has to do is get the member IDs from recommenders, and join to them members table to find out their names.</p>
 |HINT|
-Read up on <c><a href="http://www.postgresql.org/docs/9.2/static/queries-with.html">WITH RECURSIVE</a></c>.
+Read up on <c><a href="http://www.postgresql.org/docs/current/static/queries-with.html">WITH RECURSIVE</a></c>.
 |SORTED|
 1
 |PAGEID|

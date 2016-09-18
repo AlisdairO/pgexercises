@@ -5,7 +5,7 @@ Produce a timestamp for 1 a.m. on the 31st of August 2012.
 |QUERY|
 select timestamp '2012-08-31 01:00:00';
 |ANSWER|
-<p>Here's a pretty easy question to start off with!  SQL has a bunch of different date and time types, which you can peruse at your leisure over at the excellent <a href="http://www.postgresql.org/docs/9.2/static/datatype-datetime.html">Postgres documentation</a>.  These basically allow you to store dates, times, or timestamps (date+time).</p>
+<p>Here's a pretty easy question to start off with!  SQL has a bunch of different date and time types, which you can peruse at your leisure over at the excellent <a href="http://www.postgresql.org/docs/current/static/datatype-datetime.html">Postgres documentation</a>.  These basically allow you to store dates, times, or timestamps (date+time).</p>
 
 <p>The approved answer is the best way to create a timestamp under normal circumstances.  You can also use casts to change a correctly formatted string into a timestamp, for example:</p>
 

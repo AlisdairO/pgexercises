@@ -1,6 +1,6 @@
 |CATNAME|
 Recursive Queries
 |CATDESC|
-<p>Common Table Expressions allow us to, effectively, create our own temporary tables for the duration of a query - they're largely a convenience to help us make more readable SQL.  Using the <a href="http://www.postgresql.org/docs/9.2/static/queries-with.html">WITH RECURSIVE</a> modifier, however, it's possible for us to create recursive queries.  This is enormously advantageous for working with tree and graph-structured data - imagine retrieving all of the relations of a graph node to a given depth, for example.</p>
+<p>Common Table Expressions allow us to, effectively, create our own temporary tables for the duration of a query - they're largely a convenience to help us make more readable SQL.  Using the <a href="http://www.postgresql.org/docs/current/static/queries-with.html">WITH RECURSIVE</a> modifier, however, it's possible for us to create recursive queries.  This is enormously advantageous for working with tree and graph-structured data - imagine retrieving all of the relations of a graph node to a given depth, for example.</p>
 <p>This category shows you some basic recursive queries that are possible using our dataset.</p>
 <!--NB talk about graph queries in EAV models -->

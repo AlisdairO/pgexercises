@@ -19,7 +19,7 @@ order by memid
 |ANSWER|
 <p>This is a pretty minor variation on the previous question.  The essential difference is that we're now heading in the opposite direction.  One interesting point to note is that unlike the previous example, this CTE produces multiple rows per iteration, by virtue of the fact that we're heading down the recommendation tree (following all branches) rather than up it.</p>
 |HINT|
-Read up on <c><a href="http://www.postgresql.org/docs/9.2/static/queries-with.html">WITH RECURSIVE</a></c>.
+Read up on <c><a href="http://www.postgresql.org/docs/current/static/queries-with.html">WITH RECURSIVE</a></c>.
 |SORTED|
 1
 |PAGEID|

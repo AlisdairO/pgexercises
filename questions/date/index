@@ -2,4 +2,4 @@
 Working with Timestamps
 |CATDESC|
 <p>Dates/Times in SQL are a complex topic, deserving of a category of their own.  They're also fantastically powerful, making it easier to work with variable-length concepts like 'months' than many programming languages.</p>
-<p>Before getting started on this category, it's probably worth taking a look over the PostgreSQL <a href="http://www.postgresql.org/docs/9.2/static/functions-datetime.html">docs page</a> on date/time functions.  You might also want to complete the aggregate functions category, since we'll use some of those capabilities in this section.</p>
+<p>Before getting started on this category, it's probably worth taking a look over the PostgreSQL <a href="http://www.postgresql.org/docs/current/static/functions-datetime.html">docs page</a> on date/time functions.  You might also want to complete the aggregate functions category, since we'll use some of those capabilities in this section.</p>
