@@ -163,7 +163,7 @@ $(function(){
 			this.splitPos=perc;
 			
 
-			var barsize=this.C[this.opts.sizing]()+(2*parseInt(this.C.css('border-'+this.opts.moving+'-width')));//+ border. cehap&dirty
+			var barsize=this.C[this.opts.sizing]()+(2*parseFloat(this.C.css('border-'+this.opts.moving+'-width')));//+ border. cehap&dirty
 			var splitsize=this.splitter[this.opts.sizing]();
 			if(this.opts.closeableto!=perc){
 				var percpx=Math.max(parseInt((splitsize/100)*perc),this.opts.minAsize);
