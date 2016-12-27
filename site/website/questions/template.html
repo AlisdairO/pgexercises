@@ -103,7 +103,7 @@
         </h1>
       </div>
 
-      <div class="row" style="margin-bottom:30px">
+      <div class="row" style="margin-bottom:10px">
         <div class="span8">
           <h3>Question</h3>
             |QUESTION|
@@ -115,74 +115,82 @@
       </div>
       <div class="row">
       <div class="span12">
-      <div id=splittercontainer>
-        <div id="expres" ondblclick="setOptimalExpectedResultsSize()">
-          <div style="overflow-x:hidden;">
-            <div style="display: inline-block; min-width:1000px;">
-              <h3>Expected Results</h3>
-              <div style="width:auto; display:inline-block">
-              <!-- FILLER -->
-                <table id="exprestable" class="demo table table-bordered table-striped" style="width:auto;">
-                  <thead>
-                    <tr>
-                      <th>Col1</th>
-                      <th>Col2</th>
-                      <th>Col3</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>                  <td>val</td><td>val</td><td>val</td>
-                    </tr>
-                    <tr>
-                      <td>val</td><td>val</td><td>val</td>
-                    </tr>
-                    <tr>                  <td>val</td><td>val</td><td>val</td>
-                    </tr>
-                    <tr>                  <td>val</td><td>val</td><td>val</td>
-                    </tr>
-                    <tr>                  <td>val</td><td>val</td><td>val</td>
-                    </tr>
-                    <tr>                  <td>val</td><td>val</td><td>val</td>
-                    </tr>
-                    <tr>                  <td>val</td><td>val</td><td>val</td>
-                    </tr>
-                    <tr>                  <td>val</td><td>val</td><td>val</td>
-                    </tr>
-                    <tr>                  <td>val</td><td>val</td><td>val</td>
-                    </tr>
-                    <tr>                  <td>val</td><td>val</td><td>val</td>
-                    </tr>
-                    </tbody>
-                </table>
+      <div id=splittercontainerouter>
+        <div id="schemareminder" class="btn btn-primary" onClick="schema();">
+          <div>Schema reminder <span id="schemareminderarrow">&#x25BC;</span></div>
+        </div>
+        <div id="schemaremindercontents">
+          <img id="schemareminderimage" src="../../img/schema-horizontal.svg" alt="DB schema" width="840"></img>
+        </div>
+        <div id=splittercontainer>
+          <div id="expres" ondblclick="setOptimalExpectedResultsSize()">
+            <div style="overflow-x:hidden;">
+              <div style="display: inline-block; min-width:1000px;">
+                <h3>Expected Results</h3>
+                <div style="width:auto; display:inline-block">
                 <!-- FILLER -->
-                |RESULTS|
+                  <table id="exprestable" class="demo table table-bordered table-striped" style="width:auto;">
+                    <thead>
+                      <tr>
+                        <th>Col1</th>
+                        <th>Col2</th>
+                        <th>Col3</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>                  <td>val</td><td>val</td><td>val</td>
+                      </tr>
+                      <tr>
+                        <td>val</td><td>val</td><td>val</td>
+                      </tr>
+                      <tr>                  <td>val</td><td>val</td><td>val</td>
+                      </tr>
+                      <tr>                  <td>val</td><td>val</td><td>val</td>
+                      </tr>
+                      <tr>                  <td>val</td><td>val</td><td>val</td>
+                      </tr>
+                      <tr>                  <td>val</td><td>val</td><td>val</td>
+                      </tr>
+                      <tr>                  <td>val</td><td>val</td><td>val</td>
+                      </tr>
+                      <tr>                  <td>val</td><td>val</td><td>val</td>
+                      </tr>
+                      <tr>                  <td>val</td><td>val</td><td>val</td>
+                      </tr>
+                      <tr>                  <td>val</td><td>val</td><td>val</td>
+                      </tr>
+                      </tbody>
+                  </table>
+                  <!-- FILLER -->
+                  |RESULTS|
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <div id="codediv">
-          <div id="youranswerdiv" ondblclick="setOptimalYourAnswerSize()">
-                  <h3 style="min-width:200px;">Your Answer<span id="youranswertickspan"><img src="../../assets/cross.svg" class="youranswertick"></img></span>
-              <span id="youranswerbuttons">
-                <a id="hintbtn" class="youranswerbutton btn btn-primary btn-small" onClick="hint();">Hint</a>
-                <a id="helpbtn" class="youranswerbutton btn btn-primary btn-small" onClick="help();" title="[Alt-h]">Schema & Help</a>
-                <a id="querybtn" class="youranswerbutton btn btn-primary btn-small" onClick="save();">Save</a>
-                <a id="savebtn" class="youranswerbutton btn btn-primary btn-small" onClick="query();" title="[Alt-r]">Run Query</a>
-              </span>
-            </h3>
-            <div style="clear:both;">
-	      <div id="codewrapper">
-                <form>
-                  <textarea id="code" name="code"></textarea>
-                </form>
+  
+          <div id="codediv">
+            <div id="youranswerdiv" ondblclick="setOptimalYourAnswerSize()">
+                    <h3 style="min-width:200px;">Your Answer<span id="youranswertickspan"><img src="../../assets/cross.svg" class="youranswertick"></img></span>
+                <span id="youranswerbuttons">
+                  <a id="hintbtn" class="youranswerbutton btn btn-primary btn-small" onClick="hint();">Hint</a>
+                  <a id="helpbtn" class="youranswerbutton btn btn-primary btn-small" onClick="help();" title="[Alt-h]">Help</a>
+                  <a id="querybtn" class="youranswerbutton btn btn-primary btn-small" onClick="save();">Save</a>
+                  <a id="savebtn" class="youranswerbutton btn btn-primary btn-small" onClick="query();" title="[Alt-r]">Run Query</a>
+                </span>
+              </h3>
+              <div style="clear:both;">
+  	      <div id="codewrapper">
+                  <form>
+                    <textarea id="code" name="code"></textarea>
+                  </form>
+                </div>
+  	    </div>
+            </div>
+            <div id="yourresultsdiv" ondblclick="setOptimalYourResultsSize()">
+              <div>
+                <table id="yourresultstable" class="demo table table-bordered table-striped"></table>
+                <pre id="yourresultserror"></pre>
               </div>
-	    </div>
-          </div>
-          <div id="yourresultsdiv" ondblclick="setOptimalYourResultsSize()">
-            <div>
-              <table id="yourresultstable" class="demo table table-bordered table-striped"></table>
-              <pre id="yourresultserror"></pre>
             </div>
           </div>
         </div>
@@ -226,7 +234,7 @@
         <div id="helpcontent">
 	  <h4>Keyboard shortcuts:</h4>
 	  <ul>
-	    <li><b>Alt-h</b>: Show/Hide Schema & Help menu
+	    <li><b>Alt-h</b>: Show/Hide Help menu
 	    <li><b>Alt-r</b>: Run query
 	    <li><b>Alt-x</b>: Run selected text as query
 	    <li><b>Alt-s</b>: Run query by cursor (delimited by whitespace/semi-colon)
@@ -239,8 +247,6 @@
 	      <li>Don't forget to use the hint button if you're stuck!
 	    </ul>
 	  <hr />
-	  <h4>Database schema:</h4>
-          <img src="../../img/schema2.svg" alt="DB schema" width="700"></img>
 	</div>
       </div>
 
