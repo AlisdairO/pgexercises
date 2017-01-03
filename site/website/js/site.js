@@ -4,6 +4,7 @@ var splitCont;
 var splitContV;
 var editor;
 var isMSIE = 0;
+var schemareminder = true;
 /*@cc_on isMSIE=1;@*/
 
 $(document).ready(function() {
@@ -23,6 +24,7 @@ $(document).ready(function() {
 	initHint();
 	initHelp();
 	initExpRes();
+	initSchema();
 
 	initLocalStoredInfo();
 
@@ -197,7 +199,7 @@ function initHint() {
 }
 
 function initHelp() {
-	$("#help").dialog({autoOpen:false, width:760, height:500});
+	$("#help").dialog({autoOpen:false, width:760, height:380});
 }
 
 //initialises expected results scrollbar
@@ -206,6 +208,19 @@ function initExpRes() {
 	$("#expres").on('resize', function(e) { 
 		$("#expres").perfectScrollbar('update');
 	});
+}
+
+function initSchema() {
+        schemareminder = localStorage.getItem("schemareminder") != "false";
+        if(schemareminder) {
+                $("#schemaremindercontents").slideToggle(0, function () {
+                        setSchemaReminderArrow(false);
+                });
+        }
+}
+
+function setSchemaReminderArrow(arrow) {
+        $("#schemareminderarrow").text(arrow ? "\u25BC" : "\u25B2");
 }
 
 function initYourResults() {
@@ -219,6 +234,14 @@ function initYourResults() {
 
 function hint() {
 	$("#hint").dialog('open');
+}
+
+function schema() {
+	$("#schemaremindercontents").slideToggle(function () {
+                setSchemaReminderArrow(schemareminder);
+                schemareminder = !schemareminder;
+                localStorage.setItem("schemareminder", schemareminder);
+        });
 }
 
 function help() {

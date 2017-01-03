@@ -60,12 +60,44 @@ a.listlink:visited {color:#CD3804;}
 	height:400px;
 	width:100%;
 	margin:0;
+	box-sizing: border-box;
 	padding-left:3px;
 	padding-right:3px;
-	border: 1px dashed #ce4213;
+	border-bottom: 1px dashed #ce4213;
+	border-left: 1px dashed #ce4213;
+	border-right: 1px dashed #ce4213;
 	position:relative;
 }
 
+#schemareminder {
+	display: block;
+	padding-left: 4px;
+	line-height: 5px;
+	font-size: 11px;
+	text-align: left;
+	background-image: linear-gradient(to bottom,#f59877, #FF9062);
+}
+
+#schemaremindercontents {
+	height: 230px;
+        display: none;
+	border-left: 1px dashed #ce4213;
+	border-right: 1px dashed #ce4213;
+	border-bottom: 1px dashed #ce4213;
+}
+
+#schemareminderimage {
+	margin: auto;
+	display: block;
+}
+
+#schemareminder:hover {
+    background-color: #ff8356;
+}
+
+#schemareminderarrow {
+    font-size: 8px;
+}
 
 #expres{
 	position: relative;
