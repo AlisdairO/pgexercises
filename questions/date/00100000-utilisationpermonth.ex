@@ -1,7 +1,7 @@
 |QUESTIONNAME|
 Work out the utilisation percentage for each facility by month
 |QUESTION|
-Work out the utilisation percentage for each facility by month, sorted by month, rounded to 1 decimal place.  Opening time is 8am, closing time is 8.30pm.  You can treat every month as a full month, regardless of if there were some dates the club was not open.
+Work out the utilisation percentage for each facility by month, sorted by name and month, rounded to 1 decimal place.  Opening time is 8am, closing time is 8.30pm.  You can treat every month as a full month, regardless of if there were some dates the club was not open.
 |QUERY|
 select name, month, 
 	round((100*slots)/
