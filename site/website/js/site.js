@@ -108,12 +108,14 @@ function initCodeMirror() {
 			if(e.altKey && e.type == "keydown") {
 				e.preventDefault();
 				var queryStr = "";
-				if(e.which == 88) { //alt-x run selected
+				if(e.which == 72) { // alt-h, show/hide help
+					help();
+				} else if(e.which == 78) { //alt-n, next example
+				        nextExample();
+				} else if(e.which == 88) { //alt-x run selected
 					queryStr = editor.getSelection();
 				} else if (e.which == 82) { //alt-r, run everything
 					queryStr = editor.getValue();
-				} else if(e.which == 72) { // alt-h, show/hide help
-					help();
 				} else if (e.which == 83) { //alt-s run 'near cursor' - a best effort to find a queryStr near the cursor
 					//queries can be bounded by semicolons or empty lines.
 					//doesn't handle semicolons in quotes - but none of our questions
@@ -253,6 +255,10 @@ function help() {
 	} else {
 		$("#help").dialog('open');
 	}
+}
+
+function nextExample() {
+    $("a:contains('Next Exercise')").click();
 }
 
 function toggleAnswers(forceSetValue) {
