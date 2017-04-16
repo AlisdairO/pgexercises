@@ -13,3 +13,5 @@ Check out the <c>LPAD</c> function.  You'll also need to cast the zipcode column
 0
 |PAGEID|
 0483f866-2b9f-11e3-8908-0023df7f7ec4
+|WRITEABLE|
+0

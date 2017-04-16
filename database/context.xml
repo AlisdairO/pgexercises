@@ -28,6 +28,1805 @@
      maxIdle="50"
      validationQuery="select 1" />
 
+<Resource name="jdbc/pgexerciseswrite0" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw0"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin0" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw0"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite1" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw1"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin1" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw1"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite2" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw2"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin2" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw2"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite3" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw3"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin3" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw3"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite4" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw4"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin4" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw4"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite5" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw5"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin5" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw5"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite6" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw6"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin6" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw6"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite7" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw7"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin7" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw7"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite8" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw8"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin8" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw8"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite9" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw9"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin9" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw9"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite10" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw10"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin10" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw10"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite11" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw11"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin11" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw11"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite12" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw12"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin12" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw12"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite13" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw13"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin13" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw13"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite14" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw14"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin14" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw14"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite15" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw15"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin15" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw15"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite16" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw16"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin16" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw16"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite17" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw17"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin17" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw17"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite18" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw18"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin18" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw18"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite19" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw19"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin19" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw19"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite20" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw20"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin20" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw20"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite21" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw21"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin21" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw21"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite22" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw22"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin22" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw22"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite23" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw23"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin23" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw23"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite24" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw24"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin24" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw24"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite25" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw25"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin25" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw25"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite26" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw26"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin26" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw26"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite27" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw27"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin27" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw27"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite28" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw28"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin28" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw28"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite29" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw29"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin29" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw29"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite30" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw30"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin30" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw30"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite31" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw31"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin31" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw31"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite32" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw32"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin32" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw32"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite33" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw33"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin33" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw33"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite34" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw34"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin34" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw34"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite35" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw35"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin35" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw35"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite36" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw36"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin36" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw36"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite37" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw37"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin37" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw37"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite38" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw38"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin38" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw38"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite39" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw39"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin39" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw39"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite40" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw40"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin40" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw40"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite41" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw41"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin41" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw41"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite42" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw42"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin42" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw42"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite43" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw43"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin43" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw43"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite44" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw44"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin44" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw44"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite45" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw45"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin45" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw45"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite46" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw46"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin46" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw46"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite47" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw47"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin47" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw47"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite48" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw48"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin48" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw48"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite49" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw49"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin49" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw49"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite50" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw50"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin50" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw50"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite51" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw51"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin51" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw51"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite52" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw52"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin52" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw52"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite53" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw53"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin53" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw53"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite54" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw54"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin54" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw54"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite55" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw55"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin55" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw55"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite56" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw56"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin56" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw56"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite57" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw57"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin57" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw57"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite58" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw58"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin58" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw58"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite59" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw59"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin59" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw59"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite60" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw60"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin60" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw60"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite61" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw61"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin61" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw61"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite62" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw62"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin62" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw62"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite63" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw63"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin63" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw63"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite64" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw64"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin64" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw64"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite65" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw65"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin65" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw65"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite66" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw66"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin66" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw66"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite67" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw67"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin67" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw67"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite68" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw68"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin68" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw68"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite69" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw69"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin69" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw69"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite70" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw70"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin70" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw70"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite71" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw71"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin71" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw71"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite72" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw72"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin72" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw72"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite73" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw73"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin73" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw73"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite74" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw74"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin74" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw74"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite75" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw75"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin75" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw75"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite76" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw76"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin76" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw76"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite77" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw77"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin77" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw77"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite78" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw78"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin78" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw78"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite79" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw79"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin79" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw79"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite80" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw80"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin80" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw80"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite81" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw81"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin81" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw81"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite82" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw82"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin82" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw82"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite83" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw83"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin83" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw83"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite84" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw84"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin84" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw84"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite85" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw85"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin85" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw85"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite86" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw86"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin86" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw86"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite87" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw87"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin87" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw87"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite88" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw88"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin88" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw88"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite89" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw89"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin89" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw89"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite90" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw90"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin90" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw90"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite91" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw91"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin91" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw91"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite92" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw92"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin92" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw92"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite93" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw93"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin93" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw93"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite94" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw94"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin94" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw94"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite95" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw95"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin95" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw95"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite96" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw96"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin96" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw96"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite97" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw97"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin97" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw97"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite98" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw98"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin98" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw98"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexerciseswrite99" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw99"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
+
+<Resource name="jdbc/pgexercisesadmin99" auth="Container" type="javax.sql.DataSource"
+     username="pgexercises"
+     password=""
+     driverClassName="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:6543/exercisesrw99"
+     maxActive="2"
+     maxIdle="1"
+     validationQuery="select 1" />
 
     <!-- Uncomment this to disable session persistence across Tomcat restarts -->
     

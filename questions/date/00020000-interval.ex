@@ -16,3 +16,5 @@ You can use the '-' symbol on timestamps
 0
 |PAGEID|
 6D111D5A-A6DD-408A-8634-8778EBCD7B5A
+|WRITEABLE|
+0

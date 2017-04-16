@@ -1,11 +1,16 @@
-#!/usr/bin/perl
+#! /usr/bin/env perl
 use strict;
+use LWP::UserAgent;
 use File::Find;
+use JSON;
+use HTML::Make;
+use JSON::Parse 'parse_json';
 
+my $tomcaturl = "http://localhost:8080/SQLForwarder/SQLForwarder";
 my $outputloc = "../site/website/questions/";
 my $templateloc = "../site/website/questions/template.html";
 my $questionsloc = "../questions/";
-my @dirs = ("basic", "joins", "aggregates", "date", "string", "recursive");
+my @dirs = ("basic", "joins", "updates", "aggregates", "date", "string", "recursive");
 #categories data structure ends up like: category -> files -> file metadata
 my $categories = {};
 my $emptyfile = {'title' => '', 'filenamehtml' => '#'};
@@ -169,9 +174,10 @@ sub processHTML {
 
 	my $exerciseData = parseConfig(\@filedata);
 
+        my $tableToReturn = $exerciseData->{'|RETURNTABLE|'};
 	my $query = $exerciseData->{'|QUERY|'};
 	print (%$exerciseData);
-	my ($resultsTable,$jsonTable)  = genResults($query);
+	my ($resultsTable,$jsonTable)  = genResults($query, $tableToReturn);
 	my $commenton = 0;
 
 	open TEMPLATE, "<",$templateloc or die $!;
@@ -198,6 +204,14 @@ sub processHTML {
 		} elsif($line =~ /\|SORTED\|/) {
 			my $sorted = $exerciseData->{'|SORTED|'};
 			$line =~ s/\|SORTED\|/$sorted/;
+			print OUT $line;
+		} elsif($line =~ /\|WRITEABLE\|/) {
+			my $writeable = $exerciseData->{'|WRITEABLE|'};
+			$line =~ s/\|WRITEABLE\|/$writeable/;
+			print OUT $line;
+		} elsif($line =~ /\|RETURNTABLE\|/) {
+			my $returntable = $exerciseData->{'|RETURNTABLE|'};
+			$line =~ s/\|RETURNTABLE\|/$returntable/;
 			print OUT $line;
 		} elsif($line =~ /\|PAGEID\|/) {
 			my $pageID = $exerciseData->{'|PAGEID|'};
@@ -342,50 +356,53 @@ sub processFile {
 	}
 }
 
-#run query in postgres.  The shell script that runs the query returns
-#an html table (genned by postgres), which we clean up slightly.
-
-#TODO this is woefully hacky.  We should blatantly just use a connector
-#to PG itself.  No idea what I was thinking.  Perl going to my head...
+#run query against tomcat server.
 sub genResults {
 	my $query = shift;
-	$query =~ s/\"/\\\"/g;
-	my $htmltable = `./runpsql "$query" 2>&1`;
-	if ($htmltable =~ /psql93/) {
-		die("\nerror accessing pg!");
-	}
+        my $tabletoreturn = shift;
+        print "\n TABLE $tabletoreturn \n";
+        my $writeable = defined ($tabletoreturn);
+        print "\n WRITEABLE $writeable \n";
+        my $uri = URI->new( $tomcaturl );
+        $uri->query_form(query => $query, writeable => $writeable, tableToReturn => $tabletoreturn);
+        my $ua = LWP::UserAgent->new;
+        $ua->env_proxy;
+        print "\nURI: " . $uri . "\n";
+        my $response = $ua->get($uri);
+        my $result;
+        if ($response->is_success) {
+            $result = $response->decoded_content;
+        } else {
+            print "\n ERROR: " . $response->decoded_content . "\n";
+            die("ERROR: " . $response->status_line . "\n");
+        }
+        
+        print "\nRESULT: " . $result . "\n";
 
-	$htmltable =~ s/[ v]+align="[^"]*"//g; #remove align statements
-	$htmltable =~ s/border="[^"]*"/id="exprestable" class="demo table table-bordered table-striped" style="width:auto;"/g; #remove border statements
-	$htmltable =~ s/<table (.*)/<table \1<thead>/; #insert thead
-	$htmltable =~ s/<\/tr>/<\/tr><\/thead><tbody>/; #insert /thead and tbody
-	$htmltable =~ s/<\/table>/<\/tbody><\/table>/; #insert /tbody
-	$htmltable =~ s/<br \/>//; #remove <br />
-	$htmltable =~ s/<td>&nbsp; <\/td>/<td><\/td>/g; #remove <br />
+        my $json = parse_json ($result);
 
+        my $headers = $json->{'headers'};
+        my $thead = HTML::Make->new('thead');
+        my $header_row = $thead->push('tr');
+        foreach my $header(@$headers) {
+            $header_row->push('th', text => $header);
+        }
 
-	
-	my @headers = $htmltable =~ /<th>(.*?)<\/th>/g;
-	my $cols = scalar(@headers);
-	my @values = $htmltable =~ /<td>(.*?)<\/td>/g;
-	my @resultstable;
-	my $valrow = 0;
-	my $jsontable = "[";
-	while($valrow < scalar(@values)) {
-		$jsontable .= "[";
-		for(my $j = 0; $j < $cols; $j++) {
-			$jsontable .= "'" . $values[$valrow] . "'";
-			if($j < $cols - 1) {
-				$jsontable.=",";
-			}
-			$valrow++;
-		}
-		$jsontable .= "]";
-		if($valrow < scalar(@values) - $cols+1) {
-			$jsontable .= ",";
-		}
-	}
-	$jsontable .= "]";
+        my $values = $json->{'values'};
+        my $tbody = HTML::Make->new('tbody');
+        foreach my $valuerow(@$values) {
+            my $value_tr = $tbody->push('tr');
+            foreach my $value(@$valuerow) {
+                print "\nVALUE: $value\n";
+                #$value = $value eq "0" ? "\\0" : $value;
+                my $td = $value_tr->push('td');
+                $td->add_text($value);
+            }
+        }
+
+        my $htmltable = $thead->text . $tbody->text;
+        my $jsontable = encode_json($json->{'values'});
+
 	print $htmltable . "\n";
 	print $jsontable . "\n";
 

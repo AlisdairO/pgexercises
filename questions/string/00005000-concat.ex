@@ -12,3 +12,5 @@ Use the <c>||</c> operator to concatenate strings
 0
 |PAGEID|
 1e806c68-1974-11e4-aa6a-efecb22b3579
+|WRITEABLE|
+0

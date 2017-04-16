@@ -291,13 +291,16 @@ function query(str) {
 	if(!str) {
 		str = editor.getValue();
 	}
+        
+        var is_writeable = App.writeable == 1 ? 1 : 0;
+        var table_to_return = is_writeable == 1 ? App.tableToReturn : null;
 
         //table emptied in advance + timeout used to force screen flicker to make a user
         //aware that a query has definitely been performed.
 	var table = $("#yourresultstable");
 	table.empty();
 	window.setTimeout(function() {
-		$.get("/SQLForwarder/SQLForwarder", {query:str}, function(data) {
+		$.get("/SQLForwarder/SQLForwarder", {query:str, writeable:is_writeable, tableToReturn:table_to_return}, function(data) {
 			//empty the error field, and fill the table with the JSON-formatted results!
 			$("#yourresultserror").hide();
 

@@ -19,3 +19,5 @@ The <c>WHERE</c> clause allows you to filter the rows that you want to retrieve.
 0
 |PAGEID|
 91465B99-7B5A-4970-B582-79913E41D421
+|WRITEABLE|
+0

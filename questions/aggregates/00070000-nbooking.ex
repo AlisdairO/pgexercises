@@ -20,3 +20,5 @@ Take a look at the <c>MIN</c> aggregate function
 1
 |PAGEID|
 CF73B932-CE2E-4FE4-AA8E-D00976DFC45B
+|WRITEABLE|
+0

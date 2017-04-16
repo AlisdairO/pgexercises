@@ -21,3 +21,5 @@ Look up the SQL aggregate function <c>MAX</c>
 0
 |PAGEID|
 48B782DB-FAA6-4124-82AF-4E2AFF1044B5
+|WRITEABLE|
+0

@@ -81,3 +81,5 @@ There's no need to use window functions to solve this problem.  Hard-code the nu
 1
 |PAGEID|
 185D4EC4-A501-4CB8-ABA3-04CD964A1CF6
+|WRITEABLE|
+0

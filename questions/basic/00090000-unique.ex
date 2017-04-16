@@ -19,3 +19,5 @@ Look up the SQL keywords <c>DISTINCT</c>, <c>ORDER BY</c>, and <c>LIMIT</c>.
 1
 |PAGEID|
 DA27B853-5E1A-441F-8EE0-211CE617F003
+|WRITEABLE|
+0

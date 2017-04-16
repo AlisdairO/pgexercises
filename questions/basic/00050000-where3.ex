@@ -16,3 +16,5 @@ Try looking up the SQL <c>LIKE</c> operator.
 0
 |PAGEID|
 8EF314B3-651C-481E-B3ED-17A8968411C4
+|WRITEABLE|
+0

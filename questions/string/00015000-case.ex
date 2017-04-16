@@ -16,3 +16,5 @@ Use the <c>UPPER</c> function or the <c>ILIKE</c> operator.
 0
 |PAGEID|
 9e7b8f08-2ba2-11e3-a5aa-0023df7f7ec4
+|WRITEABLE|
+0

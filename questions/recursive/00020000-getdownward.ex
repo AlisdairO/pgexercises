@@ -24,3 +24,5 @@ Read up on <c><a href="http://www.postgresql.org/docs/current/static/queries-wit
 1
 |PAGEID|
 4a1e6e0c-2856-11e3-8bd1-0023df7f7ec4
+|WRITEABLE|
+0

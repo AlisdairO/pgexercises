@@ -110,3 +110,5 @@ You'll need to generate a list of days: check out <c>GENERATE_SERIES</c> for tha
 1
 |PAGEID|
 7CFB33CF-40F0-49C8-B0A5-8F3F99D3F99F
+|WRITEABLE|
+0

@@ -27,3 +27,5 @@ Look up the ~ or <c>SIMILAR TO</c> operators in the Postgres docs.
 1
 |PAGEID|
 9df31ff6-3f20-11e3-8372-0023df7f7ec4
+|WRITEABLE|
+0

@@ -19,3 +19,5 @@ Take a look at the <c>EXTRACT</c> function.
 1
 |PAGEID|
 9D932BE5-29DC-4B4B-A418-00E9E9751CF1
+|WRITEABLE|
+0

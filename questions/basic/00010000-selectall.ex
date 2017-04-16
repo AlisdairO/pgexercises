@@ -14,3 +14,5 @@ select * from cd.facilities;
 0
 |PAGEID|
 15ACAD5C-9A3E-4D1A-9E83-3149C2FCFA4D
+|WRITEABLE|
+0

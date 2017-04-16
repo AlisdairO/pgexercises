@@ -26,3 +26,5 @@ Try looking up the SQL <c>IN</c> operator.
 0
 |PAGEID|
 4BFEFCED-9F88-4D90-BB1E-45DFCB960F25
+|WRITEABLE|
+0

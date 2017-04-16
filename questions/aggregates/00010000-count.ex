@@ -40,3 +40,5 @@ Try investigating the SQL <c>COUNT</c> function
 0
 |PAGEID|
 E7789C0F-CEB2-4D7B-8897-8D8CA5478F7D
+|WRITEABLE|
+0

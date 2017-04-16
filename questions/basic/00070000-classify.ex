@@ -20,3 +20,5 @@ Try looking up the SQL <c>CASE</c> statement.
 0
 |PAGEID|
 E5607899-7323-4E7A-8D7E-FCC0EA32838B
+|WRITEABLE|
+0

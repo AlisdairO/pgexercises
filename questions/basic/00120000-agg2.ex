@@ -30,3 +30,5 @@ You may find you need a subquery to get this done - although other methods exist
 1
 |PAGEID|
 22B4AFEF-A54A-4080-AC6F-8A9C8E3C7EC6
+|WRITEABLE|
+0

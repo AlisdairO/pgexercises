@@ -42,6 +42,7 @@
                 <ul class="dropdown-menu">
                   <li><a href="questions/basic/">Basic</a></li>
                   <li><a href="questions/joins/">Joins and Subqueries</a></li>
+                  <li><a href="questions/updates/">Modifying data</a></li>
                   <li><a href="questions/aggregates/">Aggregates</a></li>
                   <li><a href="questions/date/">Date</a></li>
                   <li><a href="questions/string/">String</a></li>
@@ -93,12 +94,13 @@
       </div>
       <div class="row aboutqstn">
         <div class="span8 offset1">
-          <p>Good question!  Generally speaking, allowing raw SQL to run against your database is, of course, a big no-no.  We're aided rather in this by the fact that all our work here is read-only, allowing us to easily prevent malicious writes to the DB :-).  Other concerns are people running very expensive queries, changing settings, etc.  I've taken the following security measures:</p>
+          <p>Good question! Generally speaking, allowing raw SQL to run against your database is, of course, a big no-no. Historically, the site was purely read-only. This allowed us a lot of leeway, because (bugs in Postgres aside) you couldn't run any damaging SQL against the database. Other concerns were people running very expensive queries, changing settings, etc. These can be mitigated with the following security measures:</p>
           <ul>
             <li>User has read-only access to the exercises tables and nothing else.
             <li>Each statement is time limited using statement_timeout.
             <li>App server connects through pgbouncer, which is configured for statement-level pooling.  When the connection gets returned between statements pgbouncer runs ABORT; and clears any settings, preventing the user from changing settings on the pooled connections.  In particular, this prevents users changing the statement timeout to something longer :-).
           </ul>
+          <p>More recently, I've added some questions around data modification. This adds more complexity, as the user has to be able to alter the database! In order to secure this, for questions that require DML I've given the user access to alter tables under the 'cd' schema. The 'cd' schema gets deleted after every operation, and an admin user recreates it. To ensure reasonable behaviour when it comes to concurrency, there's a rotating set of databases underlying this, and each database can only be used by one user at a time.
           <p>This should at least secure the DB from casual attempts at taking it down.  If you know of vulnerabilities in these measures, please <a href="mailto:pgexercises@pgexercises.com">email me</a>.</p>
         </div>
       </div>

@@ -26,3 +26,5 @@ Investigate the <c>NTILE</c> window function.
 1
 |PAGEID|
 AAD28EA4-D02C-49AB-B065-7A229D5BBE09
+|WRITEABLE|
+0

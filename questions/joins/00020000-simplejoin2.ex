@@ -23,3 +23,5 @@ This is another <c>INNER JOIN</c>. You may also want to think about using the <c
 1
 |PAGEID|
 AB9B1D9D-E13D-461E-9D24-03563CFA350B
+|WRITEABLE|
+0

@@ -16,3 +16,5 @@ You can multiply an interval by the number of slots in a booking.
 1
 |PAGEID|
 7d327298-223e-11e3-b1bb-0023df7f7ec4
+|WRITEABLE|
+0

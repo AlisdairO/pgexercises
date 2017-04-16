@@ -27,3 +27,5 @@ Your initial statement should return all the recommendedby and memid fields in t
 1
 |PAGEID|
 524202ce-2856-11e3-bbef-0023df7f7ec4
+|WRITEABLE|
+0

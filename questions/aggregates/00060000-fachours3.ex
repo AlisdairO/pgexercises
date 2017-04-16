@@ -25,3 +25,5 @@ Remember that in Postgres, dividing two integers together causes an integer divi
 1
 |PAGEID|
 3B453BF9-ABD5-4C48-8EB5-3627FF8AAAA5
+|WRITEABLE|
+0

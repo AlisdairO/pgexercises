@@ -12,3 +12,5 @@ The easiest way to do this is with the <c>EXTRACT</c> function.
 0
 |PAGEID|
 91F7E06D-AAED-4179-8661-83BCC330A016
+|WRITEABLE|
+0

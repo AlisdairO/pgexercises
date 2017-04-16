@@ -13,3 +13,5 @@ You'll need to add a <c>WHERE</c> clause to the answer of the previous question.
 0
 |PAGEID|
 0F0BAA3C-9FA0-47DC-8A8F-1FBA363E5DE0
+|WRITEABLE|
+0

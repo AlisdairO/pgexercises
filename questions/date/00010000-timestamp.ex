@@ -25,3 +25,5 @@ There's a bunch of ways to do this, but the easiest is probably to look at the <
 0
 |PAGEID|
 4FBCBF61-D92D-460B-91EF-F295390794C0
+|WRITEABLE|
+0

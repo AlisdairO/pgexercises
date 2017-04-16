@@ -14,3 +14,5 @@ Take a look at Postgres' <c>GENERATE_SERIES</c> function
 0
 |PAGEID|
 65DF6CDB-3FA3-489D-8269-4D418BA306DA
+|WRITEABLE|
+0

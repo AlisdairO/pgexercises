@@ -1,0 +1,6 @@
+|CATNAME|
+Modifying data
+|CATDESC|
+<p>Querying data is all well and good, but at some point you're probably going to want to put data into your database! This section deals with inserting, updating, and deleting information. Operations that alter your data like this are collectively known as Data Manipulation Language, or DML.</p>
+<p>In previous sections, we returned to you the results of the query you've performed. Since modifications like the ones we're making in this section don't return any query results, we instead show you the updated content of the table you're supposed to be working on. You can compare this with the table shown in 'Expected Results' to see how you've done.</p>
+<p>If you struggle with these questions, I strongly recommend <a href="http://shop.oreilly.com/product/9780596007270.do">Learning SQL</a>, by Alan Beaulieu.</p>

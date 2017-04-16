@@ -15,3 +15,5 @@ For this one you'll need to check out the <c>SUM</c> aggregate function.
 1
 |PAGEID|
 2049E915-DDB0-4E1E-BEB1-37731FA22C3A
+|WRITEABLE|
+0

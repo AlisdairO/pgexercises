@@ -25,3 +25,5 @@ You can do this by extracting the epoch from the interval between two timestamps
 0
 |PAGEID|
 91F9C895-3651-4ACF-936E-91635428EB6D
+|WRITEABLE|
+0

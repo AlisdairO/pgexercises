@@ -50,3 +50,5 @@ Take a look at the documentation for <c>INNER JOIN</c>.
 0
 |PAGEID|
 E3C88AF9-53BC-460D-9D06-ED66630FACBC
+|WRITEABLE|
+0

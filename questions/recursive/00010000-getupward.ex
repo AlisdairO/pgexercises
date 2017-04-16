@@ -46,3 +46,5 @@ Read up on <c><a href="http://www.postgresql.org/docs/current/static/queries-wit
 1
 |PAGEID|
 de08311c-2846-11e3-8be6-0023df7f7ec4
+|WRITEABLE|
+0

@@ -18,3 +18,5 @@ You can restrict the data that goes into your aggregate functions using the <c>W
 1
 |PAGEID|
 C875DDEF-6559-4E2A-979E-AB8EA43E1B3F
+|WRITEABLE|
+0

@@ -13,3 +13,5 @@ Use the <c>LIKE</c> operator.
 0
 |PAGEID|
 5a966edc-2b9a-11e3-ab9e-0023df7f7ec4
+|WRITEABLE|
+0

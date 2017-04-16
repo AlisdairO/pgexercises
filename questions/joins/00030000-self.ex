@@ -24,3 +24,5 @@ This is an <c>INNER JOIN</c>, just like the previous exercises.
 1
 |PAGEID|
 72632294-4D39-4342-8BE4-162B883F5798
+|WRITEABLE|
+0

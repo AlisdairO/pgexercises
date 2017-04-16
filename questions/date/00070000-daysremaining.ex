@@ -16,3 +16,5 @@ Take a look at the <c>DATE_TRUNC</c> function
 1
 |PAGEID|
 5CFRB62B-4C60-4D87-B99C-92610B44136F
+|WRITEABLE|
+0

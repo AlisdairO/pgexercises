@@ -15,3 +15,5 @@ Look up the SQL timestamp format, and remember that you can compare dates much l
 0
 |PAGEID|
 36AF8D4D-2F2B-4FE4-B335-6B72A115A1D8
+|WRITEABLE|
+0

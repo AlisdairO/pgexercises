@@ -56,6 +56,7 @@
                 <ul class="dropdown-menu">
                   <li><a href="../basic/">Basic</a></li>
                   <li><a href="../joins/">Joins and Subqueries</a></li>
+                  <li><a href="../updates/">Modifying data</a></li>
                   <li><a href="../aggregates/">Aggregates</a></li>
                   <li><a href="../date/">Date</a></li>
                   <li><a href="../string/">String</a></li>
@@ -128,8 +129,8 @@
               <div style="display: inline-block; min-width:1000px;">
                 <h3>Expected Results</h3>
                 <div style="width:auto; display:inline-block">
-                <!-- FILLER -->
                   <table id="exprestable" class="demo table table-bordered table-striped" style="width:auto;">
+                <!-- FILLER -->
                     <thead>
                       <tr>
                         <th>Col1</th>
@@ -160,9 +161,9 @@
                       <tr>                  <td>val</td><td>val</td><td>val</td>
                       </tr>
                       </tbody>
-                  </table>
                   <!-- FILLER -->
-                  |RESULTS|
+                      |RESULTS|
+                    </table>
                 </div>
               </div>
             </div>
@@ -255,6 +256,8 @@
         var App = {};
 	App.sorted = |SORTED|;
 	App.pageID = "|PAGEID|";
+        App.writeable = |WRITEABLE|;
+        App.tableToReturn = "|RETURNTABLE|";
 	App.jsonResults = sortJSONResults(|JSONRESULTS|);
     </script>
 

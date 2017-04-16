@@ -57,3 +57,5 @@ Read up on the <c>COUNT</c> window function.
 1
 |PAGEID|
 1DAA4B87-48BB-49A3-AC62-EB2EC1A11FB2
+|WRITEABLE|
+0

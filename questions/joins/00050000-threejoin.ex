@@ -24,3 +24,5 @@ This answer requires multiple joins.  To concatenate strings you can use the <c>
 0
 |PAGEID|
 1E7B6EED-BDC5-4B46-829C-0E1B10BD8644
+|WRITEABLE|
+0

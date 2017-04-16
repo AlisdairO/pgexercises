@@ -23,3 +23,5 @@ Yet another question based on the <c>RANK</c> window function!  Remember the rel
 1
 |PAGEID|
 487D2223-28C4-4DB9-8DCD-F5E31490782D
+|WRITEABLE|
+0

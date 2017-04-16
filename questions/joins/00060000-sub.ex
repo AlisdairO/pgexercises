@@ -20,3 +20,5 @@ Answering this question correctly requires the use of a <i>subquery</i>
 1
 |PAGEID|
 699A3656-42C9-40AE-A56D-54DD6905FDEF
+|WRITEABLE|
+0

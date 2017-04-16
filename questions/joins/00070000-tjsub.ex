@@ -34,3 +34,5 @@ Your answer will be similar to the referenced exercise.  Use a subquery in the <
 0
 |PAGEID|
 4C85AC8E-6F45-457C-B9C9-41C07C57A39D
+|WRITEABLE|
+0

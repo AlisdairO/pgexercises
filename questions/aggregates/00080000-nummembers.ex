@@ -15,3 +15,5 @@ Read up on the <c>ROW_NUMBER</c> window function.
 1
 |PAGEID|
 09229A41-91FA-4D34-BF5D-6380F7E27AF1
+|WRITEABLE|
+0

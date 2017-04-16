@@ -19,3 +19,5 @@ The select statement allows you to specify column names to retrieve.
 0
 |PAGEID|
 E57B52A5-0749-4E25-A64F-04CE0007A897
+|WRITEABLE|
+0

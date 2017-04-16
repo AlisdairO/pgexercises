@@ -16,3 +16,5 @@ You'll need the <c>SUBSTR</c> function here, combined with some aggregation.
 1
 |PAGEID|
 eeac2498-12a5-11e4-8bf7-537359e34291
+|WRITEABLE|
+0

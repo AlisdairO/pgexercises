@@ -19,3 +19,5 @@ Try investigating <c>GROUP BY</c> with your count this time.  Don't forget to fi
 1
 |PAGEID|
 494C7BF9-F6D0-464F-A8A4-9C6814C6FF4A
+|WRITEABLE|
+0

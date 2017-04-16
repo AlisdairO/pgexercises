@@ -63,3 +63,5 @@ Look up Postgres' <c>ROLLUP</c> operator.
 1
 |PAGEID|
 7737A2D8-5BF5-40E9-8486-9396D8D7B098
+|WRITEABLE|
+0

@@ -19,3 +19,5 @@ Try investigating the <c>HAVING</c> clause.
 1
 |PAGEID|
 B3124FAB-CD6E-44DD-ACDB-3D5B9DE4AFFA
+|WRITEABLE|
+0

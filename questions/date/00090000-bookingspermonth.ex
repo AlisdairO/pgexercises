@@ -15,3 +15,5 @@ You're probably going to want the date_trunc function again.
 1
 |PAGEID|
 98eed3b2-229a-11e3-ad0b-0023df7f7ec4
+|WRITEABLE|
+0

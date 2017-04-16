@@ -55,3 +55,5 @@ You may find <c>HAVING</c> difficult to use here.  Try a subquery instead.  You'
 1
 |PAGEID|
 FD4B1491-C3D6-4E46-90B0-1B6CB861C505
+|WRITEABLE|
+0

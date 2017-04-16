@@ -23,3 +23,5 @@ Consider the <c>TRANSLATE</c> or <c>REGEXP_REPLACE</c> functions.
 1
 |PAGEID|
 87cecbca-14fa-11e4-a0c7-8b4e1f3cc8a8
+|WRITEABLE|
+0

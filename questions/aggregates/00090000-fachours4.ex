@@ -47,3 +47,5 @@ This one's a little bit tough.  You'll need the <c>RANK</c> window function, and
 1
 |PAGEID|
 B1370BB1-673C-4FC6-AFC7-DC19E55F0576
+|WRITEABLE|
+0
