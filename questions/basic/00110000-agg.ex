@@ -1,7 +1,7 @@
 |QUESTIONNAME|
 Simple aggregation
 |QUESTION|
-You'd like to get the signup date of your last member.  How can you retrieve this information?
+You'd like to get the signup date of your last member.  How can you retrieve this information? Try to do it without using the <c>LIMIT</c> operator.
 |QUERY|
 select max(joindate) as latest
 	from cd.members;
