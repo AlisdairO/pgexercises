@@ -5,9 +5,7 @@ Produce a list of the total number of slots booked per facility per month in the
 |QUERY|
 select facid, extract(month from starttime) as month, sum(slots) as "Total Slots"
 	from cd.bookings
-	where
-		starttime >= '2012-01-01'
-		and starttime < '2013-01-01'
+	where extract(year from starttime) = 2012
 	group by facid, month
 order by facid, month;
 |ANSWER|
