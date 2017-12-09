@@ -1,11 +1,11 @@
 |QUESTIONNAME|
 Work out the end time of bookings
 |QUESTION|
-Return a list of the start and end time of the last 10 bookings (by the time at which they end) in the system.
+Return a list of the start and end time of the last 10 bookings (ordered by the time at which they end, followed by the time at which they start) in the system.
 |QUERY|
 select starttime, starttime + slots*(interval '30 minutes') endtime
 	from cd.bookings
-	order by endtime desc
+	order by endtime, starttime desc
 	limit 10
 |ANSWER|
 <p>This question simply returns the start time for a booking, and a calculated end time which is equal to <c>start time + (30 minutes * slots)</c>.  Note that it's perfectly okay to multiply intervals.</p>
