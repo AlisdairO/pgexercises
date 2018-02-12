@@ -104,6 +104,34 @@ order by date;
 
 <p>As well as storing frequently-used query fragments, views can be used for a variety of purposes, including restricting access to certain columns of a table.</p>
 
+<p>Finally, the problem can be solved without generating timestamps by computing daily revenues and averaging them using window framing:</p>
+
+<sql>
+WITH daily_revenue AS (
+    SELECT
+      to_char(starttime, 'YYYY-MM-DD') AS day,
+      sum(CASE WHEN memid = 0
+        THEN slots * guestcost
+          ELSE slots * membercost END) AS revenue
+    FROM cd.bookings b
+      INNER JOIN cd.facilities f ON b.facid = f.facid
+    GROUP BY to_char(starttime, 'YYYY-MM-DD')
+), rolling_revenue AS (
+    SELECT
+      day,
+      avg(revenue) OVER (
+        ORDER BY day
+        ROWS BETWEEN 14 PRECEDING AND CURRENT ROW
+        ) AS revenue
+    FROM daily_revenue
+)
+SELECT
+  day,
+  revenue
+FROM rolling_revenue
+WHERE day >= '2012-08-01' AND day < '2012-09-01'
+</sql>
+
 |HINT|
 You'll need to generate a list of days: check out <c>GENERATE_SERIES</c> for that.  You can then solve this problem using aggregate functions or window functions.
 |SORTED|
