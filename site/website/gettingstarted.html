@@ -84,7 +84,7 @@
        zipcode integer NOT NULL, 
        telephone character varying(20) NOT NULL, 
        recommendedby integer,
-       joindate timestamp not null,
+       joindate timestamp NOT NULL,
        CONSTRAINT members_pk PRIMARY KEY (memid),
        CONSTRAINT fk_members_recommendedby FOREIGN KEY (recommendedby)
             REFERENCES cd.members(memid) ON DELETE SET NULL
