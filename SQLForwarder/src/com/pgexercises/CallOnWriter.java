@@ -13,7 +13,7 @@ import javax.servlet.ServletContext;
 import org.json.simple.JSONObject;
 import org.postgresql.copy.CopyIn;
 import org.postgresql.copy.CopyManager;
-import org.postgresql.core.BaseConnection;
+import org.postgresql.jdbc.PgConnection;
 
 class CallOnWriter {
 	private final String query;
@@ -45,17 +45,12 @@ class CallOnWriter {
 	}
 
 	public JSONObject runUsingDataSource(WriteableDbSource writeableDbSource) throws SQLException {
-		BaseConnection conn, conn2;
-		conn = conn2 = null;
 		try (Connection adminTempConn = writeableDbSource.getAdminDataSource().getConnection();
 				Connection userTempConn = writeableDbSource.getUserDataSource().getConnection();
 				Statement adminStatement = adminTempConn.createStatement();
 				Statement userStatement = userTempConn.createStatement();
 				) {
-			BaseConnection adminConnection = (BaseConnection)adminTempConn.unwrap(BaseConnection.class);
-			BaseConnection userConnection = (BaseConnection)userTempConn.unwrap(BaseConnection.class);
-			conn = adminConnection;
-			conn2 = userConnection;
+			PgConnection adminConnection =  (PgConnection)((javax.sql.PooledConnection) adminTempConn).getConnection();
 			resetDb(adminConnection, adminStatement);
 			JSONObject toReturn = doDML(userStatement);
 			if (toReturn == null) {
@@ -63,15 +58,6 @@ class CallOnWriter {
 			}
 
 			return toReturn;
-		} finally {
-			// there's some weird interactions with autoclose and the fact that I've unwrapped the connections.
-			// just reverted to using finally instead, seems to work fine.
-			if (conn != null) {
-				conn.close();
-			}
-			if (conn2 != null) {
-				conn2.close();
-			}
 		}
 	}
 
@@ -93,7 +79,7 @@ class CallOnWriter {
 		}
 	}
 
-	private void resetDb(BaseConnection adminConnection, Statement adminStatement) throws SQLException {
+	private void resetDb(PgConnection adminConnection, Statement adminStatement) throws SQLException {
 		adminStatement.executeUpdate("drop schema if exists cd cascade");
 		adminStatement.executeUpdate(recreateSchemaSQL);
 		doCopyIn(adminConnection, "COPY bookings (bookid, facid, memid, starttime, slots) FROM stdin", bookingsData);
@@ -102,8 +88,8 @@ class CallOnWriter {
 		adminStatement.executeUpdate(finaliseRecreateSQL);
 	}
 
-	private void doCopyIn(BaseConnection connection, String copyStr, String data) throws SQLException {
-		CopyManager copyManager = new CopyManager(connection);
+	private void doCopyIn(PgConnection connection, String copyStr, String data) throws SQLException {
+		CopyManager copyManager = connection.getCopyAPI();
 		CopyIn copyIn = copyManager.copyIn(copyStr);
 
 		try {

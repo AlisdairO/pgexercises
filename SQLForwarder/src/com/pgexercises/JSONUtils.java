@@ -35,10 +35,10 @@ public class JSONUtils {
 				row.add(attrValStr);
 			}
 		}
-		
+
 		return respJSON;
 	}
-	
+
 	/*
 	 * Performs any required string alterations to normalise formatting between static
 	 * site generation and this dynamic query.  This is all rather horrible - in future
@@ -50,7 +50,7 @@ public class JSONUtils {
 			attrVal = "";
 		}
 		String attrValStr = attrVal.toString();
-		
+
 		if(colType == Types.TIMESTAMP) {
 			attrValStr = attrValStr.substring(0,attrValStr.lastIndexOf(".0"));
 		} else if(colType == Types.DOUBLE 
@@ -60,10 +60,10 @@ public class JSONUtils {
 		} else if(attrVal instanceof PGInterval) {
 			attrValStr = formatInterval((PGInterval)attrVal);
 		}
-		
+
 		return attrValStr;	
 	}
-	
+
 	private static String formatInterval(PGInterval attrValInterval) {
 		StringBuilder attrValSB = new StringBuilder();
 		if(attrValInterval.getYears() > 1) {
@@ -71,13 +71,13 @@ public class JSONUtils {
 		} else if(attrValInterval.getYears() == 1) {
 			attrValSB.append(attrValInterval.getYears()).append(" year "); 
 		}
-		
+
 		if(attrValInterval.getMonths() > 1) {
 			attrValSB.append(attrValInterval.getMonths()).append(" months "); 
 		} else if(attrValInterval.getMonths() == 1) {
 			attrValSB.append(attrValInterval.getMonths()).append(" month "); 
 		}
-		
+
 		if(attrValInterval.getDays() > 1) {
 			attrValSB.append(attrValInterval.getDays()).append(" days "); 
 		} else if(attrValInterval.getDays() == 1) {
@@ -85,11 +85,11 @@ public class JSONUtils {
 		}
 		String secs = new DecimalFormat("00.################").format(attrValInterval.getSeconds());
 		String time = String.format( "%02d:%02d:%s", attrValInterval.getHours(), attrValInterval.getMinutes(), secs);
-		
+
 		if(!time.equals("00:00:00")) {
 			attrValSB.append(time);
 		}
-		
+
 		return attrValSB.toString().trim();
 	}
 }
