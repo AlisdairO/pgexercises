@@ -83,8 +83,6 @@ public class SQLForwarder extends HttpServlet {
 				//TODO this is a bit crap - still the possibility of an internal error
 				//after all.  Inspect the PSQLState for 400 vs 500 indicator purposes!
 				log.finer(e.getMessage());
-				log.severe(stackTraceToString(e));
-				e.printStackTrace();
 				response.sendError(400, e.getMessage());
 				return;
 			}
