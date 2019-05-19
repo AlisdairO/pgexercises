@@ -61,13 +61,15 @@ public class SQLForwarder extends HttpServlet {
 		if ("1".equals(writeable)) {
 			tableToReturn = request.getParameter("tableToReturn");
 			if (tableToReturn == null) {
-				response.sendError(400, "Must specify table to return for writeable query");
+				response.setStatus(400);
+				response.getWriter().println("Must specify table to return for writeable query");
 				return;
 			}
 		}
 		String query = request.getParameter("query");
 		if(query.length() > 15000) {
-			response.sendError(400, "Request too long.");
+			response.setStatus(400);
+			response.getWriter().println("Request too long.");
 			return;
 		}
 		log.finer(query);
@@ -83,13 +85,15 @@ public class SQLForwarder extends HttpServlet {
 				//TODO this is a bit crap - still the possibility of an internal error
 				//after all.  Inspect the PSQLState for 400 vs 500 indicator purposes!
 				log.finer(e.getMessage());
-				response.sendError(400, e.getMessage());
+				response.setStatus(400);
+				response.getWriter().println(e.getMessage());
 				return;
 			}
 		} catch (Exception e) { //catch-all for unanticipated errors: make sure we log them.
 			log.severe("Encountered error: " + e);
 			log.severe(stackTraceToString(e));
-			response.sendError(500, e.toString());
+			response.setStatus(500);
+			response.getWriter().println("");
 			e.printStackTrace();
 			return;
 		}

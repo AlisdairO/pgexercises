@@ -348,9 +348,7 @@ function query(str) {
 			$("#yourresultsdiv").perfectScrollbar('update');
 		},"json").fail(function(xhr, status, error) {
 			//handle errors coming back from the tomcat server
-			var parsed = $('<div>').append($(xhr.responseText));
-			var errText = parsed.find('h1').get(0).lastChild.nodeValue;
-			errText = errText.substring(errText.indexOf("- ") + 2, errText.length);
+                        errText = xhr.responseText;
 			errText += "\n\n Query was: " + str;
 
 			$("#yourresultstable").empty();
