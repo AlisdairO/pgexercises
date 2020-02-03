@@ -10,7 +10,7 @@ select name
 	from cd.facilities;
 |ANSWER|
 <p>The <c>UNION</c> operator does what you might expect: combines the results of two SQL queries into a single table.  The caveat is that both results from the two queries must have the same number of columns and compatible data types.
-<p><c>UNION</c> removes duplicate rows, while <c>UNION ALL</c> does not.  Use <c>UNION ALL</c> by default, unless you care about duplicate results.
+<p><c>UNION</c> removes duplicate rows, while <c>UNION ALL</c> does not.  Use <c>UNION</c> by default, unless you care about duplicate results.
 |HINT|
 Look up the SQL keyword <c>UNION</c>
 |SORTED|
