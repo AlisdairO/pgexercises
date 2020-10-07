@@ -13,7 +13,7 @@ import javax.servlet.ServletContext;
 import org.json.simple.JSONObject;
 import org.postgresql.copy.CopyIn;
 import org.postgresql.copy.CopyManager;
-import org.postgresql.jdbc.PgConnection;
+import org.postgresql.core.BaseConnection;
 
 class CallOnWriter {
 	private final String query;
@@ -44,13 +44,16 @@ class CallOnWriter {
 		}
 	}
 
-	public JSONObject runUsingDataSource(WriteableDbSource writeableDbSource) throws SQLException {
+	public JSONObject runUsingDataSource(WriteableDbSource writeableDbSource) throws SQLException, PGEQueryResultSizeTooBigException {
+		BaseConnection adminConnection, userConnection;
+		adminConnection = userConnection = null;
 		try (Connection adminTempConn = writeableDbSource.getAdminDataSource().getConnection();
 				Connection userTempConn = writeableDbSource.getUserDataSource().getConnection();
 				Statement adminStatement = adminTempConn.createStatement();
 				Statement userStatement = userTempConn.createStatement();
 				) {
-			PgConnection adminConnection =  (PgConnection)((javax.sql.PooledConnection) adminTempConn).getConnection();
+			adminConnection = (BaseConnection)adminTempConn.unwrap(BaseConnection.class);
+			userConnection = (BaseConnection)userTempConn.unwrap(BaseConnection.class);
 			resetDb(adminConnection, adminStatement);
 			JSONObject toReturn = doDML(userStatement);
 			if (toReturn == null) {
@@ -58,10 +61,20 @@ class CallOnWriter {
 			}
 
 			return toReturn;
+		} finally {
+			// there's some weird interactions with autoclose and the fact that I've unwrapped the connections.
+			// just reverted to using finally instead since it's not worth the effort to debug for this hobby
+			// project :-)
+			if (adminConnection != null) {
+				adminConnection.close();
+			}
+			if (userConnection != null) {
+				userConnection.close();
+			}
 		}
 	}
 
-	private JSONObject doDML(Statement userStatement) throws SQLException {
+	private JSONObject doDML(Statement userStatement) throws SQLException, PGEQueryResultSizeTooBigException {
 		userStatement.execute(query);
 		try (ResultSet rs = userStatement.getResultSet()) {
 			if (rs != null) {
@@ -71,7 +84,7 @@ class CallOnWriter {
 		return null;
 	}
 
-	private JSONObject getReturnTableContents(Statement userStatement) throws SQLException {
+	private JSONObject getReturnTableContents(Statement userStatement) throws SQLException, PGEQueryResultSizeTooBigException {
 		// Normally string concatenation with user input is bad, but we
 		// let the user do whatever they have permissions to do anyway :-).
 		try (ResultSet rs = userStatement.executeQuery("select * from " + tableToReturn + " order by 1")) {
@@ -79,7 +92,7 @@ class CallOnWriter {
 		}
 	}
 
-	private void resetDb(PgConnection adminConnection, Statement adminStatement) throws SQLException {
+	private void resetDb(BaseConnection adminConnection, Statement adminStatement) throws SQLException {
 		adminStatement.executeUpdate("drop schema if exists cd cascade");
 		adminStatement.executeUpdate(recreateSchemaSQL);
 		doCopyIn(adminConnection, "COPY bookings (bookid, facid, memid, starttime, slots) FROM stdin", bookingsData);
@@ -88,8 +101,8 @@ class CallOnWriter {
 		adminStatement.executeUpdate(finaliseRecreateSQL);
 	}
 
-	private void doCopyIn(PgConnection connection, String copyStr, String data) throws SQLException {
-		CopyManager copyManager = connection.getCopyAPI();
+	private void doCopyIn(BaseConnection connection, String copyStr, String data) throws SQLException {
+		CopyManager copyManager = new CopyManager(connection);
 		CopyIn copyIn = copyManager.copyIn(copyStr);
 
 		try {

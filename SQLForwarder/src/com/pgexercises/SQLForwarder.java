@@ -25,7 +25,7 @@ import org.json.simple.JSONObject;
 public class SQLForwarder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger("SQLForwarder");
-	private static final int WRITABLE_DB_COUNT = 100;
+	private static final int WRITABLE_DB_COUNT = 1;
 	private final ArrayList<WriteableDbSource> availableWriters;
 	private final DataSource readOnlyDataSource;
 
@@ -88,12 +88,15 @@ public class SQLForwarder extends HttpServlet {
 				response.setStatus(400);
 				response.getWriter().println(e.getMessage());
 				return;
+			} catch (PGEQueryResultSizeTooBigException e) {
+				response.setStatus(400);
+				response.getWriter().println("Query produced too many results");
+				return;
 			}
 		} catch (Exception e) { //catch-all for unanticipated errors: make sure we log them.
 			log.severe("Encountered error: " + e);
 			log.severe(stackTraceToString(e));
-			response.setStatus(500);
-			response.getWriter().println("");
+			response.sendError(500, e.toString());
 			e.printStackTrace();
 			return;
 		}
@@ -102,7 +105,7 @@ public class SQLForwarder extends HttpServlet {
 		}
 	}
 
-	private JSONObject handleQuery(String query) throws SQLException {
+	private JSONObject handleQuery(String query) throws SQLException, PGEQueryResultSizeTooBigException {
 		try (Connection c = readOnlyDataSource.getConnection();
 				Statement s = c.createStatement();
 				ResultSet rs = s.executeQuery(query);
@@ -111,11 +114,11 @@ public class SQLForwarder extends HttpServlet {
 		}
 	}
 
-	private JSONObject handleUpdate(String update, String tableToReturn) throws SQLException, IOException {
+	private JSONObject handleUpdate(String update, String tableToReturn) throws SQLException, IOException, PGEQueryResultSizeTooBigException {
 		return doInNextWriteableDataSource(new CallOnWriter(getServletContext(), update, tableToReturn));
 	}
 
-	private JSONObject doInNextWriteableDataSource(CallOnWriter toCall) throws SQLException {
+	private JSONObject doInNextWriteableDataSource(CallOnWriter toCall) throws SQLException, PGEQueryResultSizeTooBigException {
 		WriteableDbSource writeableDbSource = null;
 		while(true) {
 			synchronized(this) {

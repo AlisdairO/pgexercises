@@ -30,17 +30,16 @@
 	</target>
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
-        <javac srcdir="src" destdir="${classes.dir}" classpathref="classpath" includeantruntime="false"/>
+        <javac srcdir="src" destdir="${classes.dir}" classpathref="classpath" includeantruntime="false" debug="true"/>
     </target>
     <target name="war" depends="compile">
         <mkdir dir="${war.dir}"/>
     	<war destfile="${war.dir}/${warfilename}.war" webxml="${web.dir}/WEB-INF/web.xml" update="true">
     	    <classes dir="${classes.dir}"/>
-    	    <fileset dir="${web.dir}">
-    	        <!-- Need to exclude it since webxml is an attribute of the war tag above -->
-                <exclude name="WEB-INF/web.xml" />
-                <exclude name="WEB-INF/lib/postgresql*.jar" />
-    	    </fileset>
+    		<fileset dir="${web.dir}">
+				<!-- Need to exclude it since webxml is an attribute of the war tag above -->
+				<exclude name="WEB-INF/web.xml" />
+			</fileset>
     	</war>
     </target>
 </project>
