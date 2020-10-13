@@ -11,7 +11,7 @@ select distinct mems.firstname || ' ' || mems.surname as member, facs.name as fa
 		inner join cd.facilities facs
 			on bks.facid = facs.facid
 	where
-		facs.name = 'Tennis Court 2' or facs.name = 'Tennis Court 1'
+		facs.name in ('Tennis Court 2','Tennis Court 1')
 order by member
 |ANSWER|
 <p>This exercise is largely a more complex application of what you've learned in prior questions.  It's also the first time we've used more than one join, which may be a little confusing for some.  When reading join expressions, remember that a join is effectively a function that takes two tables, one labelled the left table, and the other the right.  This is easy to visualise with just one join in the query, but a little more confusing with two.</p>
