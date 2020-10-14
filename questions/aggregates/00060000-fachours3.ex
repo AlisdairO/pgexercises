@@ -20,7 +20,7 @@ order by facs.facid;
 
 <p>Finally, let's take a look at formatting.  The <c>TO_CHAR</c> function converts values to character strings.  It takes a formatting string, which we specify as (up to) lots of numbers before the decimal place, decimal place, and two numbers after the decimal place.  The output of this function can be prepended with a space, which is why we include the outer <c>TRIM</c> function.</p>
 |HINT|
-Remember that in Postgres, dividing two integers together causes an integer division.  Here you want a floating point division.  For formatting the hours, take a look at the to_char function.
+Remember that in Postgres, dividing two integers together causes an integer division.  Here you want a floating point division.  For formatting the hours, take a look at the <c>to_char</c> function, remembering to <c>trim</c> any leftover whitespace
 |SORTED|
 1
 |PAGEID|
