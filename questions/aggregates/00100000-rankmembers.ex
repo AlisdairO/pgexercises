@@ -1,7 +1,7 @@
 |QUESTIONNAME|
 Rank members by (rounded) hours used
 |QUESTION|
-Produce a list of members, along with the number of hours they've booked in facilities, rounded to the nearest ten hours.  Rank them by this rounded figure, producing output of first name, surname, rounded hours, rank.  Sort by rank, surname, and first name.
+Produce a list of members (including guests), along with the number of hours they've booked in facilities, rounded to the nearest ten hours.  Rank them by this rounded figure, producing output of first name, surname, rounded hours, rank.  Sort by rank, surname, and first name.
 |QUERY|
 select firstname, surname,
 	((sum(bks.slots)+10)/20)*10 as hours,

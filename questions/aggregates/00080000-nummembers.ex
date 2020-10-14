@@ -1,7 +1,7 @@
 |QUESTIONNAME|
 Produce a numbered list of members
 |QUESTION|
-Produce a monotonically increasing numbered list of members, ordered by their date of joining.  Remember that member IDs are not guaranteed to be sequential.
+Produce a monotonically increasing numbered list of members (including guests), ordered by their date of joining.  Remember that member IDs are not guaranteed to be sequential.
 |QUERY|
 select row_number() over(order by joindate), firstname, surname
 	from cd.members

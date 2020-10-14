@@ -1,7 +1,7 @@
 |QUESTIONNAME|
 Produce a list of member names, with each row containing the total member count
 |QUESTION|
-Produce a list of member names, with each row containing the total member count.  Order by join date.
+Produce a list of member names, with each row containing the total member count.  Order by join date, and include guest members.
 |QUERY|
 select count(*) over(), firstname, surname
 	from cd.members
