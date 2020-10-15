@@ -47,9 +47,10 @@ public class JSONUtils {
 	}
 	
 	/*
-	 * Performs any required string alterations to normalise formatting between static
-	 * site generation and this dynamic query.  This is all rather horrible - in future
-	 * I'll be changing this to use a single java library to generate the static and dynamic
+	 * This is some nasty legacy, from a period where we had a separate querying process for
+	 * static site generation vs when the query ran on the actual site (the string output needed
+	 * normalising between the two) That has been unified now, so these hacks can be removed.
+	 * TODO evaluate if any of these are worth retaining for formatting purposes.
 	 * query results.
 	 */
 	private static String genString(Object attrVal, int colType) {
@@ -59,7 +60,10 @@ public class JSONUtils {
 		String attrValStr = attrVal.toString();
 		
 		if(colType == Types.TIMESTAMP) {
-			attrValStr = attrValStr.substring(0,attrValStr.lastIndexOf(".0"));
+			int fractionLoc = attrValStr.lastIndexOf(".0");
+			if (fractionLoc >= 0) {
+				attrValStr = attrValStr.substring(0, fractionLoc);
+			}
 		} else if(colType == Types.DOUBLE 
 				|| colType == Types.REAL) {
 			//remove trailing zeroes for floats and doubles: helps us match psql output
