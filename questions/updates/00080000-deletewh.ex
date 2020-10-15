@@ -11,7 +11,7 @@ delete from cd.members where memid = 37;
 
 <p>Foreign keys are a mechanism for defining relationships between columns of different tables. In our case we use them to specify that the memid column of the bookings table is related to the memid column of the members table. The relationship (or 'constraint') specifies that for a given booking, the member specified in the booking <b>must</b> exist in the members table. It's useful to have this guarantee enforced by the database: it means that code using the database can rely on the presence of the member. It's hard (even impossible) to enforce this at higher levels: concurrent operations can interfere and leave your database in a broken state.
 
-<p>PostgreSQL supports various different kinds of constraints that allow you to enforce structure upon your data. For more information on constraints, check out the PostgreSQL documentation on <a href="https://www.postgresql.org/docs/9.6/static/ddl-constraints.html">foreign keys</a>
+<p>PostgreSQL supports various different kinds of constraints that allow you to enforce structure upon your data. For more information on constraints, check out the PostgreSQL documentation on <a href="https://www.postgresql.org/docs/current/static/ddl-constraints.html">foreign keys</a>
 |HINT|
 Take a look at the <c>DELETE</c> statement in the PostgreSQL docs.
 |SORTED|

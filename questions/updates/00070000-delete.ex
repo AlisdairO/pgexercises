@@ -13,7 +13,7 @@ delete from cd.bookings;
 truncate cd.bookings;
 </sql>
 
-<p><c>TRUNCATE</c> also deletes everything in the table, but does so using a quicker underlying mechanism. It's not <a href="https://www.postgresql.org/docs/9.6/static/mvcc-caveats.html">perfectly safe in all circumstances</a>, though, so use judiciously. When in doubt, use <c>DELETE</c>.
+<p><c>TRUNCATE</c> also deletes everything in the table, but does so using a quicker underlying mechanism. It's not <a href="https://www.postgresql.org/docs/current/static/mvcc-caveats.html">perfectly safe in all circumstances</a>, though, so use judiciously. When in doubt, use <c>DELETE</c>.
 
 |HINT|
 Take a look at the <c>DELETE</c> statement in the PostgreSQL docs.
