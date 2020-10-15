@@ -39,6 +39,7 @@
     		<fileset dir="${web.dir}">
 				<!-- Need to exclude it since webxml is an attribute of the war tag above -->
 				<exclude name="WEB-INF/web.xml" />
+    			<exclude name="WEB-INF/lib/postgresql*.jar" />
 			</fileset>
     	</war>
     </target>
