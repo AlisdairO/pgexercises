@@ -25,7 +25,7 @@ import org.json.simple.JSONObject;
 public class SQLForwarder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger("SQLForwarder");
-	private static final int WRITABLE_DB_COUNT = 1;
+	private static final int WRITABLE_DB_COUNT = 100;
 	private final ArrayList<WriteableDbSource> availableWriters;
 	private final DataSource readOnlyDataSource;
 

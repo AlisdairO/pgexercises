@@ -45,15 +45,12 @@ class CallOnWriter {
 	}
 
 	public JSONObject runUsingDataSource(WriteableDbSource writeableDbSource) throws SQLException, PGEQueryResultSizeTooBigException {
-		BaseConnection adminConnection, userConnection;
-		adminConnection = userConnection = null;
 		try (Connection adminTempConn = writeableDbSource.getAdminDataSource().getConnection();
 				Connection userTempConn = writeableDbSource.getUserDataSource().getConnection();
 				Statement adminStatement = adminTempConn.createStatement();
 				Statement userStatement = userTempConn.createStatement();
 				) {
-			adminConnection = (BaseConnection)adminTempConn.unwrap(BaseConnection.class);
-			userConnection = (BaseConnection)userTempConn.unwrap(BaseConnection.class);
+			BaseConnection adminConnection = (BaseConnection)adminTempConn.unwrap(BaseConnection.class);
 			resetDb(adminConnection, adminStatement);
 			JSONObject toReturn = doDML(userStatement);
 			if (toReturn == null) {
@@ -61,16 +58,6 @@ class CallOnWriter {
 			}
 
 			return toReturn;
-		} finally {
-			// there's some weird interactions with autoclose and the fact that I've unwrapped the connections.
-			// just reverted to using finally instead since it's not worth the effort to debug for this hobby
-			// project :-)
-			if (adminConnection != null) {
-				adminConnection.close();
-			}
-			if (userConnection != null) {
-				userConnection.close();
-			}
 		}
 	}
 
