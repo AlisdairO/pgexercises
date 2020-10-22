@@ -9,3 +9,9 @@ site/website/questions/arrays/
 site/website/questions/updates/
 database/facs.tsv
 SQLForwarder/build/
+**/.aws-sam/
+**/.idea
+**/target/
+PGExercisesMonitorLambda/pgexercises-monitor.toml
+PGExercisesMonitorLambda/samconfig.toml
+dependency-reduced-pom.xml

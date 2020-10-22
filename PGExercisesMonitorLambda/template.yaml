@@ -1,0 +1,76 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'PGExercisesMonitorLambda
+
+  Monitors PGExercises web site, iterates through each exercise and checks it''s working
+  properly
+
+  '
+Globals:
+  Function:
+    Timeout: 300
+Parameters:
+  NotificationEmail:
+    Type: String
+  NotificationPhone:
+     Type: String
+Resources:
+  PGExercisesMonitorFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: PGExercisesMonitorFunction
+      Handler: com.pgexercises.monitor.Monitor::handleRequest
+      Runtime: java11
+      MemorySize: 192
+      Events:
+        PGExercisesMonitorHourly:
+          Type: Schedule
+          Properties:
+            Schedule: rate(50 minutes)
+#        PGExercisesMonitor:
+#          Type: Api
+#          Properties:
+#            Path: /monitor
+#            Method: get
+  AlarmTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      Subscription:
+        - Protocol: email
+          Endpoint: !Ref NotificationEmail
+        - Protocol: sms
+          Endpoint: !Ref NotificationPhone
+  Alarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmActions:
+        - !Ref AlarmTopic
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      DatapointsToAlarm: 2
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref PGExercisesMonitorFunction
+      EvaluationPeriods: 3
+      MetricName: Errors
+      Namespace: AWS/Lambda
+      Period: 3600
+      Statistic: Sum
+      Threshold: '1'
+#Outputs:
+#  PGExercisesMonitorApi:
+#    Description: API Gateway endpoint URL for Prod stage for PGExercises Monitor function
+#    Value:
+#      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/monitor/
+#  PGExercisesMonitorFunction:
+#    Description: PGExercises Monitor Lambda Function ARN
+#    Value:
+#      Fn::GetAtt:
+#      - PGExercisesMonitorFunction
+#      - Arn
+#  PGExercisesMonitorFunctionIamRole:
+#    Description: Implicit IAM Role created for PGExercises Monitor function
+#    Value:
+#      Fn::GetAtt:
+#      - PGExercisesMonitorFunctionRole
+#      - Arn
+
