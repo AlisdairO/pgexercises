@@ -29,7 +29,7 @@ order by cost desc;
 |HINT|
 As before, this answer requires multiple joins.  It's more complex <c>WHERE</c> logic than you're used to, and will require a <c>CASE</c> statement in the column selections!
 |SORTED|
-1
+0
 |PAGEID|
 0AC4E3E2-A77E-403E-B75E-99273CDBE06B
 |WRITEABLE|

@@ -1,7 +1,7 @@
 |QUESTIONNAME|
 Produce a list of all members who have used a tennis court
 |QUESTION|
-How can you produce a list of all members who have used a tennis court?  Include in your output the name of the court, and the name of the member formatted as a single column.  Ensure no duplicate data, and order by the member name.
+How can you produce a list of all members who have used a tennis court?  Include in your output the name of the court, and the name of the member formatted as a single column.  Ensure no duplicate data, and order by the member name followed by the facility name.
 |QUERY|
 select distinct mems.firstname || ' ' || mems.surname as member, facs.name as facility
 	from 
@@ -12,7 +12,7 @@ select distinct mems.firstname || ' ' || mems.surname as member, facs.name as fa
 			on bks.facid = facs.facid
 	where
 		facs.name in ('Tennis Court 2','Tennis Court 1')
-order by member
+order by member, facility
 |ANSWER|
 <p>This exercise is largely a more complex application of what you've learned in prior questions.  It's also the first time we've used more than one join, which may be a little confusing for some.  When reading join expressions, remember that a join is effectively a function that takes two tables, one labelled the left table, and the other the right.  This is easy to visualise with just one join in the query, but a little more confusing with two.</p>
 
