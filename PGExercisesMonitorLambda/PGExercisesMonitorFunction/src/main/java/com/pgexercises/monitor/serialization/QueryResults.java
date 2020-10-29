@@ -6,10 +6,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.framework.qual.DefaultQualifier;
+import org.checkerframework.framework.qual.TypeUseLocation;
 
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@DefaultQualifier(value = NonNull.class, locations = TypeUseLocation.LOCAL_VARIABLE)
 public class QueryResults {
     private final List<String> headers;
     private final ResultsTable values;
@@ -35,7 +40,10 @@ public class QueryResults {
     }
 
     @Override
-    public boolean equals(Object that) {
+    public boolean equals(@Nullable Object that) {
+        if (that == null) {
+            return false;
+        }
         return EqualsBuilder.reflectionEquals(this, that);
     }
 

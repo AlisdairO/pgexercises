@@ -10,6 +10,7 @@ import java.net.URISyntaxException;
 
 import static org.junit.Assert.assertEquals;
 
+@SuppressWarnings("initialization.fields.uninitialized")
 public class MonitorTest {
     private static final String[] CATEGORY_PAGES = new String[] {"basic", "joins", "updates", "aggregates", "date", "string", "recursive"};
     private static final String[] QUESTION_PAGES = new String[] {"selectall.html","selectspecific.html","where.html","where2.html","where3.html","where4.html","classify.html","date.html","unique.html","union.html","agg.html","agg2.html"};

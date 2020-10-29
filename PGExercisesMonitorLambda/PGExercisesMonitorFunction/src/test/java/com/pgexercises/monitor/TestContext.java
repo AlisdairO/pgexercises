@@ -1,9 +1,8 @@
 package com.pgexercises.monitor;
 
-import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.CognitoIdentity;
-import com.amazonaws.services.lambda.runtime.ClientContext;
-import com.amazonaws.services.lambda.runtime.LambdaLogger;
+import com.amazonaws.services.lambda.runtime.*;
+
+import java.util.Map;
 
 public class TestContext implements Context{
 
@@ -27,10 +26,60 @@ public class TestContext implements Context{
         return "arn:aws:lambda:us-east-2:123456789012:function:my-function";
     }
     public CognitoIdentity getIdentity(){
-        return null;
+        return new CognitoIdentity() {
+            @Override
+            public String getIdentityId() {
+                return "test";
+            }
+
+            @Override
+            public String getIdentityPoolId() {
+                return "test2";
+            }
+        };
     }
     public ClientContext getClientContext(){
-        return null;
+        return new ClientContext() {
+            @Override
+            public Client getClient() {
+                return new Client() {
+                    @Override
+                    public String getInstallationId() {
+                        return "";
+                    }
+
+                    @Override
+                    public String getAppTitle() {
+                        return "";
+                    }
+
+                    @Override
+                    public String getAppVersionName() {
+                        return "";
+                    }
+
+                    @Override
+                    public String getAppVersionCode() {
+                        return "";
+                    }
+
+                    @Override
+                    public String getAppPackageName() {
+                        return "";
+                    }
+                };
+            }
+
+            @Override
+            public Map<String, String> getCustom() {
+                return Map.of();
+            }
+
+            @Override
+            public Map<String, String> getEnvironment() {
+                return Map.of();
+            }
+        };
     }
     public int getRemainingTimeInMillis(){
         return 300000;

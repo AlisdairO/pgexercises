@@ -1,7 +1,9 @@
 package com.pgexercises.monitor;
 
 import org.apache.commons.lang3.Validate;
-import org.jetbrains.annotations.NotNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.framework.qual.DefaultQualifier;
+import org.checkerframework.framework.qual.TypeUseLocation;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -11,6 +13,7 @@ import java.net.http.HttpResponse;
 import java.util.Collections;
 import java.util.Map;
 
+@DefaultQualifier(value = NonNull.class, locations = TypeUseLocation.LOCAL_VARIABLE)
 public class ResourceGetterImpl implements ResourceGetter {
     private final HttpClient httpClient;
 
@@ -21,13 +24,13 @@ public class ResourceGetterImpl implements ResourceGetter {
     }
 
     @Override
-    public @NotNull String getResource(@NotNull String uri) throws IOException {
+    public @NonNull String getResource(@NonNull String uri) throws IOException {
         Validate.notNull(uri);
         return getResource(uri, Collections.emptyMap());
     }
 
     @Override
-    public @NotNull String getResource(@NotNull String uri, @NotNull Map<String, String> params) throws IOException {
+    public @NonNull String getResource(@NonNull String uri, @NonNull Map<String, String> params) throws IOException {
         Validate.notNull(uri);
         Validate.notNull(params);
 

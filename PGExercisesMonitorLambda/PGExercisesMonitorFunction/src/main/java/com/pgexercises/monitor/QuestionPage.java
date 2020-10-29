@@ -8,12 +8,15 @@ import com.pgexercises.monitor.serialization.ResultsTable;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.jetbrains.annotations.NotNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.framework.qual.DefaultQualifier;
+import org.checkerframework.framework.qual.TypeUseLocation;
 
 import java.io.IOException;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
+@DefaultQualifier(value = NonNull.class, locations = TypeUseLocation.LOCAL_VARIABLE)
 public class QuestionPage {
     private static final Pattern SUGGESTED_SQL_FINDER_PATTER = Pattern.compile("<pre id=\"querydiv\" class=\"answerdiv prettyprint lang-sql\">(.*?)</pre>", Pattern.DOTALL);
     private static final Pattern EXPECTED_RESULTS_FINDER_PATTERN = Pattern.compile("App\\.jsonResults = sortJSONResults\\((.*?)\\);", Pattern.DOTALL);
@@ -28,7 +31,7 @@ public class QuestionPage {
     private final String tableToReturn;
     private final boolean isSorted;
 
-    public QuestionPage(@NotNull String pageData) throws JsonProcessingException {
+    public QuestionPage(@NonNull String pageData) throws JsonProcessingException {
         Validate.notNull(pageData);
         isModifyingSolution = findIsModifyingSolution(pageData);
         expectedResults = MAPPER.readValue(findExpectedResults(pageData), ResultsTable.class);
@@ -37,27 +40,27 @@ public class QuestionPage {
         isSorted = findIsSorted(pageData);
     }
 
-    private boolean findIsSorted(String pageContent) {
+    private static boolean findIsSorted(String pageContent) {
         return Utils.getSingleMatchFromPage(pageContent, IS_SORTED_FINDER_PATTERN).equals("1");
     }
 
-    private String findTableToReturn(String pageContent) {
+    private static String findTableToReturn(String pageContent) {
         return Utils.getSingleMatchFromPage(pageContent, TABLES_TO_RETURN_FINDER_PATTERN);
     }
 
-    private boolean findIsModifyingSolution(String pageContent) {
+    private static boolean findIsModifyingSolution(String pageContent) {
         return Utils.getSingleMatchFromPage(pageContent, IS_MODIFYING_FINDER_PATTERN).equals("1");
     }
 
-    private String findExpectedResults(@NotNull String pageContent) {
+    private static String findExpectedResults(@NonNull String pageContent) {
         return Utils.getSingleMatchFromPage(pageContent, EXPECTED_RESULTS_FINDER_PATTERN);
     }
 
-    private String findSuggestedSolution(@NotNull String pageContent) {
+    private static String findSuggestedSolution(@NonNull String pageContent) {
         return Utils.getSingleMatchFromPage(pageContent, SUGGESTED_SQL_FINDER_PATTER);
     }
 
-    public void validate(@NotNull LambdaLogger logger, @NotNull ResourceGetter resourceGetter, String endpointLocation) throws IOException {
+    public void validate(@NonNull LambdaLogger logger, @NonNull ResourceGetter resourceGetter, String endpointLocation) throws IOException {
         Validate.notNull(logger);
         Validate.notNull(resourceGetter);
         logger.log(this.toString() + "\n");
@@ -68,7 +71,7 @@ public class QuestionPage {
         }
     }
 
-    private QueryResults queryActualResults(@NotNull LambdaLogger logger, @NotNull ResourceGetter resourceGetter, String endpointLocation) throws IOException {
+    private QueryResults queryActualResults(@NonNull LambdaLogger logger, @NonNull ResourceGetter resourceGetter, String endpointLocation) throws IOException {
         TreeMap<String, String> params = new TreeMap<>();
         params.put("query", suggestedSolution);
         params.put("writeable", isModifyingSolution ? "1" : "0");
@@ -78,7 +81,7 @@ public class QuestionPage {
     }
 
     @Override
-    public @NotNull String toString() {
+    public @NonNull String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
 }

@@ -6,8 +6,10 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import org.apache.commons.lang3.Validate;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.framework.qual.DefaultQualifier;
+import org.checkerframework.framework.qual.TypeUseLocation;
 import org.jetbrains.annotations.VisibleForTesting;
 
 import java.io.IOException;
@@ -33,6 +35,7 @@ import java.util.regex.Pattern;
  * the navigation process/links are valid. I'll change this approach if it causes problems
  * in real-world usage.
  */
+@DefaultQualifier(value = NonNull.class, locations = TypeUseLocation.LOCAL_VARIABLE)
 public class Monitor implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
     // TODO put this in some config
@@ -49,12 +52,12 @@ public class Monitor implements RequestHandler<APIGatewayProxyRequestEvent, APIG
         this(new ResourceGetterImpl());
     }
 
-    public Monitor(@NotNull ResourceGetter resourceGetter) {
+    public Monitor(@NonNull ResourceGetter resourceGetter) {
         Validate.notNull(resourceGetter);
         this.resourceGetter = resourceGetter;
     }
 
-    public APIGatewayProxyResponseEvent handleRequest(@Nullable final APIGatewayProxyRequestEvent input, @NotNull final Context context) {
+    public APIGatewayProxyResponseEvent handleRequest(final @Nullable APIGatewayProxyRequestEvent input, final @NonNull Context context) {
         Validate.notNull(context);
         LambdaLogger logger = context.getLogger();
 
@@ -74,7 +77,7 @@ public class Monitor implements RequestHandler<APIGatewayProxyRequestEvent, APIG
         }
     }
 
-    private void checkGeneratedPages(@NotNull LambdaLogger logger) throws IOException {
+    private void checkGeneratedPages(@NonNull LambdaLogger logger) throws IOException {
         String basePageContents = getPageContents(BASE_PAGE_URI, logger);
         List<String> categoryPageURIs = Utils.getMatchesFromPage(basePageContents, CATEGORY_PAGE_FINDER_PATTERN, BASE_PAGE_URI + "/");
 
@@ -92,7 +95,7 @@ public class Monitor implements RequestHandler<APIGatewayProxyRequestEvent, APIG
         }
     }
 
-    private void checkCategoryPage(@NotNull String categoryPageURI, @NotNull LambdaLogger logger) throws IOException {
+    private void checkCategoryPage(@NonNull String categoryPageURI, @NonNull LambdaLogger logger) throws IOException {
         try {
             String categoryPageContents = getPageContents(categoryPageURI, logger);
             List<String> questionPageURIs = Utils.getMatchesFromPage(categoryPageContents, QUESTION_PAGE_FINDER_PATTERN, categoryPageURI + "/");
@@ -112,12 +115,12 @@ public class Monitor implements RequestHandler<APIGatewayProxyRequestEvent, APIG
         }
     }
 
-    private void checkQuestionPage(@NotNull String page, @NotNull LambdaLogger logger) throws IOException {
+    private void checkQuestionPage(@NonNull String page, @NonNull LambdaLogger logger) throws IOException {
         QuestionPage questionPage = new QuestionPage(getPageContents(page, logger));
         questionPage.validate(logger, resourceGetter, SQL_ENDPOINT);
     }
 
-    private void checkStaticPages(@NotNull LambdaLogger logger) throws IOException {
+    private void checkStaticPages(@NonNull LambdaLogger logger) throws IOException {
         for (String page : STATIC_PAGES) {
             if (Thread.interrupted()) {
                 logger.log("Interrupted, exiting\n");
@@ -127,7 +130,7 @@ public class Monitor implements RequestHandler<APIGatewayProxyRequestEvent, APIG
         }
     }
 
-    private String getPageContents(@NotNull String uri, @NotNull LambdaLogger logger) throws IOException {
+    private @NonNull String getPageContents(@NonNull String uri, @NonNull LambdaLogger logger) throws IOException {
         logger.log("Getting page content: " + uri + "\n");
         return resourceGetter.getResource(uri);
     }

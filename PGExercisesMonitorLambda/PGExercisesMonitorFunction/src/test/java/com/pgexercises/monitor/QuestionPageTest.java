@@ -12,6 +12,7 @@ import org.junit.rules.ExpectedException;
 import java.net.URISyntaxException;
 import java.util.*;
 
+@SuppressWarnings("initialization.fields.uninitialized")
 public class QuestionPageTest {
     private static final ObjectMapper MAPPER = new ObjectMapper();
     private static final String DEFAULT_QUERY = "select max(joindate) as latest\n" +

@@ -26,6 +26,7 @@ public class UtilsTest {
         Utils.buildUri("https://pgexercises.com[][][]", Map.of());
     }
 
+    @SuppressWarnings("argument.type.incompatible")
     @Test (expected = NullPointerException.class)
     public void testNullParamsUri() throws URISyntaxException {
         Utils.buildUri(null, null);
@@ -36,6 +37,7 @@ public class UtilsTest {
         Assert.assertEquals("https://pgexercises.com?a=a", Utils.buildUri("https://pgexercises.com", new TreeMap(Map.of("a","a"))).toString());
     }
 
+    @SuppressWarnings("argument.type.incompatible")
     @Test (expected = NullPointerException.class)
     public void testGetMatchesFromPageNullParams() throws Exception {
         Utils.getMatchesFromPage(null, null, null);
@@ -47,6 +49,7 @@ public class UtilsTest {
         Assert.assertEquals(List.of("pdata", "pdata2"), matches);
     }
 
+    @SuppressWarnings("argument.type.incompatible")
     @Test (expected = NullPointerException.class)
     public void testGetSingleMatchFromPageNullParams() throws Exception {
         Utils.getSingleMatchFromPage(null, null);
