@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ResultsTable implements Cloneable {
+public class ResultsTable {
     List<List<String>> results;
 
     @JsonCreator

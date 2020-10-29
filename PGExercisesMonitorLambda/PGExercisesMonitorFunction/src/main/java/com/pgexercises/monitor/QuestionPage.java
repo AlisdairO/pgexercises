@@ -63,7 +63,7 @@ public class QuestionPage {
         logger.log(this.toString() + "\n");
         QueryResults actualResults = queryActualResults(logger, resourceGetter, endpointLocation);
         if (!actualResults.getValues().matches(expectedResults, isSorted)) {
-            logger.log(String.format("Data didn't match.\n  Page data: [%s]\n  Actual: [%s]", this.toString(), actualResults.getValues()));
+            logger.log(String.format("Data didn't match.%n  Page data: [%s]%n  Actual: [%s]", this.toString(), actualResults.getValues()));
             throw new RuntimeException("Data didn't match. Failing.");
         }
     }
@@ -73,7 +73,7 @@ public class QuestionPage {
         params.put("query", suggestedSolution);
         params.put("writeable", isModifyingSolution ? "1" : "0");
         params.put("tableToReturn", tableToReturn);
-        logger.log(String.format("Hitting URI: [%s] with params [%s]\n", endpointLocation, StringUtils.join(params)));
+        logger.log(String.format("Hitting URI: [%s] with params [%s]%n", endpointLocation, StringUtils.join(params)));
         return MAPPER.readValue(resourceGetter.getResource(endpointLocation, params), QueryResults.class);
     }
 
