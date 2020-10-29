@@ -8,9 +8,9 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 import org.apache.commons.lang3.Validate;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.com.google.common.annotations.VisibleForTesting;
 import org.checkerframework.framework.qual.DefaultQualifier;
 import org.checkerframework.framework.qual.TypeUseLocation;
-import org.jetbrains.annotations.VisibleForTesting;
 
 import java.io.IOException;
 import java.util.List;
@@ -39,7 +39,8 @@ import java.util.regex.Pattern;
 public class Monitor implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
     // TODO put this in some config
-    @VisibleForTesting static final String BASE_PAGE_URI = "https://pgexercises.com";
+    @VisibleForTesting
+    static final String BASE_PAGE_URI = "https://pgexercises.com";
     @VisibleForTesting static final String SQL_ENDPOINT = BASE_PAGE_URI + "/SQLForwarder/SQLForwarder";
     @VisibleForTesting static final String[] STATIC_PAGES = new String[] {"gettingstarted.html", "about.html", "options.html"};
 
