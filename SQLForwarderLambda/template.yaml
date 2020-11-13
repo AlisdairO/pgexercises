@@ -1,0 +1,588 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: PGExercises main software stack
+
+Globals:
+  Function:
+    Timeout: 200
+
+Parameters:
+  RDSAdminUserName:
+    Type: String
+    Default: pgeadmin
+  RDSUserUserName:
+    Type: String
+    Default: pgexercises
+  RDSDBName:
+    Type: String
+    Default: ex_management
+  BaseDBName:
+    Type: String
+    Default: exercises
+  WriteableDbCount:
+    Type: String
+    Default: 100
+  Domain:
+    Description: 'The domain of your website.'
+    Type: String
+    Default: 'pgexercises-test.com'
+  HostedZoneID:
+    Description: 'The ID of your hosted zone in Route 53'
+    Type: 'AWS::Route53::HostedZone::Id'
+    Default: 'Z097804733CZNW2I6044K'
+  CreateCert:
+    Description: 'Whether to create an HTTPS certificate for this site. You MUST create this stack in the us-east-1 (N. Virginia) region when creating a certificate'
+    Type: String
+    AllowedValues:
+      - 'Yes'
+      - 'No'
+    Default: 'Yes'
+  ErrorPagePath:
+    Description: 'The path of the error page for the website.'
+    Type: String
+    Default: '/404.html'
+  IndexDocument:
+    Description: 'Directory index filename'
+    Type: String
+    Default: 'index.html'
+  LogsRetentionInDays:
+    Description: 'Specifies the number of days you want to retain log events'
+    Type: Number
+    Default: 7
+    AllowedValues: [ 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, 3653 ]
+Conditions:
+  ShouldCreateCert: !Equals
+    - !Ref CreateCert
+    - 'Yes'
+Resources:
+  privateVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      CidrBlock: 172.31.0.0/16
+      Tags:
+        - Key: Name
+          Value: !Ref AWS::StackName
+
+  privateDBSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref privateVPC
+      CidrBlock: 172.31.0.0/20
+      AvailabilityZone: !Select
+        - 0
+        - !GetAZs
+          Ref: AWS::Region
+      Tags:
+        - Key: Name
+          Value: privateDBSubnet1
+
+  privateDBSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref privateVPC
+      CidrBlock: 172.31.16.0/20
+      AvailabilityZone: !Select
+        - 1
+        - !GetAZs
+          Ref: AWS::Region
+      Tags:
+        - Key: Name
+          Value: privateDBSubnet2
+
+  privateLambdaSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref privateVPC
+      AvailabilityZone:
+        Fn::Select:
+          - 0
+          - Fn::GetAZs: ""
+      CidrBlock: 172.31.32.0/20
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Join ["-", [!Ref "AWS::StackName","subnet-a"]]
+
+  privateLambdaSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref privateVPC
+      AvailabilityZone:
+        Fn::Select:
+          - 1
+          - Fn::GetAZs: ""
+      CidrBlock: 172.31.48.0/20
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Join ["-", [!Ref "AWS::StackName","subnet-b"]]
+  privateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref privateVPC
+  privateLambdaSubnet1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref privateLambdaSubnet1
+      RouteTableId: !Ref privateRouteTable
+  privateLambdaSubnet2RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref privateLambdaSubnet2
+      RouteTableId: !Ref privateRouteTable
+  privateDBSubnet1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref privateDBSubnet1
+      RouteTableId: !Ref privateRouteTable
+  privateDBSubnet2RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref privateDBSubnet2
+      RouteTableId: !Ref privateRouteTable
+
+  RDSSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow DB access from PGE lambda subnets
+      VpcId:
+        Ref: privateVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 5432
+          ToPort: 5432
+          SourceSecurityGroupId : !Ref LambdaSecurityGroup
+      Tags:
+        - Key: Name
+          Value: RDSSecurityGroup
+
+  LambdaSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for Lambda ENIs
+      VpcId:
+        Ref: privateVPC
+      Tags:
+        - Key: Name
+          Value: LambdaSecurityGroup
+
+  SecretManagerVPCESecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for Security Manager VPCE
+      VpcId:
+        Ref: privateVPC
+      SecurityGroupIngress:
+        - IpProtocol: '-1'
+          FromPort: '-1'
+          ToPort: '-1'
+          SourceSecurityGroupId: !Ref LambdaSecurityGroup
+      Tags:
+        - Key: Name
+          Value: SecretManagerVPCESecurityGroup
+
+  SecretsManagerVPCEndpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      SubnetIds:
+        - Ref: privateLambdaSubnet1
+        - Ref: privateLambdaSubnet2
+      SecurityGroupIds:
+        - !Ref SecretManagerVPCESecurityGroup
+      VpcEndpointType: 'Interface'
+      ServiceName: !Sub "com.amazonaws.${AWS::Region}.secretsmanager"
+      PrivateDnsEnabled: true
+      VpcId:
+        Ref: privateVPC
+
+  # Allows us to access CFN to respond as custom resource
+  S3VPCEndpoint:
+    Type: 'AWS::EC2::VPCEndpoint'
+    Properties:
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          # TODO RESTRICT THIS
+          - Effect: Allow
+            Principal: '*'
+            Action:
+              - '*'
+            Resource:
+              - '*'
+      RouteTableIds:
+        - !Ref privateRouteTable
+      ServiceName: !Sub 'com.amazonaws.${AWS::Region}.s3'
+      VpcId: !Ref privateVPC
+
+  # Create Db subnet groups for RDS instance
+  DBSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: PGE subnet group
+      SubnetIds:
+        - !Ref privateDBSubnet1
+        - !Ref privateDBSubnet2
+      Tags:
+        - Key: Name
+          Value: !Join ["-", [!Ref "AWS::StackName","dbsg"]]
+
+  # TODO configure rotation. Use of secrets manager is kind of overkill for this
+  # project since the data is unimportant and we can trivially just spin up another
+  # stack, but it's kind of nice to do things properly for other people's reference :-)
+  RDSAdminPasswordSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: RDS admin pass secret
+      GenerateSecretString:
+        SecretStringTemplate: !Sub '{"username": "${!Ref RDSAdminUserName}"}'
+        GenerateStringKey: password
+        PasswordLength: 16
+        ExcludeCharacters: '"@/\'
+      Tags:
+        - Key: Name
+          Value: !Join ["-", [!Ref "AWS::StackName","adminsecret"]]
+          
+  RDSUserPasswordSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: RDS user pass secret
+      GenerateSecretString:
+        SecretStringTemplate: !Sub '{"username": "${!Ref RDSUserUserName}"}'
+        GenerateStringKey: password
+        PasswordLength: 16
+        ExcludeCharacters: '"@/\'
+      Tags:
+        - Key: Name
+          Value: !Join ["-", [!Ref "AWS::StackName","usersecret"]]
+
+  #This is a RDS instance resource. Its master username and password use dynamic references to resolve values from
+  #SecretsManager. The dynamic reference guarantees that CloudFormation will not log or persist the resolved value
+  #We use a ref to the Secret resource logical id in order to construct the dynamic reference, since the Secret name is being
+  #generated by CloudFormation
+  PGEDBInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      AllocatedStorage: 20
+      DBInstanceClass: db.t3.micro
+      DBName: !Ref RDSDBName
+      Engine: postgres
+      MasterUsername: !Ref RDSAdminUserName
+      MasterUserPassword: !Join ['', ['{{resolve:secretsmanager:', !Ref RDSAdminPasswordSecret, ':SecretString:password}}' ]]
+      MultiAZ: False
+      PubliclyAccessible: False
+      StorageType: gp2
+      DBSubnetGroupName: !Ref DBSubnetGroup
+      VPCSecurityGroups:
+        - !Ref RDSSecurityGroup
+      BackupRetentionPeriod: 0
+      DBInstanceIdentifier: !Join ["-", [!Ref "AWS::StackName","db"]]
+
+  SQLForwarderFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    DependsOn:
+      - PGEDBInstance
+      - S3VPCEndpoint
+      - SecretsManagerVPCEndpoint
+      - PGExercisesDbInitTrigger
+    Properties:
+      CodeUri: SQLForwarderFunction
+      Handler: com.pgexercises.sqlforwarder.SQLForwarder::handleRequest
+      Runtime: java11
+      MemorySize: 256
+      AutoPublishAlias: live
+      ProvisionedConcurrencyConfig:
+        ProvisionedConcurrentExecutions: 1
+      ReservedConcurrentExecutions: 50
+      VpcConfig: # For accessing RDS instance
+        SecurityGroupIds:
+          - !Ref LambdaSecurityGroup
+        SubnetIds:
+          - !Ref privateLambdaSubnet1
+          - !Ref privateLambdaSubnet2
+      Policies:
+        - AWSLambdaVPCAccessExecutionRole
+        - AWSSecretsManagerGetSecretValuePolicy:
+            SecretArn:
+              !Ref RDSAdminPasswordSecret
+        - AWSSecretsManagerGetSecretValuePolicy:
+            SecretArn:
+              !Ref RDSUserPasswordSecret
+      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+        Variables:
+          dbURI: !Join ['', ['jdbc:postgresql://', !GetAtt PGEDBInstance.Endpoint.Address]]
+          baseDbName: !Ref BaseDBName
+          adminDbName: !Ref RDSDBName
+          userAcct: !Ref RDSUserUserName
+          adminAcct: !Ref RDSAdminUserName
+          adminPassSecretName: !Ref RDSAdminPasswordSecret
+          userPassSecretName: !Ref RDSUserPasswordSecret
+          writeableDbCount: 100
+      Events:
+        SQLForwarder:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref SQLForwarderApi
+            Path: /SQLForwarder
+            Method: get
+
+  SQLForwarderApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      EndpointConfiguration:
+        Type: EDGE
+
+  # TODO https://aws.amazon.com/blogs/compute/amazon-api-gateway-adds-support-for-aws-waf/
+  # TODO might need to redo this for custom domain to prevent CORS issues: put all behind same cloudfront distribution instead.
+  # https://serverfault.com/questions/833360/what-aws-service-to-avoid-cors-issues-with-s3-static-content-and-aws-backends
+  # https://stackoverflow.com/questions/53966672/cloudfront-how-to-setup-reverse-proxy-on-an-existing-distribution-serving-websit
+  #https://www.rehanvdm.com/serverless/cloudfront-reverse-proxy-api-gateway-to-prevent-cors/index.html
+  # https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-cors.html
+  # https://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html
+  # THIS ONE https://medium.com/studitemps-tech/how-to-set-up-a-reverse-proxy-with-cloudfront-lambda-edge-and-phoenix-ece134ee16c7
+
+  SQLForwarderWebACL:
+    Type: AWS::WAFv2::WebACL
+    Properties:
+      Name: SQLForwarderWebACL
+      Description: WebACL for SQLForwarder
+      Scope: REGIONAL
+      DefaultAction:
+        Allow: { }
+      VisibilityConfig:
+        SampledRequestsEnabled: true
+        CloudWatchMetricsEnabled: true
+        MetricName: !Join ["-", ["SQLForwarderACLMetric", !Ref AWS::StackName]]
+      Rules:
+        - Name: FloodPrevention
+          Priority: 0
+          Action:
+            Block: { }
+          VisibilityConfig:
+            SampledRequestsEnabled: true
+            CloudWatchMetricsEnabled: true
+            MetricName: test
+          Statement:
+            RateBasedStatement:
+              Limit: 200
+              AggregateKeyType: IP
+
+  SQLForwarderWebACLAssociation:
+    Type: AWS::WAFv2::WebACLAssociation
+    Properties:
+      # ResourceArn: !Sub arn:aws:apigateway:${AWS::Region}::/restapis/${CamerasApi}/stages/${StageName}
+      ResourceArn: !Sub
+        - arn:aws:apigateway:${AWS::Region}::/restapis/${SQLForwarderAPIName}/stages/${StageName}
+        - SQLForwarderAPIName: !Ref SQLForwarderApi
+          StageName: !Ref SQLForwarderApi.Stage
+      WebACLArn: !GetAtt  SQLForwarderWebACL.Arn
+
+
+  PGExercisesDbInit:
+    Type: AWS::Serverless::Function
+    DependsOn:
+      - PGEDBInstance
+      - S3VPCEndpoint
+      - SecretsManagerVPCEndpoint
+      - privateLambdaSubnet1RouteTableAssociation
+      - privateLambdaSubnet2RouteTableAssociation
+      - privateRouteTable
+    Properties:
+      CodeUri: PGExercisesDbInit
+      MemorySize: 384
+      Handler: com.pgexercises.init.PGExercisesDbInit::handleRequest
+      Description: "Lambda function which will execute when this CFN template is created, updated or deleted"
+      Runtime: java11
+      Timeout: 300
+      VpcConfig: # For accessing RDS instance
+        SecurityGroupIds:
+          - !Ref LambdaSecurityGroup
+        SubnetIds:
+          - !Ref privateLambdaSubnet1
+          - !Ref privateLambdaSubnet2
+      Policies:
+        - AWSLambdaVPCAccessExecutionRole
+        - AWSSecretsManagerGetSecretValuePolicy:
+            SecretArn:
+              !Ref RDSAdminPasswordSecret
+        - AWSSecretsManagerGetSecretValuePolicy:
+            SecretArn:
+              !Ref RDSUserPasswordSecret
+      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+        Variables:
+          dbURI: !Join ['', ['jdbc:postgresql://', !GetAtt PGEDBInstance.Endpoint.Address]]
+          baseDbName: !Ref BaseDBName
+          adminDbName: !Ref RDSDBName
+          userAcct: !Ref RDSUserUserName
+          adminAcct: !Ref RDSAdminUserName
+          adminPassSecretName: !Ref RDSAdminPasswordSecret
+          userPassSecretName: !Ref RDSUserPasswordSecret
+          writeableDbCount: 100
+
+  # Wire up the lambda function LambdaRDSCFNInit to execute on stack create, update or delete
+  PGExercisesDbInitTrigger:
+    Type: Custom::LambdaRDS
+    Version: 1.0
+    Properties:
+      ServiceToken: !GetAtt [ PGExercisesDbInit, Arn ]
+
+  S3Bucket:
+    Type: 'AWS::S3::Bucket'
+
+  # Create a CloudFront Access Identity to broker access to the bucket
+  CloudFrontOriginAccessIdentity:
+    Type: 'AWS::CloudFront::CloudFrontOriginAccessIdentity'
+    Properties:
+      CloudFrontOriginAccessIdentityConfig:
+        Comment: !Ref S3Bucket
+  ReadPolicy:
+    Type: 'AWS::S3::BucketPolicy'
+    Properties:
+      Bucket: !Ref S3Bucket
+      PolicyDocument:
+        Statement:
+          - Action: 's3:GetObject'
+            Effect: Allow
+            Resource: !Sub 'arn:aws:s3:::${S3Bucket}/*'
+            Principal:
+              CanonicalUser: !GetAtt CloudFrontOriginAccessIdentity.S3CanonicalUserId
+
+  # Lambda@Edge function to handle doc root stuff
+  StandardRedirectsForCloudFrontRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - 'lambda.amazonaws.com'
+                - 'edgelambda.amazonaws.com'
+            Action: 'sts:AssumeRole'
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'
+
+  StandardRedirectsForCloudFront:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: StandardRedirectsForCloudFront/index.handler
+      Runtime: nodejs10.x
+      Description: 'Standard Redirects for CloudFront by Digital Sailors via the Serverless Application Repository.'
+      MemorySize: 128
+      Role: !GetAtt 'StandardRedirectsForCloudFrontRole.Arn'
+      Timeout: 3
+      AutoPublishAlias: 'CurrentProd'
+
+  # Configure the bucket as a CloudFront Origin and grant access via the access identity
+  CloudFrontDistribution:
+    Type: 'AWS::CloudFront::Distribution'
+    Properties:
+      DistributionConfig:
+        Aliases:
+          - !Ref Domain
+        ViewerCertificate:
+          AcmCertificateArn: !Ref Cert
+          SslSupportMethod: 'sni-only'
+        CustomErrorResponses:
+          - ErrorCode: 403 # not found
+            ResponseCode: 404
+            ResponsePagePath: !Ref ErrorPagePath
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - GET
+            - HEAD
+            - OPTIONS
+          CachedMethods:
+            - GET
+            - HEAD
+            - OPTIONS
+          Compress: true
+          DefaultTTL: 3600 # in seconds
+          ForwardedValues:
+            Cookies:
+              Forward: none
+              QueryString: false
+          MaxTTL: 86400 # in seconds
+          MinTTL: 60 # in seconds
+          TargetOriginId: s3origin
+          ViewerProtocolPolicy: !If
+            - ShouldCreateCert
+            - 'redirect-to-https'
+            - 'allow-all'
+          LambdaFunctionAssociations:
+            - EventType: 'origin-request'
+              LambdaFunctionARN: !Ref StandardRedirectsForCloudFront
+        DefaultRootObject: 'index.html'
+        Enabled: true
+        HttpVersion: http2
+        Origins:
+          - DomainName: !GetAtt 'S3Bucket.DomainName'
+            Id: s3origin
+            S3OriginConfig:
+              OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${CloudFrontOriginAccessIdentity}'
+        PriceClass: 'PriceClass_All'
+
+  # Set up A Record via Route 53
+  Route53Record:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: !Ref Domain
+      Type: A
+      AliasTarget:
+        HostedZoneId: Z2FDTNDATAQYW2 # This Zone ID is used for any CloudFront Distribution
+        DNSName: !GetAtt 'CloudFrontDistribution.DomainName'
+
+  # Set up TLS Cert
+  Cert:
+    Condition: ShouldCreateCert
+    Type: 'AWS::CertificateManager::Certificate'
+    Properties:
+      DomainName: !Ref Domain
+      ValidationMethod: DNS
+
+  # Create an IAM user with Access Keys to enable automated deployment of the website to this bucket
+  PublishUser:
+    Type: 'AWS::IAM::User'
+    Properties:
+      Policies:
+        - PolicyName: !Sub 'publish-to-${S3Bucket}'
+          PolicyDocument:
+            Statement:
+              - Action: 's3:*'
+                Effect: Allow
+                Resource:
+                  - !Sub 'arn:aws:s3:::${S3Bucket}'
+                  - !Sub 'arn:aws:s3:::${S3Bucket}/*'
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  SQLForwarderApi:
+    Description: "API Gateway endpoint URL for Prod stage for SQLForwarder function"
+    Value: !Sub "https://${SQLForwarderApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+  SQLForwarderFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt SQLForwarderFunction.Arn
+  SQLForwarderFunctionIamRole:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt SQLForwarderFunctionRole.Arn
+  BucketName:
+    Description: 'S3 Bucket Name'
+    Value: !Ref S3Bucket
+  PublishUser:
+    Description: 'IAM User with write access to the bucket'
+    Value: !Ref PublishUser
+  DistributionId:
+    Description: 'CloudFront Distribution ID'
+    Value: !Ref CloudFrontDistribution
+  URL:
+    Description: 'URL of the website'
+    Value: !If
+      - ShouldCreateCert
+      - !Sub 'https://${Domain}'
+      - !Sub 'http://${Domain}'

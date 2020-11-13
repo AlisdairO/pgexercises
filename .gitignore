@@ -13,5 +13,5 @@ SQLForwarder/build/
 **/.idea
 **/target/
 PGExercisesMonitorLambda/pgexercises-monitor.toml
-PGExercisesMonitorLambda/samconfig.toml
+**/samconfig.toml
 dependency-reduced-pom.xml

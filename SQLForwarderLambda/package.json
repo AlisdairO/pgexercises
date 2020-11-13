@@ -1,0 +1,24 @@
+{
+  "name": "standard-redirects-for-cloudfront",
+  "version": "1.4.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "test-coverage": "istanbul cover _mocha",
+    "predeploy": "git log -1 --pretty=format:'{ \"date\":\"%cI\", \"commit\":\"%H\" }' > git-commit.json",
+    "deploy": "zip -r LATE-standard-redirects-for-cloudfront.zip . -i \\*.js -i git-commit.json -i node_modules/\\* -x test/\\* -x node_modules/aws-sdk/\\* -x node_modules/mocha/\\* && echo Uploading... && aws lambda update-function-code --region us-east-1 --function-name LATE-standard-redirects-for-cloudfront --zip-file fileb://LATE-standard-redirects-for-cloudfront.zip --publish",
+    "package": "aws cloudformation package --template-file sam.yaml --output-template-file standard-redirects-for-cloudfront-sam.yaml --s3-bucket public.digital-sailors.de --s3-prefix serverless-application-repo/standard-redirects-for-cloudfront",
+    "package-test": "aws cloudformation package --template-file sam.yaml --output-template-file standard-redirects-for-cloudfront-sam-test.yaml --s3-bucket demo.digital-sailors.work --s3-prefix serverless-application-repo/standard-redirects-for-cloudfront-test"
+  },
+  "dependencies": {},
+  "license": "Apache-2.0",
+  "author": {
+    "name": "DigitalSailors e.K.",
+    "email": "contact@digital-sailors.de",
+    "url": "https://www.digital-sailors.de"
+  },
+  "devDependencies": {
+    "mocha": "^4.0.1"
+  }
+}
