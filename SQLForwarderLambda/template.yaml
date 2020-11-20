@@ -450,6 +450,7 @@ Resources:
               CanonicalUser: !GetAtt CloudFrontOriginAccessIdentity.S3CanonicalUserId
 
   # Lambda@Edge function to handle doc root stuff
+  # TODO fold this into the function definition below
   StandardRedirectsForCloudFrontRole:
     Type: 'AWS::IAM::Role'
     Properties:
@@ -474,7 +475,12 @@ Resources:
       MemorySize: 128
       Role: !GetAtt 'StandardRedirectsForCloudFrontRole.Arn'
       Timeout: 3
-      AutoPublishAlias: 'CurrentProd'
+      AutoPublishAlias: live
+
+#  StandardRedirectsForCloudFrontV2:
+#    Type: 'AWS::Lambda::Version'
+#    Properties:
+#      FunctionName: !Ref StandardRedirectsForCloudFront
 
   # Configure the bucket as a CloudFront Origin and grant access via the access identity
   CloudFrontDistribution:
@@ -504,25 +510,56 @@ Resources:
           ForwardedValues:
             Cookies:
               Forward: none
-              QueryString: false
+            QueryString: false
           MaxTTL: 86400 # in seconds
           MinTTL: 60 # in seconds
-          TargetOriginId: s3origin
+          TargetOriginId: static
           ViewerProtocolPolicy: !If
             - ShouldCreateCert
             - 'redirect-to-https'
             - 'allow-all'
           LambdaFunctionAssociations:
             - EventType: 'origin-request'
-              LambdaFunctionARN: !Ref StandardRedirectsForCloudFront
+              LambdaFunctionARN: !Ref StandardRedirectsForCloudFront.Version
+        CacheBehaviors: #second the behavior for the API Gateway
+          - AllowedMethods: #allow all method for the backend to implement
+              - GET
+              - HEAD
+              - OPTIONS
+            CachedMethods: #cache only on get requests
+              - GET
+              - HEAD
+              - OPTIONS
+            Compress: true
+            ForwardedValues:
+              Headers: #define explicit headers, since API Gateway doesn't work otherwise
+                - Accept
+                - Referer
+                - Authorization
+                - Content-Type
+              QueryString: true #to transfer get parameters to the gateway
+            PathPattern: "/SQLForwarder/*" #path pattern after the Gateway stage identifier.
+            TargetOriginId: api #id of the origin
+            ViewerProtocolPolicy: https-only #API Gateway only support https
         DefaultRootObject: 'index.html'
         Enabled: true
         HttpVersion: http2
         Origins:
           - DomainName: !GetAtt 'S3Bucket.DomainName'
-            Id: s3origin
+            Id: static
             S3OriginConfig:
               OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${CloudFrontOriginAccessIdentity}'
+          - DomainName: #define the API Gateway origin
+              Fn::Join:
+                - ""
+                - - Ref: SQLForwarderApi
+                  - ".execute-api."
+                  - Ref: AWS::Region
+                  - ".amazonaws.com"
+              Id: api
+              CustomOriginConfig:
+                OriginProtocolPolicy: https-only
+
         PriceClass: 'PriceClass_All'
 
   # Set up A Record via Route 53
@@ -543,6 +580,9 @@ Resources:
     Properties:
       DomainName: !Ref Domain
       ValidationMethod: DNS
+      DomainValidationOptions:
+        - DomainName: !Ref Domain
+          HostedZoneId: !Ref HostedZoneID
 
   # Create an IAM user with Access Keys to enable automated deployment of the website to this bucket
   PublishUser:
