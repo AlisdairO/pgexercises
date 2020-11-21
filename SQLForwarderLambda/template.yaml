@@ -209,7 +209,7 @@ Resources:
             Action:
               - "s3:PutObject"
             Resource:
-              - !Sub "arn:aws:s3:::cloudformation-waitcondition-${AWS::Region}/*"
+              - !Sub "arn:aws:s3:::cloudformation-custom-resource-response-${AWS::Region}/*"
       RouteTableIds:
         - !Ref privateRouteTable
       ServiceName: !Sub 'com.amazonaws.${AWS::Region}.s3'
