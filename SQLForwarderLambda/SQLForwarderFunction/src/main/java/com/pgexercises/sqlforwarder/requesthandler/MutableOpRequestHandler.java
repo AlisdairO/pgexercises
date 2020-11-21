@@ -176,7 +176,11 @@ public class MutableOpRequestHandler implements RequestHandler {
         }
 
         private boolean haveConnectionsAgedOut() {
-            return TimeUnit.MINUTES.convert((System.nanoTime() - lastResetTime), TimeUnit.NANOSECONDS) > 180;
+            boolean agedOut = TimeUnit.HOURS.convert((System.nanoTime() - lastResetTime), TimeUnit.NANOSECONDS) > 12;
+            if (agedOut) {
+                System.out.println("Connections have aged out. Closing as long running management transactions can impact database health");
+            }
+            return agedOut;
         }
     }
 }

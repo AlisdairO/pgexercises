@@ -204,13 +204,12 @@ Resources:
       PolicyDocument:
         Version: 2012-10-17
         Statement:
-          # TODO RESTRICT THIS
           - Effect: Allow
-            Principal: '*'
+            Principal: "*"
             Action:
-              - '*'
+              - "s3:PutObject"
             Resource:
-              - '*'
+              - !Sub "arn:aws:s3:::cloudformation-waitcondition-${AWS::Region}/*"
       RouteTableIds:
         - !Ref privateRouteTable
       ServiceName: !Sub 'com.amazonaws.${AWS::Region}.s3'
@@ -477,11 +476,6 @@ Resources:
       Timeout: 3
       AutoPublishAlias: live
 
-#  StandardRedirectsForCloudFrontV2:
-#    Type: 'AWS::Lambda::Version'
-#    Properties:
-#      FunctionName: !Ref StandardRedirectsForCloudFront
-
   # Configure the bucket as a CloudFront Origin and grant access via the access identity
   CloudFrontDistribution:
     Type: 'AWS::CloudFront::Distribution'
@@ -538,12 +532,13 @@ Resources:
                 - Authorization
                 - Content-Type
               QueryString: true #to transfer get parameters to the gateway
-            PathPattern: "/SQLForwarder/*" #path pattern after the Gateway stage identifier.
+            PathPattern: "/SQLForwarder*" #path pattern after the Gateway stage identifier.
             TargetOriginId: api #id of the origin
             ViewerProtocolPolicy: https-only #API Gateway only support https
         DefaultRootObject: 'index.html'
         Enabled: true
         HttpVersion: http2
+        PriceClass: 'PriceClass_All'
         Origins:
           - DomainName: !GetAtt 'S3Bucket.DomainName'
             Id: static
@@ -556,11 +551,11 @@ Resources:
                   - ".execute-api."
                   - Ref: AWS::Region
                   - ".amazonaws.com"
-              Id: api
-              CustomOriginConfig:
-                OriginProtocolPolicy: https-only
+            Id: api
+            OriginPath: !Join ["", ["/", !Ref "SQLForwarderApi.Stage"]]
+            CustomOriginConfig:
+              OriginProtocolPolicy: https-only
 
-        PriceClass: 'PriceClass_All'
 
   # Set up A Record via Route 53
   Route53Record:
@@ -602,9 +597,6 @@ Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  SQLForwarderApi:
-    Description: "API Gateway endpoint URL for Prod stage for SQLForwarder function"
-    Value: !Sub "https://${SQLForwarderApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
   SQLForwarderFunction:
     Description: "Hello World Lambda Function ARN"
     Value: !GetAtt SQLForwarderFunction.Arn

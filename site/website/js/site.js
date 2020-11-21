@@ -300,7 +300,7 @@ function query(str) {
 	var table = $("#yourresultstable");
 	table.empty();
 	window.setTimeout(function() {
-		$.get("/SQLForwarder/SQLForwarder", {query:str, writeable:is_writeable, tableToReturn:table_to_return}, function(data) {
+		$.get("/SQLForwarder", {query:str, writeable:is_writeable, tableToReturn:table_to_return}, function(data) {
 			//empty the error field, and fill the table with the JSON-formatted results!
 			$("#yourresultserror").hide();
 
