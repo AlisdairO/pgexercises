@@ -24,6 +24,8 @@ public class SQLForwarder implements RequestHandler<APIGatewayProxyRequestEvent,
     // initialising here makes a LARGE difference in cold start time.
     //
     // Arguably I ought to write all this stuff in something quick to init like Rust...
+    // TODO establish management connection simultaneously in separate thread. Could ALSO optimistically connect
+    // to a random number writer DB and fall back to search if that fails...
     private static volatile RequestHandlerManager requestHandlerManager;
     static {
         try {
