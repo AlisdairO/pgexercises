@@ -21,8 +21,10 @@ public class RequestHandlerManager {
         // TODO switch to request-on-demand, allows us to determine the writer data source correctly when needed
         mutableOpRequestHandler = new MutableOpRequestHandler(mutableUserSource, mutableAdminSource, managementSource, envInfo);
         immutableOpRequestHandler = new ImmutableOpRequestHandler(immutableUserSource);
+        mutableOpRequestHandler.initPreWarm();
         // pre-warms the connection for immutable queries, which are the overwhelming majority
         immutableOpRequestHandler.performQuery(new RequestData("select 1"));
+        mutableOpRequestHandler.waitOnInit();
     }
 
     public synchronized @Nullable QueryResponse handleRequest(RequestData reqData) throws PGEInternalErrorException, PGEUserException {

@@ -209,7 +209,14 @@ Resources:
             Action:
               - "s3:PutObject"
             Resource:
-              - !Sub "arn:aws:s3:::cloudformation-custom-resource-response-${AWS::Region}/*"
+              !Sub
+                - "arn:aws:s3:::cloudformation-custom-resource-response-${StrippedRegion}/*"
+                - StrippedRegion:
+                    Fn::Join:
+                      - ''
+                      - Fn::Split:
+                          - '-'
+                          - !Ref AWS::Region
       RouteTableIds:
         - !Ref privateRouteTable
       ServiceName: !Sub 'com.amazonaws.${AWS::Region}.s3'
@@ -420,6 +427,7 @@ Resources:
           adminPassSecretName: !Ref RDSAdminPasswordSecret
           userPassSecretName: !Ref RDSUserPasswordSecret
           writeableDbCount: 100
+          JAVA_TOOL_OPTIONS: -Xlog:gc+metaspace,gc+heap,gc:stdout:time,tags
 
   # Wire up the lambda function LambdaRDSCFNInit to execute on stack create, update or delete
   PGExercisesDbInitTrigger:
@@ -430,6 +438,7 @@ Resources:
 
   S3Bucket:
     Type: 'AWS::S3::Bucket'
+    DeletionPolicy: Retain
 
   # Create a CloudFront Access Identity to broker access to the bucket
   CloudFrontOriginAccessIdentity:
@@ -569,13 +578,25 @@ Resources:
         HostedZoneId: Z2FDTNDATAQYW2 # This Zone ID is used for any CloudFront Distribution
         DNSName: !GetAtt 'CloudFrontDistribution.DomainName'
 
+  Route53RecordWWW:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: !Sub 'www.${Domain}'
+      Type: A
+      AliasTarget:
+        HostedZoneId: Z2FDTNDATAQYW2 # This Zone ID is used for any CloudFront Distribution
+        DNSName: !GetAtt 'CloudFrontDistribution.DomainName'
+
   # Set up TLS Cert
   Cert:
     Condition: ShouldCreateCert
     Type: 'AWS::CertificateManager::Certificate'
     Properties:
-      DomainName: !Ref Domain
+      DomainName: !Sub '*.${Domain}'
       ValidationMethod: DNS
+      SubjectAlternativeNames:
+        - !Ref Domain
       DomainValidationOptions:
         - DomainName: !Ref Domain
           HostedZoneId: !Ref HostedZoneID

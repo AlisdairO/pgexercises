@@ -14,13 +14,36 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
+// TODO refactor the handling of 'connection': this used to be a
+// base non-future-y connection, but since switching to async
+// initialisation the internal handling is a bit messy
 public class CacheableConnection {
-    private @Nullable BaseConnection connection;
+    private @Nullable Future<BaseConnection> connection;
     private final DbSource dbSource;
 
     public CacheableConnection(DbSource dbSource) {
         this.dbSource = dbSource;
+        connection = createConnectionAsync(dbSource);
+    }
+
+    private static Future<BaseConnection> createConnectionAsync(DbSource dbSource) {
+        ExecutorService executor = Executors.newFixedThreadPool(1);
+        Callable<BaseConnection> task = () -> {
+            String dbUrl = dbSource.getUri().toString() + "/" + dbSource.getDatabase();
+            System.out.println("Initialising connection to: " + dbUrl);
+            BaseConnection conn = (BaseConnection) DriverManager.getConnection(dbUrl,
+                    dbSource.getUser(),
+                    dbSource.getPassword());
+            System.out.println("Done initialising connection: " + dbUrl);
+            return conn;
+        };
+        return executor.submit(task);
     }
 
     public synchronized void closeConnection() throws PGEInternalErrorException {
@@ -28,21 +51,23 @@ public class CacheableConnection {
             return;
         }
 
-        Connection c = connection;
+        Future<BaseConnection> c = connection;
         connection = null;
         try {
-            c.close();
-        } catch (SQLException e) {
+            c.get().close();
+        } catch (SQLException | InterruptedException | ExecutionException e) {
             throw new PGEInternalErrorException("Couldn't close connection", e);
         }
     }
 
+
     public synchronized void resetConnectionForPooling() throws PGEInternalErrorException {
-        if (connection == null) {
+        Connection conn = getExistingConnection();
+        if (conn == null) {
             return;
         }
 
-        try (Statement s = connection.createStatement()) {
+        try (Statement s = conn.createStatement()) {
             s.execute("ROLLBACK; DISCARD ALL;");
         } catch (SQLException e) {
             closeConnection();
@@ -50,24 +75,34 @@ public class CacheableConnection {
         }
     }
 
-    private synchronized BaseConnection getConnection() throws PGEInternalErrorException {
+    private synchronized BaseConnection getOrCreateConnection() throws PGEInternalErrorException {
         ensureConnectionValidity();
-        if (connection == null) {
-            try {
-                connection = (BaseConnection) DriverManager.getConnection(dbSource.getUri().toString() + "/" + dbSource.getDatabase(),
-                        dbSource.getUser(),
-                        dbSource.getPassword());
-            } catch (SQLException e) {
-                throw new PGEInternalErrorException("Couldn't create connection", e);
+        try {
+            if (connection == null) {
+                connection = createConnectionAsync(dbSource);
             }
+            return connection.get();
+        } catch (ExecutionException | InterruptedException e) {
+            throw new PGEInternalErrorException("Couldn't create connection", e);
         }
-        return connection;
+    }
+
+    private synchronized @Nullable BaseConnection getExistingConnection() throws PGEInternalErrorException {
+        if (connection == null) {
+            return null;
+        }
+        try {
+            return connection.get();
+        } catch (ExecutionException | InterruptedException e) {
+            throw new PGEInternalErrorException("Couldn't create connection", e);
+        }
     }
 
     private synchronized void ensureConnectionValidity() throws PGEInternalErrorException {
-        if (connection != null) {
+        Connection conn = getExistingConnection();
+        if (conn != null) {
             try {
-                executeInternal("select 1", connection);
+                executeInternal("select 1", conn);
             } catch (Exception e) {
                 closeConnection();
             }
@@ -75,14 +110,17 @@ public class CacheableConnection {
     }
 
     public synchronized @Nullable QueryResponse execute(String sql) throws SQLException, PGEUserException, PGEInternalErrorException {
-        return executeInternal(sql, getConnection());
+        return executeInternal(sql, getOrCreateConnection());
     }
 
     private synchronized @Nullable QueryResponse executeInternal(String sql, Connection conn) throws SQLException, PGEUserException {
+        System.out.println("EXEC Q: " + sql);
         try (Statement s = conn.createStatement()) {
             if (s.execute(sql)) {
                 try (ResultSet rs = s.getResultSet()) {
-                    return new QueryResponse(rs);
+                    QueryResponse qr = new QueryResponse(rs);
+                    System.out.println("DONE EXEC Q: " + sql);
+                    return qr;
                 }
             } else {
                 return null;
@@ -91,15 +129,19 @@ public class CacheableConnection {
     }
 
     public synchronized void executeUpdateInternal(String sql) throws PGEInternalErrorException {
-        try (Statement s = getConnection().createStatement()) {
+        System.out.println("Start exec U");
+        try (Statement s = getOrCreateConnection().createStatement()) {
+            System.out.println("EXEC U: " + sql);
             s.executeUpdate(sql);
+            System.out.println("DONE EXEC U: " + sql);
         } catch (SQLException e) {
             throw new PGEInternalErrorException(e.getMessage(), e);
         }
     }
 
     public synchronized void doCopyIn(String copyStr, String data) throws SQLException, PGEInternalErrorException {
-        CopyManager copyManager = new CopyManager(getConnection());
+        System.out.println("COPY IN");
+        CopyManager copyManager = new CopyManager(getOrCreateConnection());
         CopyIn copyIn = copyManager.copyIn(copyStr);
 
         try {
@@ -111,12 +153,18 @@ public class CacheableConnection {
                 copyIn.cancelCopy();
             }
         }
+        System.out.println("DONE COPY IN");
     }
 
-    public synchronized boolean isTransactionActive() {
-        if (connection == null) {
+    public synchronized boolean isTransactionActive() throws PGEInternalErrorException {
+        BaseConnection conn = getExistingConnection();
+        if (conn == null) {
             return false;
         }
-        return connection.getTransactionState() == TransactionState.OPEN;
+        return conn.getTransactionState() == TransactionState.OPEN;
+    }
+
+    public synchronized void waitOnInit() throws PGEInternalErrorException {
+        this.ensureConnectionValidity();
     }
 }

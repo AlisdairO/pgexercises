@@ -39,6 +39,11 @@ public class DbInitializer {
         }
     }
 
+    // Doesn't do anything. This is to allow for loading the class to trigger static initialisation.
+    public static void warmClass() {
+
+    }
+
     private static void createUnprivilegedUser(CacheableConnection adminConnection, DbEnvInfo dbEnvInfo) throws SQLException, PGEInternalErrorException {
         adminConnection.executeUpdateInternal(dbEnvInfo.replaceEnvInfoInSql(createUnprivilegedUser, null));
     }

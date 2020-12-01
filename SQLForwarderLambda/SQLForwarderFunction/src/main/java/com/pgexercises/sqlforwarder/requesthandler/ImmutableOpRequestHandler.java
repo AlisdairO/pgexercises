@@ -30,6 +30,10 @@ public class ImmutableOpRequestHandler implements RequestHandler {
 
     @Override
     public synchronized void cleanupAfterQuery() throws PGEInternalErrorException {
+        // check each of the connections has finished initialising, so we don't end up
+        // freezing the lambda with connections in some half-initialised state, since who knows
+        // what would happen then...
+        connection.waitOnInit();
         connection.resetConnectionForPooling();
     }
 

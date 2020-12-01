@@ -11,6 +11,7 @@ import com.pgexercises.sqlforwarder.RequestData;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.sql.SQLException;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class MutableOpRequestHandler implements RequestHandler {
@@ -18,18 +19,24 @@ public class MutableOpRequestHandler implements RequestHandler {
     private final ConnectionOwner connectionOwner;
     private final DbEnvInfo envInfo;
 
-
-    public MutableOpRequestHandler(DbSource baseUserDbSource, DbSource baseAdminDbSource, DbSource managementConnectionSource, DbEnvInfo envInfo) {
-        this.connectionOwner = new ConnectionOwner(baseUserDbSource, baseAdminDbSource, managementConnectionSource);
+    public MutableOpRequestHandler(DbSource baseUserDbSource, DbSource baseAdminDbSource, DbSource managementConnectionSource, DbEnvInfo envInfo) throws PGEUserException, PGEInternalErrorException {
+        this.connectionOwner = new ConnectionOwner(baseUserDbSource, baseAdminDbSource, managementConnectionSource, envInfo.getWriteableDbCount());
         this.envInfo = envInfo;
+    }
+
+    public synchronized void initPreWarm() throws PGEUserException, PGEInternalErrorException {
+        DbInitializer.warmClass();
+        connectionOwner.initConnections();
     }
 
     @Override
     public synchronized @Nullable QueryResponse performQuery(RequestData requestData) throws PGEInternalErrorException, PGEUserException {
+        System.out.println("perform query");
         QueryResponse result;
         try {
             result = connectionOwner.getUserConnection().execute(requestData.getQuery());
             if (result == null) {
+                connectionOwner.getUserConnection().resetConnectionForPooling();
                 result = connectionOwner.getUserConnection().execute("select * from " + requestData.getTableToReturn() + " order by 1");
                 if (result == null) {
                     throw new PGEInternalErrorException("Null result set for " + requestData.getTableToReturn());
@@ -52,13 +59,25 @@ public class MutableOpRequestHandler implements RequestHandler {
         }
     }
 
+    public synchronized void waitOnInit() throws PGEInternalErrorException {
+        System.out.println("wait on init");
+        // check each of the connections has finished initialising, so we don't end up
+        // freezing the lambda with connections in some half-initialised state, since who knows
+        // what would happen then...
+        connectionOwner.getManagementConnection().waitOnInit();
+        connectionOwner.getAdminConnection().waitOnInit();
+        connectionOwner.getUserConnection().waitOnInit();
+        System.out.println("done wait on init");
+    }
+
     @Override
     public synchronized void preCheck() throws PGEInternalErrorException, PGEUserException {
         connectionOwner.validateConnections();
         resetDb();
     }
 
-    private void resetDb() throws PGEInternalErrorException {
+    private synchronized void resetDb() throws PGEInternalErrorException {
+        System.out.println("Reset DB");
         DbInitializer.resetDb(connectionOwner.getAdminConnection(), envInfo, false, connectionOwner.getWriteableDbOffset(), true);
     }
 
@@ -68,13 +87,15 @@ public class MutableOpRequestHandler implements RequestHandler {
         private final CacheableConnection managementConnection;
         private final DbSource baseUserDbSource;
         private final DbSource baseAdminDbSource;
+        private final int writeableDbCount;
         private int writeableDb;
         private long lastResetTime = System.nanoTime();
 
-        ConnectionOwner(DbSource baseUserDbSource, DbSource baseAdminDbSource, DbSource managementConnectionSource) {
+        ConnectionOwner(DbSource baseUserDbSource, DbSource baseAdminDbSource, DbSource managementConnectionSource, int writeableDbCount) throws PGEUserException, PGEInternalErrorException {
             this.managementConnection = new CacheableConnection(managementConnectionSource);
             this.baseUserDbSource = baseUserDbSource;
             this.baseAdminDbSource = baseAdminDbSource;
+            this.writeableDbCount = writeableDbCount;
             this.writeableDb = -1;
         }
 
@@ -106,18 +127,66 @@ public class MutableOpRequestHandler implements RequestHandler {
                     || !getManagementConnection().isTransactionActive()
                     || writeableDb == -1
                     || haveConnectionsAgedOut()) {
-                closeConnections();
-                writeableDb = reserveWriteableDb(getManagementConnection());
-                userConnection = new CacheableConnection(baseUserDbSource.withDbOffset(writeableDb));
-                adminConnection = new CacheableConnection(baseAdminDbSource.withDbOffset(writeableDb));
-                lastResetTime = System.nanoTime();
+                System.out.println(String.format("UserConnection null? : %b, adminConnection null? : %b" +
+                        "Management connection tran active? : %b, writeableDb: %d, connections aged out? : %b",
+                        userConnection == null, adminConnection == null, getManagementConnection().isTransactionActive(),
+                        writeableDb, haveConnectionsAgedOut()));
+                closeAllConnections();
+                initConnections();
             }
 
             try {
+                System.out.println("Checking user connection");
                 checkConnection(getUserConnection());
             } finally {
+                System.out.println("Checking admin connection");
                 checkConnection(getAdminConnection());
             }
+            System.out.println("Done checking connections");
+        }
+
+        public synchronized void initConnections() throws PGEUserException, PGEInternalErrorException {
+            // Connection initialisation is a little complicated, because to compensate for the
+            // fact that we have to init frequently in a lambda environment, (even with provisioned
+            // concurrency) we want to do everything
+            // in parallel during the lambda init phase (where we get more CPU shares). As a result
+            // we pick a writeable DB in advance and hope it's free. In most cases it will be, but
+            // if it's not we close the connection and go through the slow path where we lock the db
+            // first then do connection init.
+            //
+            // This would be much simpler if there was some ability to do processing-after-return in Lambda.
+            // Mutable operations are the exception in PGExercises, so in an ideal case we'd make the
+            // following approach:
+            // - receive request
+            // - greedily init the immutable connection
+            // - start initing the mutable connections on another thread
+            // - process request and return
+            // - finish initing mutable connections
+            //
+            // Sadly this doesn't work, so we're left with a choice between forcing init of all connections
+            // before return, or giving a poor/slow experience on mutable requests. For now we're seeing if
+            // we can make option 1 fast enough.
+            //
+            // TODO: connection establishment is weirdly slow, should investigate...
+            int desiredWriteableDb = getRandomDbNumber();
+            try {
+                userConnection = new CacheableConnection(baseUserDbSource.withDbOffset(desiredWriteableDb));
+                adminConnection = new CacheableConnection(baseAdminDbSource.withDbOffset(desiredWriteableDb));
+                writeableDb = reserveWriteableDb(getManagementConnection(), desiredWriteableDb);
+                if (writeableDb != desiredWriteableDb) {
+                    closeWriteableDbConnections();
+                    userConnection = new CacheableConnection(baseUserDbSource.withDbOffset(writeableDb));
+                    adminConnection = new CacheableConnection(baseAdminDbSource.withDbOffset(writeableDb));
+                }
+            } catch (PGEUserException | PGEInternalErrorException e) {
+                closeAllConnections();
+                throw e;
+            }
+            lastResetTime = System.nanoTime();
+        }
+
+        private int getRandomDbNumber() {
+            return new Random().nextInt(writeableDbCount) + 1;
         }
 
         private synchronized void checkConnection(CacheableConnection connection) throws PGEInternalErrorException {
@@ -129,42 +198,49 @@ public class MutableOpRequestHandler implements RequestHandler {
             }
         }
 
-        private synchronized void closeConnections() throws PGEInternalErrorException {
+        private synchronized void closeAllConnections() throws PGEInternalErrorException {
             System.out.println("Closing connections for mutable request handler");
+            try {
+                closeWriteableDbConnections();
+            } finally {
+                try {
+                    managementConnection.execute("ROLLBACK");
+                } catch (PGEUserException | SQLException e) {
+                    throw new PGEInternalErrorException("couldn't rollback management tran", e);
+                } finally {
+                    managementConnection.closeConnection();
+                }
+            }
+        }
+
+        private synchronized void closeWriteableDbConnections() throws PGEInternalErrorException {
             writeableDb = -1;
             CacheableConnection userC = userConnection;
             CacheableConnection adminC = adminConnection;
             userConnection = null;
             adminConnection = null;
-            // TODO pyramid lol
             try {
                 if (userC != null) {
                     userC.closeConnection();
                 }
             } finally {
-                try {
-                    if (adminC != null) {
-                        adminC.closeConnection();
-                    }
-                } finally {
-                    try {
-                        managementConnection.execute("ROLLBACK");
-                    } catch (PGEUserException | SQLException e) {
-                        throw new PGEInternalErrorException("couldn't rollback management tran", e);
-                    } finally {
-                        managementConnection.closeConnection();
-                    }
+                if (adminC != null) {
+                    adminC.closeConnection();
                 }
+
             }
         }
 
-        private synchronized int reserveWriteableDb(CacheableConnection managementConnection) throws PGEUserException, PGEInternalErrorException {
-            QueryResponse lockedId;
-            try {
-                managementConnection.execute("BEGIN");
-                lockedId = managementConnection.execute("SELECT lock_id FROM mgmt.lock_list FOR UPDATE SKIP LOCKED LIMIT 1");
-            } catch (SQLException e) {
-                throw new PGEInternalErrorException("Couldn't lock writeable DB due to error", e);
+        private synchronized int reserveWriteableDb(CacheableConnection managementConnection, int desiredDb) throws PGEUserException, PGEInternalErrorException {
+            // Attempt to lock a database we've optimistically selected first. This allows
+            // us to initialise all the connections we want simultaneously if it works out
+            // (which it generally does).
+            System.out.println("Optimistically locking writeable DB with ID: " + desiredDb);
+            QueryResponse lockedId = lockWriteableDb(managementConnection, desiredDb);
+
+            if (lockedId == null || lockedId.getSingleValue() == null) {
+                System.out.println("Failed optimistic lock, falling back to a general search");
+                lockedId = lockWriteableDb(managementConnection, null);
             }
 
             String value = lockedId == null || lockedId.getSingleValue() == null ? null : lockedId.getSingleValue();
@@ -173,6 +249,28 @@ public class MutableOpRequestHandler implements RequestHandler {
                 throw new PGEUserException("PGExercises is overloaded right now: please retry");
             }
             return Integer.parseInt(value);
+        }
+
+        private synchronized @Nullable QueryResponse lockWriteableDb(CacheableConnection managementConnection, @Nullable Integer dbOffset) throws PGEInternalErrorException {
+            String sql;
+            if (dbOffset == null) {
+                sql = "SELECT lock_id FROM mgmt.lock_list FOR UPDATE SKIP LOCKED LIMIT 1";
+            } else {
+                sql = "SELECT lock_id FROM mgmt.lock_list WHERE lock_id = " + dbOffset + " FOR UPDATE SKIP LOCKED";
+            }
+
+            try {
+                managementConnection.execute("BEGIN");
+                return managementConnection.execute(sql);
+            } catch (SQLException | PGEUserException e) {
+                try {
+                    managementConnection.execute("ROLLBACK");
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                    managementConnection.closeConnection();
+                }
+                throw new PGEInternalErrorException("Couldn't lock writeable DB. Desired db was: " + dbOffset);
+            }
         }
 
         private boolean haveConnectionsAgedOut() {

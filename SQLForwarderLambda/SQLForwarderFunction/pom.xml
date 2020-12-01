@@ -86,6 +86,9 @@
         </dependency>
     </dependencies>
 
+    <!-- TODO consider graal native-image eg https://github.com/vertx-howtos/aws-native-image-lambda-howto/blob/master/aws-lambda-vertx-runtime/pom.xml -->
+    <!-- https://aws.amazon.com/blogs/architecture/field-notes-optimize-your-java-application-for-aws-lambda-with-quarkus/ -->
+    <!-- https://github.com/aws-samples/aws-quarkus-demo/tree/master/lambda -->
     <build>
       <plugins>
           <plugin>

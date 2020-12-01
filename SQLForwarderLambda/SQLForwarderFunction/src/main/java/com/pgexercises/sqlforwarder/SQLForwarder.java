@@ -18,14 +18,12 @@ import java.util.Map;
  * Handler for requests to Lambda function.
  */
 public class SQLForwarder implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
-
     // RequestHandlerManager is statically initialized because Lambda performance: during the init period,
     // Lambdas get larger CPU shares. The AWS SDK and JDBC libs have nontrivial initialisation costs, and
     // initialising here makes a LARGE difference in cold start time.
     //
-    // Arguably I ought to write all this stuff in something quick to init like Rust...
-    // TODO establish management connection simultaneously in separate thread. Could ALSO optimistically connect
-    // to a random number writer DB and fall back to search if that fails...
+    // Arguably I ought to write all this stuff in something quick to init like Rust. More likely
+    // is that I'll build a Graal native-image version :-)
     private static volatile RequestHandlerManager requestHandlerManager;
     static {
         try {

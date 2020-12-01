@@ -5,6 +5,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import software.amazon.awssdk.regions.Region;
 
 import java.net.URI;
+import java.util.regex.Matcher;
 
 public class DbEnvInfo {
     private final URI jdbcURI;
@@ -94,23 +95,26 @@ public class DbEnvInfo {
     }
 
     public String replaceEnvInfoInSql(String sql, @Nullable Integer dbNameOffset, boolean suppressLogging) {
+        System.out.println("Replace env info start");
         if (!suppressLogging) {
             System.out.println("ENVINFO: " + this.toString());
             System.out.println("---- SQL-BEFORE BEGIN ----\n: " + sql + "---- SQL-BEFORE END ----\n");
         }
         // admin password intentionally left out, if we're ever pasting that
         // into SQL we're doing something wrong.
-        String after = sql.replaceAll("<DBNAME>", baseDbName + (dbNameOffset == null ? "" : dbNameOffset.toString()))
-                .replaceAll("<REGION>", region.toString())
-                .replaceAll("<USER>", unprivilegedUser)
-                .replaceAll("<ADMINUSER>", adminUser)
-                .replaceAll("<ADMINDB>", adminDbName)
+        String after =
+                sql.replaceAll("<DBNAME>", Matcher.quoteReplacement(baseDbName + (dbNameOffset == null ? "" : dbNameOffset.toString())))
+                .replaceAll("<REGION>", Matcher.quoteReplacement(region.toString()))
+                .replaceAll("<USER>", Matcher.quoteReplacement(unprivilegedUser))
+                .replaceAll("<ADMINUSER>", Matcher.quoteReplacement(adminUser))
+                .replaceAll("<ADMINDB>", Matcher.quoteReplacement(adminDbName))
                 .replaceAll("<WRITEABLE_DB_COUNT>", Integer.toString(writeableDbCount))
-                .replaceAll("<PASSWORD>", unprivilegedUserPassword);
+                .replaceAll("<PASSWORD>", Matcher.quoteReplacement(unprivilegedUserPassword));
 
         if (!suppressLogging) {
             System.out.println("\n---- SQL-AFTER BEGIN ----\n: " + after + "---- SQL-AFTER END ----\n");
         }
+        System.out.println("Replace env info end");
         return after;
     }
 
