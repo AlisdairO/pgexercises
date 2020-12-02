@@ -536,6 +536,9 @@ Resources:
               - HEAD
               - OPTIONS
             Compress: true
+            MaxTTL: 0
+            MinTTL: 0
+            DefaultTTL: 0
             ForwardedValues:
               Headers: #define explicit headers, since API Gateway doesn't work otherwise
                 - Accept
