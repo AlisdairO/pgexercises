@@ -493,6 +493,7 @@ Resources:
       DistributionConfig:
         Aliases:
           - !Ref Domain
+          - !Sub 'www.${Domain}'
         ViewerCertificate:
           AcmCertificateArn: !Ref Cert
           SslSupportMethod: 'sni-only'
