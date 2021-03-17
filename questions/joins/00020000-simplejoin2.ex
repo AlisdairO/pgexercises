@@ -15,7 +15,7 @@ select bks.starttime as start, facs.name as name
 order by bks.starttime;
 |ANSWER|
 <p>This is another <c>INNER JOIN</c> query, although it has a fair bit more complexity in it!  The <c>FROM</c> part of the query is easy - we're simply joining facilities and bookings tables together on the facid.  This produces a table where, for each row in bookings, we've attached detailed information about the facility being booked.</p>
-<p>On to the <c>WHERE</c> component of the query.  The checks on starttime are fairly self explanatory - we're making sure that all the bookings start between the specified dates.  Since we're only interested in tennis courts, we're also using the <c>IN</c> operator to tell the database system to only give us back facility named 'Tennis Court 2' or 'Tennis Court 1'.  There's other ways to express this: We could have used <c>where facs.facid = 0 or facs.facid = 1</c>, or even <c>where facs.name like 'Tennis%'</c>.</p>
+<p>On to the <c>WHERE</c> component of the query.  The checks on starttime are fairly self explanatory - we're making sure that all the bookings start between the specified dates.  Since we're only interested in tennis courts, we're also using the <c>IN</c> operator to tell the database system to only give us back facilities named 'Tennis Court 2' or 'Tennis Court 1'.  There's other ways to express this: We could have used <c>where facs.facid = 0 or facs.facid = 1</c>, or even <c>where facs.name like 'Tennis%'</c>.</p>
 <p>The rest is pretty simple: we <c>SELECT</c> the columns we're interested in, and <c>ORDER BY</c> the start time.</p>
 |HINT|
 This is another <c>INNER JOIN</c>. You may also want to think about using the <c>IN</c> or <c>LIKE</c> operators to limit the results you get back.
