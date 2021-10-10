@@ -3,7 +3,8 @@ Return a count of bookings for each month
 |QUESTION|
 Return a count of bookings for each month, sorted by month
 |QUERY|
-select date_trunc('month', starttime) as month, count(*)
+select date_trunc('month', starttime) as month,
+        sum(slots)
 	from cd.bookings
 	group by month
 	order by month
