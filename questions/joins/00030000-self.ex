@@ -1,7 +1,7 @@
 |QUESTIONNAME|
-Produce a list of all members who have recommended another member
+Produce a list of all members who were recommended by another member
 |QUESTION|
-How can you output a list of all members who have recommended another member?  Ensure that there are no duplicates in the list, and that results are ordered by (surname, firstname).
+How can you output a list of all members who were recommended by another member?  Ensure that there are no duplicates in the list, and that results are ordered by (surname, firstname).
 |QUERY|
 select distinct recs.firstname as firstname, recs.surname as surname
 	from 
