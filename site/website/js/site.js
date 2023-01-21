@@ -337,6 +337,16 @@ function query(str) {
 
 				$("#youranswertickspan").empty();
 				$("#youranswertickspan").append($('<img class="youranswertick" src="../../assets/tick2.svg">'));
+				
+				//After correct answer, automatically scroll down to discussions 
+				let scrollTimeInMillis = 800;
+				let finalElementId = 'querydiv';
+				setTimeout(() => {
+					document.getElementById(finalElementId)?.scrollIntoView(
+						{behavior: 'smooth'}
+					);
+				}, scrollTimeInMillis)
+
 			} else {
 				$("#youranswertickspan").empty();
 				$("#youranswertickspan").append($('<img class="youranswertick" src="../../assets/cross.svg">'));
