@@ -105,16 +105,34 @@ function initCodeMirror() {
 		autofocus: false,
 		viewportMargin: Infinity,
 		onKeyEvent: function(cm, e) {
-			if(e.altKey && e.type == "keydown") {
+			if((e.ctrlKey || e.altKey) && e.type == "keydown") {
 				e.preventDefault();
+
+				//Parse the chosen option
+				const keyPressed = {
+					X : (e.which == 88),
+					R : (e.which == 82),
+					H : (e.which == 72),
+					S : (e.which == 83),
+					ENTER : (e.which == 13),
+					ALT : e.altKey,
+					CTRL : e.ctrlKey
+				} 
+				let runSelected = (keyPressed.ALT && keyPressed.X);
+				let runEverything = (keyPressed.ALT && keyPressed.R);
+				let toggleHelp = (keyPressed.ALT && keyPressed.H);
+				let runNearCursor = (keyPressed.ALT && keyPressed.S) || (keyPressed.CTRL && keyPressed.ENTER);
+
+				//Execute the chosen option
 				var queryStr = "";
-				if(e.which == 88) { //alt-x run selected
+				if(runSelected) {
 					queryStr = editor.getSelection();
-				} else if (e.which == 82) { //alt-r, run everything
+				} else if (runEverything) { 
 					queryStr = editor.getValue();
-				} else if(e.which == 72) { // alt-h, show/hide help
+				} else if(toggleHelp) {
 					help();
-				} else if (e.which == 83) { //alt-s run 'near cursor' - a best effort to find a queryStr near the cursor
+				} else if (runNearCursor) { //alt-s or ctrl-enter run 'near cursor' 
+					//a best effort to find a queryStr near the cursor
 					//queries can be bounded by semicolons or empty lines.
 					//doesn't handle semicolons in quotes - but none of our questions
 					//require those, so not bothering for now.  TODO?
