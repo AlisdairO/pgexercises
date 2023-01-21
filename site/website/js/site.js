@@ -339,7 +339,7 @@ function query(str) {
 				$("#youranswertickspan").append($('<img class="youranswertick" src="../../assets/tick2.svg">'));
 				
 				//After correct answer, automatically scroll down to discussions 
-				let scrollTimeInMillis = 800;
+				let scrollTimeInMillis = 2000;
 				let finalElementId = 'querydiv';
 				setTimeout(() => {
 					document.getElementById(finalElementId)?.scrollIntoView(
