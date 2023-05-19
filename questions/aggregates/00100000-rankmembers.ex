@@ -32,6 +32,34 @@ select firstname, surname, hours, rank() over (order by hours desc) from
 order by rank, surname, firstname;
 </sql>
 
+|ANSWER|
+<p> Another way to answer this question is using the rounding function and by setting it to -1 the sum is rounded to the nearest 10.
+<p> You can also set the type to int if you'd like but it isn't needed.
+
+<sql>
+with t1 as
+(
+SELECT
+    b.memid
+    ,round(sum(b.slots)/2,-1)::int as hours
+    ,RANK() OVER (order by round(sum(b.slots)/2,-1) desc) as rank
+FROM cd.bookings as b
+inner join cd.members as m on b.memid=m.memid
+GROUP BY b.memid
+)
+
+select
+	 m.firstname
+	,m.surname
+	,t1.hours
+	,t1.rank
+from t1
+inner join cd.members as m on t1.memid = m.memid
+order by t1.rank asc
+<sql>
+
+
+
 |HINT|
 You'll need the <c>RANK</c> window function again.  You can use integer arithmetic to accomplish rounding.
 |SORTED|
