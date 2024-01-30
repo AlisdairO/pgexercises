@@ -14,12 +14,15 @@ update cd.facilities facs
 <p>As the number of columns we want to update increases, standard SQL can start to get pretty awkward: you don't want to be specifying a separate subquery for each of 15 different column updates. Postgres provides a nonstandard extension to SQL called <c>UPDATE...FROM</c> that addresses this: it allows you to supply a <c>FROM</c> clause to generate values for use in the <c>SET</c> clause. Example below:
 
 <sql>
-update cd.facilities facs
-    set
-        membercost = facs2.membercost * 1.1,
-        guestcost = facs2.guestcost * 1.1
-    from (select * from cd.facilities where facid = 0) facs2
-    where facs.facid = 1;
+update cd.facilities f1
+    set 
+        membercost = f2.membercost * 1.1,
+        guestcost = f2.guestcost * 1.1
+    from 
+        cd.facilities f2
+    where 
+        f1.facid = 1 and 
+        f2.facid = 0;
 </sql>
 
 |HINT|
