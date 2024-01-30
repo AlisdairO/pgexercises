@@ -18,8 +18,11 @@ update cd.facilities facs
     set
         membercost = facs2.membercost * 1.1,
         guestcost = facs2.guestcost * 1.1
-    from (select * from cd.facilities where facid = 0) facs2
-    where facs.facid = 1;
+    from 
+        cd.facilities facs2
+    where 
+        facs.facid = 1 and 
+        facs2.facid = 0;
 </sql>
 
 |HINT|
