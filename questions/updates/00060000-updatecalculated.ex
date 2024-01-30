@@ -15,7 +15,7 @@ update cd.facilities facs
 
 <sql>
 update cd.facilities facs
-    set 
+    set
         membercost = facs2.membercost * 1.1,
         guestcost = facs2.guestcost * 1.1
     from 
