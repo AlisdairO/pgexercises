@@ -35,7 +35,7 @@ select facid, sum(slots) as totalslots
 		) as sum2);
 </sql>
 
-<p>The query produces a list of facility IDs and number of slots used, and then uses a <c>HAVING</c> clause that works out the maximum totalslots value.  We're essentially saying: 'produce a list of facids and their number of slots booked, and filter out all the ones that doen't have a number of slots booked equal to the maximum.'</p>
+<p>The query produces a list of facility IDs and number of slots used, and then uses a <c>HAVING</c> clause that works out the maximum totalslots value.  We're essentially saying: 'produce a list of facids and their number of slots booked, and filter out all the ones that don't have a number of slots booked equal to the maximum.'</p>
 
 <p>Useful as <c>HAVING</c> is, however, our query is pretty ugly.  To improve on that, let's introduce another new concept: <a href="http://www.postgresql.org/docs/current/static/queries-with.html">Common Table Expressions</a> (CTEs).  CTEs can be thought of as allowing you to define a database view inline in your query.  It's really helpful in situations like this, where you're having to repeat yourself a lot. </p>
 
