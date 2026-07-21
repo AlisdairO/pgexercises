@@ -10,7 +10,7 @@ select lpad(cast(zipcode as char(5)),5,'0') zip from cd.members order by zip
 |HINT|
 Check out the <c>LPAD</c> function.  You'll also need to cast the zipcode column to a character string.
 |SORTED|
-0
+1
 |PAGEID|
 0483f866-2b9f-11e3-8908-0023df7f7ec4
 |WRITEABLE|

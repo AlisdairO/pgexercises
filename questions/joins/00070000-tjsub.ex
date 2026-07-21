@@ -31,7 +31,7 @@ order by cost desc;
 |HINT|
 Your answer will be similar to the referenced exercise.  Use a subquery in the <c>FROM</c> clause to generate a result set that calculates the total cost of each booking.  The outer query can then select the bookings it's interested in.
 |SORTED|
-0
+1
 |PAGEID|
 4C85AC8E-6F45-457C-B9C9-41C07C57A39D
 |WRITEABLE|
